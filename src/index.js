@@ -24,15 +24,32 @@ import "assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
 import AdminLayout from "layouts/Admin.jsx";
-import AuthLayout from "layouts/Auth.jsx";
+// import AuthLayout from "layouts/Auth.jsx";
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
+
+const client = new ApolloClient({
+  uri: 'https://api.github.com/graphql',
+  request: operation =>
+    operation.setContext(() => ({
+      headers: {
+        Authorization: 'bearer 0579c8237d50c289c7cae4ea0fc34b030de0f885'
+      }
+    }))
+});
+
+
+
 
 ReactDOM.render(
   <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={props => <AdminLayout {...props} />} />
-      <Route path="/auth" render={props => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" />
-    </Switch>
+    <ApolloProvider client={client}>
+      <Switch>
+        <Route path="/" render={props => <AdminLayout {...props} />} />
+        {/* <Route path="/auth" render={props => <AuthLayout {...props} />} /> */}
+        <Redirect from="/" to="/index" />
+      </Switch>
+    </ApolloProvider>
   </BrowserRouter>,
   document.getElementById("root")
 );
