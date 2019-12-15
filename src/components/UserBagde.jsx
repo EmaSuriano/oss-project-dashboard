@@ -48,7 +48,7 @@ const UserBagde = () => {
         </DropdownItem>
         <DropdownItem href={data.viewer.url} tag="a">
           <i className="ni ni-single-02" />
-          <span>My profile</span>
+          <span>Github Profile</span>
         </DropdownItem>
         <DropdownItem href={`mailto: ${data.viewer.email}`} tag="a">
           <i className="ni ni-email-83" />

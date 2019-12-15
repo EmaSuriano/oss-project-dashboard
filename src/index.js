@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "assets/vendor/nucleo/css/nucleo.css";
 import "assets/vendor/@fortawesome/fontawesome-free/css/all.min.css";
@@ -25,9 +25,11 @@ ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <Switch>
-        <Route path="/" render={props => <AdminLayout {...props} />} />
+        <Route path="/admin" render={props => <AdminLayout {...props} />} />
         {/* <Route path="/auth" render={props => <AuthLayout {...props} />} /> */}
-        {/* <Redirect from="/" to="/admin/index" /> */}
+        <Route exact path="/">
+          <Redirect to="/admin/index" />
+        </Route>
       </Switch>
     </ApolloProvider>
   </BrowserRouter>,

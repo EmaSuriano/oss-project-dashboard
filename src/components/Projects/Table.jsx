@@ -70,7 +70,7 @@ const GithubTable = ({ projects }) => {
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
         <tr>
-          <th scope="col">Project</th>
+          <th scope="col">Name</th>
           <th scope="col">Issues</th>
           <th scope="col">Vulnerabilities</th>
           <th scope="col">Pull Requests</th>
@@ -96,7 +96,7 @@ const GithubTable = ({ projects }) => {
               <Media className="align-items-center">
                 <span className="avatar-group">
                   {project.stargazers.nodes.map((user, i) => (
-                    [
+                    <React.Fragment key={user.id}>
                       <a
                         className="avatar avatar-sm"
                         href="#pablo"
@@ -108,14 +108,15 @@ const GithubTable = ({ projects }) => {
                           className="rounded-circle"
                           src={user.avatarUrl}
                         />
-                      </a>,
+                      </a>
                       <UncontrolledTooltip
                         delay={0}
                         target={`tooltip_${i}`}
                       >
                         {user.name}
                       </UncontrolledTooltip>
-                    ]))}
+                    </React.Fragment>
+                  ))}
                 </span>
 
                 {project.stargazers.totalCount - project.stargazers.nodes.length > 0 &&

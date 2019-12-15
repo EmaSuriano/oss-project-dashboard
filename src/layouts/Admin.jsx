@@ -37,7 +37,7 @@ class Admin extends React.Component {
       if (prop.layout === "/admin") {
         return (
           <Route
-            path={prop.path}
+            path={prop.layout + prop.path}
             component={prop.component}
             key={key}
           />
@@ -66,7 +66,7 @@ class Admin extends React.Component {
           {...this.props}
           routes={routes}
           logo={{
-            innerLink: "/index",
+            innerLink: "/",
             imgSrc: require("assets/img/brand/argon-react.png"),
             imgAlt: "..."
           }}
