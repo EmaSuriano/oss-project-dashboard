@@ -9,12 +9,6 @@ import Header from "components/Projects/Header.jsx";
 import Table from "components/Projects/Table.jsx";
 import projects from '../../projects';
 
-
-
-
-
-
-
 const Tables = () => {
   return (
     <>
