@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
@@ -33,13 +16,10 @@ const client = new ApolloClient({
   request: operation =>
     operation.setContext(() => ({
       headers: {
-        Authorization: 'bearer 0579c8237d50c289c7cae4ea0fc34b030de0f885'
+        Authorization: `bearer ${process.env.REACT_APP_GH_TOKEN}`
       }
     }))
 });
-
-
-
 
 ReactDOM.render(
   <BrowserRouter>
