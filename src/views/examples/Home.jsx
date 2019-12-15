@@ -12,7 +12,7 @@ import projects from '../../projects';
 const Tables = () => {
   return (
     <>
-      <Header projects={projects} />
+      <Header projects={projects.list} />
       {/* Page content */}
       <Container className="mt--7" fluid>
         {/* Table */}
@@ -22,7 +22,7 @@ const Tables = () => {
               <CardHeader className="border-0">
                 <h3 className="mb-0">Project List</h3>
               </CardHeader>
-              <Table projects={[]} />
+              <Table projects={projects.list} />
             </Card>
           </div>
         </Row>

@@ -1,21 +1,8 @@
 import React from "react";
 import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
-import { useQuery } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
 
-const EXCHANGE_RATES = gql`
-query { 
-  viewer { 
-    login
-  }
-}
-`;
 
 const Header = ({ projects }) => {
-  const { list } = projects;
-  const { loading, error, data } = useQuery(EXCHANGE_RATES);
-
-  console.log(data);
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -32,10 +19,10 @@ const Header = ({ projects }) => {
                           tag="h5"
                           className="text-uppercase text-muted mb-0"
                         >
-                          Projects
-                          </CardTitle>
+                          Mantained Projects
+                        </CardTitle>
                         <span className="h2 font-weight-bold mb-0">
-                          {list.length}
+                          {projects.length}
                         </span>
                       </div>
                       <Col className="col-auto">
@@ -47,7 +34,7 @@ const Header = ({ projects }) => {
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              {/* <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -105,7 +92,7 @@ const Header = ({ projects }) => {
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="6" xl="3"> 
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -134,7 +121,7 @@ const Header = ({ projects }) => {
                     </p>
                   </CardBody>
                 </Card>
-              </Col>
+              </Col>*/}
             </Row>
           </div>
         </Container>

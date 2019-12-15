@@ -6,7 +6,7 @@
 // import Login from "views/examples/Login.jsx";
 // import Tables from "views/examples/Tables.jsx";
 import Home from "views/examples/Home.jsx";
-import Icons from "views/examples/Icons.jsx";
+// import Icons from "views/examples/Icons.jsx";
 
 var routes = [
   {
@@ -16,13 +16,13 @@ var routes = [
     component: Home,
     layout: "/admin"
   },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "ni ni-planet text-blue",
-    component: Icons,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "ni ni-planet text-blue",
+  //   component: Icons,
+  //   layout: "/admin"
+  // },
   // {
   //   path: "/index",
   //   name: "Dashboard",
