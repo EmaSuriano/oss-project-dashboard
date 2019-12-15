@@ -38,7 +38,6 @@ const buildRepositoriesQuery = projects => {
     }`;
   });
 
-  console.log(projectQueries);
 
   return gql`
   query { 
@@ -76,7 +75,7 @@ const GithubTable = ({ projects }) => {
       </thead>
       <tbody>
         {projectsData.map(project => (
-          <tr>
+          <tr key={project.id}>
             <th scope="row">
               <Media className="align-items-center">
                 <a className="mb-0 text-sm" href={project.url}>
@@ -109,7 +108,6 @@ const GithubTable = ({ projects }) => {
                         delay={0}
                         target={`tooltip_${i}`}
                       >
-                        {console.log(user.name)}
                         {user.name}
                       </UncontrolledTooltip>
                     ]))}

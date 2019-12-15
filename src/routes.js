@@ -10,7 +10,7 @@ import Home from "views/examples/Home.jsx";
 
 var routes = [
   {
-    path: "/index",
+    path: "/",
     name: "Home",
     icon: "ni ni-favourite-28 text-blue",
     component: Home,

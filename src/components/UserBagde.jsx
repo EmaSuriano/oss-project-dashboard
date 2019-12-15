@@ -4,9 +4,6 @@ import {
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Navbar,
-  Nav,
-  Container,
   Media
 } from "reactstrap";
 import { useQuery } from "@apollo/react-hooks";
