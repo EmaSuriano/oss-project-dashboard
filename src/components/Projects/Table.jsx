@@ -3,53 +3,8 @@ import {
   Badge,
   Media,
   Table,
-  Spinner,
   UncontrolledTooltip
 } from "reactstrap";
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
-
-const ProjectInfo = `
-  id
-  pullRequests(first: 1, states:OPEN){
-    totalCount
-  }
-  vulnerabilityAlerts(first: 1) {
-    totalCount
-  }
-  issues(first: 1, states:OPEN) {
-    totalCount
-  }
-  homepageUrl
-  url
-  name
-  stargazers(first:5) {
-    totalCount
-    nodes {
-      id
-      name
-      avatarUrl
-    }
-  }
-`;
-
-const buildRepositoriesQuery = projects => {
-  const projectQueries = projects.map(name => {
-    const key = name.replace(/-/g, '')
-    return `${key}: repository(name: "${name}") {
-      ${ProjectInfo}
-    }`;
-  });
-
-
-  return gql`
-  query { 
-    viewer { 
-      ${projectQueries.join('\n')}
-    }
-  }
-`
-}
 
 const BadgeCount = ({ count }) => {
   const color = count >= 6 && 'danger' || count >= 3 && 'warning' || 'success'; //eslint-disable-line
@@ -61,11 +16,7 @@ const BadgeCount = ({ count }) => {
 }
 
 const GithubTable = ({ projects }) => {
-  const { error, loading, data } = useQuery(buildRepositoriesQuery(projects))
-  if (loading) return <Spinner size="sm" color="primary" />;
-  if (error) return <h3>Something happen ...</h3>
 
-  const projectsData = projects.map(name => data.viewer[name.replace(/-/g, '')]).filter(Boolean);
   return (
     <Table className="align-items-center table-flush" responsive>
       <thead className="thead-light">
@@ -78,7 +29,7 @@ const GithubTable = ({ projects }) => {
         </tr>
       </thead>
       <tbody>
-        {projectsData.map(project => (
+        {projects.map(project => (
           <tr key={project.id}>
             <th scope="row">
               <Media className="align-items-center">

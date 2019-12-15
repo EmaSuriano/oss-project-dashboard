@@ -6,14 +6,14 @@
 // import Login from "views/examples/Login.jsx";
 // import Tables from "views/examples/Tables.jsx";
 // import Icons from "views/examples/Icons.jsx";
-import Home from "views/examples/Home.jsx";
+import Projects from "views/examples/Projects.jsx";
 
 var routes = [
   {
     path: "/index",
     name: "Projects",
     icon: "ni ni-favourite-28 text-blue",
-    component: Home,
+    component: Projects,
     layout: "/admin"
   },
   // {
