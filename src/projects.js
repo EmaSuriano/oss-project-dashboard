@@ -6,6 +6,6 @@ export default {
     "react-hotkey-tooltip",
     "gatsby-starter-event-calendar",
     "talks",
-    "gatsby-theme-json-resume",
+    "gatsby-theme-jsonresume",
   ]
 }

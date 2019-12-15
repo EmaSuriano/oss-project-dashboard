@@ -11,10 +11,13 @@ import { useQuery } from '@apollo/react-hooks';
 
 const ProjectInfo = `
   id
-  pullRequests(first: 99, states:OPEN){
+  pullRequests(first: 1, states:OPEN){
     totalCount
   }
-  issues(first: 100, states:OPEN) {
+  vulnerabilityAlerts(first: 1) {
+    totalCount
+  }
+  issues(first: 1, states:OPEN) {
     totalCount
   }
   homepageUrl
@@ -69,6 +72,7 @@ const GithubTable = ({ projects }) => {
         <tr>
           <th scope="col">Project</th>
           <th scope="col">Issues</th>
+          <th scope="col">Vulnerabilities</th>
           <th scope="col">Pull Requests</th>
           <th scope="col">Stargazers</th>
         </tr>
@@ -84,6 +88,7 @@ const GithubTable = ({ projects }) => {
               </Media>
             </th>
             <td><BadgeCount count={project.issues.totalCount} /></td>
+            <td><BadgeCount count={project.vulnerabilityAlerts.totalCount} /></td>
             <td>
               <BadgeCount count={project.pullRequests.totalCount} />
             </td>
