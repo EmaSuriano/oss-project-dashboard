@@ -11,4 +11,3 @@
 ## Bugs
 
 - When deployed on Netlify the route redirects to `/admin/index` which works but when you reload then it doesn't find the route.
--

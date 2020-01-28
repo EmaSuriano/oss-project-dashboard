@@ -4,18 +4,18 @@
 
 > Dashboard to have a quick overview of Open Sources projects in your Github account ✨
 
-This project is based on [Argon Dashboard React](https://github.com/creativetimofficial/argon-dashboard-react).
+Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
 
-**[Live demo](https://oss-dashboard.netlify.com)**
+**[Live demo ✨](https://oss-dashboard.netlify.com)**
 
-## What does it include?
+## What does it include? 📦
 
 - Responsive Design
 - Github API
 - Easy setup
 - Project list configuration
 
-## Screenshots
+## Screenshots 🖼
 
 | Viewport | Image                          |
 | -------- | ------------------------------ |
@@ -23,7 +23,7 @@ This project is based on [Argon Dashboard React](https://github.com/creativetimo
 | Tablet   | ![Tablet](./docs/tablet.png)   |
 | Mobile   | ![Mobile](./docs/mobile.png)   |
 
-## Configuration
+## Configuration 🛠
 
 1. Create a `.env` file at the root level with the following structure
 
@@ -38,6 +38,12 @@ REACT_APP_GH_TOKEN=YOUR_GITHUB_ACCESS_TOKEN
 
 NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere!
 
-## License
+## Contribution 💪
+
+I'm always open for Pull Requests and Issues, so don't be afraid of collaborating!
+
+In case you are interested in the project this is the current [Roadmap 🛣](./ROADMAP.md) of features and bug!
+
+## License 📝
 
 MIT.
