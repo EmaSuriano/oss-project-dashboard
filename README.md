@@ -17,11 +17,9 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 
 ## Screenshots 🖼
 
-| Viewport | Image                          |
-| -------- | ------------------------------ |
-| Desktop  | ![Desktop](./docs/desktop.png) |
-| Tablet   | ![Tablet](./docs/tablet.png)   |
-| Mobile   | ![Mobile](./docs/mobile.png)   |
+| Desktop                        | Tablet                       | Mobile                       |
+| ------------------------------ | ---------------------------- | ---------------------------- |
+| ![Desktop](./docs/desktop.png) | ![Tablet](./docs/tablet.png) | ![Mobile](./docs/mobile.png) |
 
 ## Configuration 🛠
 
