@@ -1,0 +1,17 @@
+.loading {
+  height: 0;
+  width: 0;
+  padding: 15px;
+  border: 6px solid #1171ef;
+  border-right-color: #11cdef;
+  border-radius: 22px;
+  animation: rotate 1s infinite linear;
+}
+
+@keyframes rotate {
+  /* 100% keyframe for  clockwise. 
+     use 0% instead for anticlockwise */
+  100% {
+    transform: rotate(360deg);
+  }
+}

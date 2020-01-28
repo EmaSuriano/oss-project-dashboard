@@ -1,33 +1,29 @@
 {
-  "name": "argon-dashboard-react",
+  "name": "oss-project-dashboard-react",
   "version": "1.0.0",
-  "description": "React version of Argon Dashboard by Creative Tim",
+  "description": "Argon Dashboard to show the status of github projects",
   "main": "index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
   },
   "keywords": [
-    "react",
-    "reactjs",
-    "argon",
-    "argon-react",
+    "github",
+    "open source",
     "dashboard",
     "dashboard-react",
     "argon-dashboard",
     "argon-dashboard-react"
   ],
-  "author": "Creative Tim",
+  "author": "Ema Suriano",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
+    "url": "https://github.com/EmaSuriano/oss-project-dashboard/issues"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
     "compile-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
     "minify-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
     "map-sass": "node-sass src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true"

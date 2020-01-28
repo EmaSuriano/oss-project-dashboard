@@ -63,7 +63,7 @@ const Projects = () => {
               <CardHeader className="border-0">
                 <h3 className="mb-0">Project List</h3>
               </CardHeader>
-              <Table projects={projectsData} />
+              <Table projects={projectsData} loading={loading} />
             </Card>
           </div>
         </Row>

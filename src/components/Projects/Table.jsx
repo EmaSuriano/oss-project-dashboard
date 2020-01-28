@@ -6,6 +6,8 @@ import {
   UncontrolledTooltip
 } from "reactstrap";
 
+const Loader = () => <div className="loading" />
+
 const BadgeCount = ({ count }) => {
   const color = count >= 6 && 'danger' || count >= 3 && 'warning' || 'success'; //eslint-disable-line
 
@@ -15,7 +17,7 @@ const BadgeCount = ({ count }) => {
   </Badge>)
 }
 
-const GithubTable = ({ projects }) => {
+const GithubTable = ({ projects, loading }) => {
 
   return (
     <Table className="align-items-center table-flush" responsive>
@@ -29,6 +31,13 @@ const GithubTable = ({ projects }) => {
         </tr>
       </thead>
       <tbody>
+        {loading && <tr >
+          <td colspan="5">
+            <Media className="align-items-center" style={{ justifyContent: 'center' }}>
+              <Loader />
+            </Media>
+          </td>
+        </tr>}
         {projects.map(project => (
           <tr key={project.id}>
             <th scope="row">
@@ -79,7 +88,6 @@ const GithubTable = ({ projects }) => {
             </td>
           </tr>
         ))}
-
       </tbody>
     </Table>
 
