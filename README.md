@@ -50,7 +50,12 @@ You set the plugin alias by modifying the plugins inside the Webpack configurati
 config.resolve.plugins = [
   new AliasPlugin(
     'described-resolve',
-    [{ name: 'components', alias: ['src/', 'node_modules/my-dep/src/'] }],
+    [
+      {
+        name: 'components',
+        alias: ['src/components', 'node_modules/my-dep/src/components'],
+      },
+    ],
     'resolve',
   ),
 ];
