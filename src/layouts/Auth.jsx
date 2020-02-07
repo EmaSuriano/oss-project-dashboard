@@ -24,7 +24,7 @@ import { Container, Row, Col } from "reactstrap";
 import AuthNavbar from "components/Navbars/AuthNavbar.jsx";
 import AuthFooter from "components/Footers/AuthFooter.jsx";
 
-import routes from "routes.js";
+import routes from "../routes.js";
 
 class Auth extends React.Component {
   componentDidMount() {
