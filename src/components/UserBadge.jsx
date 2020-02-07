@@ -21,7 +21,7 @@ query {
 `;
 
 
-const UserBagde = () => {
+const UserBadge = () => {
   const { loading, error, data } = useQuery(USER_INFO);
   const loaded = !(loading || error);
 
@@ -65,4 +65,4 @@ const UserBagde = () => {
 }
 
 
-export default UserBagde
+export default UserBadge

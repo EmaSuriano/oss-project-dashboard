@@ -5,8 +5,8 @@ import {
   Container,
   Row,
 } from "reactstrap";
-import Header from "../components/Projects/Header.jsx";
-import Table from "../components/Projects/Table.jsx";
+import Header from "components/Projects/Header.jsx";
+import Table from "components/Projects/Table.jsx";
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
 import projects from '../projects.js';

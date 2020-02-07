@@ -6,7 +6,7 @@ import {
   Nav,
   Container,
 } from "reactstrap";
-import UserBadge from '../UserBagde';
+import UserBadge from 'components/UserBadge';
 
 const AdminNavbar = (props) => {
   return (

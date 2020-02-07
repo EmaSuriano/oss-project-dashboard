@@ -7,8 +7,8 @@ import 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/scss/argon-dashboard-react.scss';
 import './custom.css';
 
-import AdminLayout from './layouts/Admin.jsx';
-// import AuthLayout from "layouts/Auth.jsx";
+import AdminLayout from 'layouts/Admin.jsx';
+import AuthLayout from 'layouts/Auth.jsx';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
 
@@ -27,7 +27,7 @@ ReactDOM.render(
     <ApolloProvider client={client}>
       <Switch>
         <Route path="/admin" render={props => <AdminLayout {...props} />} />
-        {/* <Route path="/auth" render={props => <AuthLayout {...props} />} /> */}
+        <Route path="/auth" render={props => <AuthLayout {...props} />} />
         <Route exact path="/">
           <Redirect to="/admin/index" />
         </Route>
