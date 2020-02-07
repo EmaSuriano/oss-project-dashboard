@@ -4,7 +4,7 @@
 // import Register from "views/examples/Register.jsx";
 // import Login from "views/examples/Login.jsx";
 // import Tables from "views/examples/Tables.jsx";
-import Icons from 'argon-dashboard-react/src/views/examples/Icons.jsx';
+// import Icons from 'argon-dashboard-react/src/views/examples/Icons.jsx';
 import Projects from './views/Projects.jsx';
 
 var routes = [
@@ -15,13 +15,13 @@ var routes = [
     component: Projects,
     layout: '/admin',
   },
-  {
-    path: '/icons',
-    name: 'Icons',
-    icon: 'ni ni-planet text-blue',
-    component: Icons,
-    layout: '/admin',
-  },
+  // {
+  //   path: '/icons',
+  //   name: 'Icons',
+  //   icon: 'ni ni-planet text-blue',
+  //   component: Icons,
+  //   layout: '/admin',
+  // },
   // {
   //   path: "/index",
   //   name: "Dashboard",
