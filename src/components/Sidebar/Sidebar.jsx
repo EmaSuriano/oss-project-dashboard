@@ -51,7 +51,7 @@ import {
   Row,
   Col
 } from "reactstrap";
-import UserBagde from "../UserBagde";
+import UserBadge from 'components/UserBadge';
 
 var ps;
 
@@ -138,7 +138,7 @@ class Sidebar extends React.Component {
           ) : null}
           {/* User */}
           <Nav className="align-items-center d-md-none">
-            <UserBagde />
+            <UserBadge />
           </Nav>
           {/* Collapse */}
           <Collapse navbar isOpen={this.state.collapseOpen}>

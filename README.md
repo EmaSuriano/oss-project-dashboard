@@ -36,6 +36,38 @@ REACT_APP_GH_TOKEN=YOUR_GITHUB_ACCESS_TOKEN
 
 NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere!
 
+## Features
+
+### Component Shadowing out of the box 🤯
+
+Inside the Webpack configuration I setup `enhanced-resolve` that allows to reference an alias with one or more possible directories. This is the key that I was looking for because it allows the same feature as in Gatsby of `shadowing`.
+
+The way it works is:
+
+You set the plugin alias by modifying the plugins inside the Webpack configuration.
+
+```javascript
+config.resolve.plugins = [
+  new AliasPlugin(
+    'described-resolve',
+    [{ name: 'components', alias: ['src/', 'node_modules/my-dep/src/'] }],
+    'resolve',
+  ),
+];
+```
+
+Then, inside the code you require a resource, can be `.js`, `.css`, or a `.png` image.
+
+```javascript
+import MyCoolComponent from 'components/myCoolComponent`;
+
+export default () => <MyCoolComponent />
+```
+
+The plugin will first look into the first alias provided, my local `src` folder, if the file is present then it will require that one. Otherwise it will go to the next alias, until the chain ends.
+
+This feature is quite handy when you are working with templates like `argon-dashboard-react`.
+
 ## Contribution 💪
 
 I'm always open for Pull Requests and Issues, so don't be afraid of collaborating!
