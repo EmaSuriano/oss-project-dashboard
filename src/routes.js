@@ -2,10 +2,10 @@
 // import Profile from "views/examples/Profile.jsx";
 // import Maps from "views/examples/Maps.jsx";
 // import Register from "views/examples/Register.jsx";
-// import Login from "views/examples/Login.jsx";
+import Login from 'views/Login.jsx';
 // import Tables from "views/examples/Tables.jsx";
 // import Icons from 'argon-dashboard-react/src/views/examples/Icons.jsx';
-import Projects from './views/Projects.jsx';
+import Projects from 'views/Projects.jsx';
 
 var routes = [
   {
@@ -50,13 +50,13 @@ var routes = [
   //   component: Tables,
   //   layout: "/admin"
   // },
-  // {
-  //   path: "/login",
-  //   name: "Login",
-  //   icon: "ni ni-key-25 text-info",
-  //   component: Login,
-  //   layout: "/auth"
-  // },
+  {
+    path: '/login',
+    name: 'Login',
+    icon: 'ni ni-key-25 text-info',
+    component: Login,
+    layout: '/auth',
+  },
   // {
   //   path: "/register",
   //   name: "Register",

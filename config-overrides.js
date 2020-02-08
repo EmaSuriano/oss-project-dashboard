@@ -20,7 +20,7 @@ module.exports = function override(config, env) {
   config.resolve.plugins = [
     new AliasPlugin(
       'described-resolve',
-      createAliases(['assets', 'components', 'layouts']),
+      createAliases(['assets', 'components', 'layouts', 'views']),
       'resolve',
     ),
   ];
