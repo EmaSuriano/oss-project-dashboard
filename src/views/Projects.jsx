@@ -44,7 +44,8 @@ query {
 }
 `
 
-const Projects = () => {
+const Projects = (props) => {
+  console.log(props)
   const { error, loading, data } = useQuery(REPOSITORIES_QUERY)
 
   const projectsData = projects.list

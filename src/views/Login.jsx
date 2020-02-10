@@ -7,7 +7,6 @@ import {
   CardHeader,
   Col
 } from "reactstrap";
-import GitHubLogin from 'react-github-login';
 
 class Login extends React.Component {
   render() {
