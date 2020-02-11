@@ -56,6 +56,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
+// make the login system following this tutorial --> https://tylermcginnis.com/react-router-protected-routes-authentication/
+
 const App = () => {
   // const token = localStorage.getItem('token');
   // if (!token) {
