@@ -1,4 +1,4 @@
-// import Index from "views/Index.jsx";
+import Index from 'views/Index.jsx';
 // import Profile from "views/examples/Profile.jsx";
 // import Maps from "views/examples/Maps.jsx";
 // import Register from "views/examples/Register.jsx";
@@ -22,13 +22,13 @@ var routes = [
   //   component: Icons,
   //   layout: '/admin',
   // },
-  // {
-  //   path: "/index",
-  //   name: "Dashboard",
-  //   icon: "ni ni-tv-2 text-primary",
-  //   component: Index,
-  //   layout: "/admin"
-  // },
+  {
+    path: '/index',
+    name: 'Dashboard',
+    icon: 'ni ni-tv-2 text-primary',
+    component: Index,
+    layout: '/auth',
+  },
   // {
   //   path: "/maps",
   //   name: "Maps",
