@@ -32,7 +32,7 @@ const GithubTable = ({ projects, loading }) => {
       </thead>
       <tbody>
         {loading && <tr >
-          <td colspan="5">
+          <td colSpan="5">
             <Media className="align-items-center" style={{ justifyContent: 'center' }}>
               <Loader />
             </Media>

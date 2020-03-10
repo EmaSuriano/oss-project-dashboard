@@ -35,7 +35,6 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 
 ```text
 NODE_PATH=./src
-REACT_APP_GH_TOKEN=YOUR_GITHUB_ACCESS_TOKEN
 ```
 
 2. Change the name of the project inside the [projects.js](https://github.com/EmaSuriano/oss-project-dashboard/blob/master/src/projects.js). They need to be the same as the URL in Github: `https://github.com/USER_NAME/PROJECT_NAME`

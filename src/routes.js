@@ -1,4 +1,4 @@
-import Index from 'views/Index.jsx';
+// import Index from 'views/Index.jsx';
 // import Profile from "views/examples/Profile.jsx";
 // import Maps from "views/examples/Maps.jsx";
 // import Register from "views/examples/Register.jsx";
@@ -9,7 +9,7 @@ import Projects from 'views/Projects.jsx';
 
 var routes = [
   {
-    path: '/index',
+    path: '/',
     name: 'Projects',
     icon: 'ni ni-favourite-28 text-blue',
     component: Projects,
@@ -22,13 +22,13 @@ var routes = [
   //   component: Icons,
   //   layout: '/admin',
   // },
-  {
-    path: '/index',
-    name: 'Dashboard',
-    icon: 'ni ni-tv-2 text-primary',
-    component: Index,
-    layout: '/auth',
-  },
+  // {
+  //   path: '/index',
+  //   name: 'Dashboard',
+  //   icon: 'ni ni-tv-2 text-primary',
+  //   component: Index,
+  //   layout: '/auth',
+  // },
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -51,7 +51,7 @@ var routes = [
   //   layout: "/admin"
   // },
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     icon: 'ni ni-key-25 text-info',
     component: Login,
