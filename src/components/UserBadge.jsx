@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from 'apollo-boost';
+import auth from '../auth';
 
 const USER_INFO = gql`
 query { 
@@ -54,9 +55,9 @@ const UserBadge = () => {
           <i className="ni ni-email-83" />
           <span>Contact me</span>
         </DropdownItem>
-        <DropdownItem href="https://www.buymeacoffee.com/emasuriano" tag="a">
+        <DropdownItem href="#" onClick={() => auth.signOut()} tag="a">
           <i className="ni ni-support-16" />
-          <span>Support</span>
+          <span>Log out</span>
         </DropdownItem>
       </DropdownMenu>
     </UncontrolledDropdown>
