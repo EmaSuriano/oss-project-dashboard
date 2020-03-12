@@ -1,23 +1,23 @@
-import React from 'react'
-import {
-  Badge,
-  Media,
-  Table,
-  UncontrolledTooltip
-} from "reactstrap";
+import React, { Fragment } from 'react';
+import { Badge, Media, Table, UncontrolledTooltip } from 'reactstrap';
+import getProjectsData from '../../queries/getProjectsData';
 
-const Loader = () => <div className="loading" />
+const Loader = () => <div className="loading" />;
 
 const BadgeCount = ({ count }) => {
-  const color = count >= 6 && 'danger' || count >= 3 && 'warning' || 'success'; //eslint-disable-line
+  const color =
+    (count >= 6 && 'danger') || (count >= 3 && 'warning') || 'success'; //eslint-disable-line
 
-  return (<Badge color="" className="badge-dot badge-md mr-4">
-    <i className={`bg-${color}`} />
-    {count}
-  </Badge>)
-}
+  return (
+    <Badge color="" className="badge-dot badge-md mr-4">
+      <i className={`bg-${color}`} />
+      {count}
+    </Badge>
+  );
+};
 
-const GithubTable = ({ projects, loading }) => {
+const GithubTable = ({ projects: projectList }) => {
+  const { error, loading, projects } = getProjectsData(projectList);
 
   return (
     <Table className="align-items-center table-flush" responsive>
@@ -31,13 +31,19 @@ const GithubTable = ({ projects, loading }) => {
         </tr>
       </thead>
       <tbody>
-        {loading && <tr >
-          <td colSpan="5">
-            <Media className="align-items-center" style={{ justifyContent: 'center' }}>
-              <Loader />
-            </Media>
-          </td>
-        </tr>}
+        {loading && (
+          <tr>
+            <td colSpan="5">
+              <Media
+                className="align-items-center"
+                style={{ justifyContent: 'center' }}
+              >
+                <Loader />
+              </Media>
+            </td>
+          </tr>
+        )}
+        {error && <p>Something happened ...</p>}
         {projects.map(project => (
           <tr key={project.id}>
             <th scope="row">
@@ -47,8 +53,12 @@ const GithubTable = ({ projects, loading }) => {
                 </a>
               </Media>
             </th>
-            <td><BadgeCount count={project.issues.totalCount} /></td>
-            <td><BadgeCount count={project.vulnerabilityAlerts.totalCount} /></td>
+            <td>
+              <BadgeCount count={project.issues.totalCount} />
+            </td>
+            <td>
+              <BadgeCount count={project.vulnerabilityAlerts.totalCount} />
+            </td>
             <td>
               <BadgeCount count={project.pullRequests.totalCount} />
             </td>
@@ -56,7 +66,7 @@ const GithubTable = ({ projects, loading }) => {
               <Media className="align-items-center">
                 <span className="avatar-group">
                   {project.stargazers.nodes.map((user, i) => (
-                    <React.Fragment key={user.id}>
+                    <Fragment key={user.id}>
                       <a
                         className="avatar avatar-sm"
                         href="#pablo"
@@ -69,30 +79,29 @@ const GithubTable = ({ projects, loading }) => {
                           src={user.avatarUrl}
                         />
                       </a>
-                      <UncontrolledTooltip
-                        delay={0}
-                        target={`tooltip_${i}`}
-                      >
+                      <UncontrolledTooltip delay={0} target={`tooltip_${i}`}>
                         {user.name}
                       </UncontrolledTooltip>
-                    </React.Fragment>
+                    </Fragment>
                   ))}
                 </span>
 
-                {project.stargazers.totalCount - project.stargazers.nodes.length > 0 &&
+                {project.stargazers.totalCount -
+                  project.stargazers.nodes.length >
+                  0 && (
                   <span className="mb-0 text-sm">
-                    + {project.stargazers.totalCount - project.stargazers.nodes.length}
+                    +{' '}
+                    {project.stargazers.totalCount -
+                      project.stargazers.nodes.length}
                   </span>
-                }
+                )}
               </Media>
             </td>
           </tr>
         ))}
       </tbody>
     </Table>
+  );
+};
 
-  )
-}
-
-
-export default GithubTable
+export default GithubTable;

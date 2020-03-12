@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  CardHeader,
-  Col
-} from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import { Button, Card, CardHeader, Col } from 'reactstrap';
 import { Redirect } from 'react-router';
 import queryString from 'query-string';
-import auth, { buildAccessTokenLink, authLink } from "../auth";
+import auth, { buildAccessTokenLink, authLink } from '../auth';
 
-const Login = (props) => {
-  const [accessToken, setAccessToken] = React.useState(auth.getCredentials());
-  const [signing, setSigning] = React.useState(false);
+const Login = props => {
+  const [accessToken, setAccessToken] = useState(auth.getCredentials());
+  const [signing, setSigning] = useState(false);
   const params = queryString.parse(props.location.search);
 
   useEffect(() => {
     const fetchGithubAuth = async code => {
-      setSigning(true)
+      setSigning(true);
       const result = await fetch(buildAccessTokenLink(code), {
         method: 'POST',
         headers: {
@@ -42,13 +37,17 @@ const Login = (props) => {
         <Card className="bg-secondary shadow border-0">
           <CardHeader className="bg-transparent pb-5">
             <div className="text-muted text-center mt-2 mb-3">
-
               <small>{signing ? 'Sign in ...' : 'Sign in with'}</small>
             </div>
 
-            <div className="btn-wrapper text-center" style={{ justifyContent: 'center', display: 'flex' }}>
-              {signing ?
-                <div className="loading" /> : <Button
+            <div
+              className="btn-wrapper text-center"
+              style={{ justifyContent: 'center', display: 'flex' }}
+            >
+              {signing ? (
+                <div className="loading" />
+              ) : (
+                <Button
                   className="btn-neutral btn-icon"
                   color="default"
                   href={authLink}
@@ -56,20 +55,18 @@ const Login = (props) => {
                   <span className="btn-inner--icon">
                     <img
                       alt="..."
-                      src={require("assets/img/icons/common/github.svg")}
+                      src={require('assets/img/icons/common/github.svg')}
                     />
                   </span>
                   <span className="btn-inner--text">Github</span>
-                </Button>}
+                </Button>
+              )}
             </div>
-
           </CardHeader>
         </Card>
-
       </Col>
     </>
   );
-}
-
+};
 
 export default Login;
