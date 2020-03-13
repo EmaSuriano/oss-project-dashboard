@@ -41,23 +41,17 @@ query {
 `;
 
 const getProjectsData = projectList => {
-  const emptyProjects = projectList.length === 0;
   const repositoriesQuery = useQuery(REPOSITORIES_QUERY(projectList), {
-    skip: emptyProjects,
+    skip: projectList.length === 0,
   });
 
-  const projects =
-    isQueryReady(repositoriesQuery) && !emptyProjects
-      ? projectList
-          .map(name => repositoriesQuery.data.viewer[name.replace(/-/g, '')])
-          .filter(Boolean)
-      : [];
+  repositoriesQuery.output = isQueryReady(repositoriesQuery)
+    ? projectList
+        .map(name => repositoriesQuery.data.viewer[name.replace(/-/g, '')])
+        .filter(Boolean)
+    : [];
 
-  return {
-    loading: repositoriesQuery.loading,
-    error: repositoriesQuery.error,
-    projects,
-  };
+  return repositoriesQuery;
 };
 
 export default getProjectsData;

@@ -10,7 +10,7 @@ import Projects from 'views/Projects.jsx';
 var routes = [
   {
     path: '/',
-    name: 'Projects',
+    name: 'Dashboard',
     icon: 'ni ni-favourite-28 text-blue',
     component: Projects,
     layout: '/admin',

@@ -2,10 +2,17 @@ import React from 'react';
 import { Card, CardHeader, Container, CardBody, Row } from 'reactstrap';
 import Header from 'components/Projects/Header.jsx';
 import Table from 'components/Projects/Table.jsx';
-import getProjectList from '../queries/getProjectList';
+import getProjects from '../queries/getProjects';
+
+const Error = ({ error }) => (
+  <CardBody>
+    <h4>Something happened ...</h4>
+    <code>{typeof error === 'string' ? error : JSON.stringify(error)}</code>
+  </CardBody>
+);
 
 const Projects = () => {
-  const { error, projects } = getProjectList();
+  const { error, loading, data: projects } = getProjects();
 
   return (
     <>
@@ -18,13 +25,9 @@ const Projects = () => {
                 <h3 className="mb-0">Project List</h3>
               </CardHeader>
               {error ? (
-                <CardBody>
-                  {error && (
-                    <h4>Something happened ...${JSON.stringify(error)}</h4>
-                  )}
-                </CardBody>
+                <Error error={error} />
               ) : (
-                <Table projects={projects} />
+                <Table projects={projects} loading={loading} />
               )}
             </Card>
           </div>
