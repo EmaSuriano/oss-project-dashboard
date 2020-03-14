@@ -9,13 +9,13 @@ const loadingFromQueries = (...queries) =>
 
 const getProjects = () => {
   const gistsQuery = getProjectsGist();
-
   const gistName = isQueryReady(gistsQuery) ? gistsQuery.output.name : '';
-  const projectsListQuery = getProjectsList(gistName);
 
+  const projectsListQuery = getProjectsList(gistName);
   const projectList = isQueryReady(projectsListQuery)
     ? projectsListQuery.output
     : [];
+
   const projectsDataQuery = getProjectsData(projectList);
 
   return {

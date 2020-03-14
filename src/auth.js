@@ -5,7 +5,9 @@ const auth = {
     this.isAuthenticated = true;
   },
   getCredentials() {
-    return localStorage.getItem('token');
+    return (
+      localStorage.getItem('token') || process.env.REACT_APP_GITHUB_ACCESS_TOKEN
+    );
   },
   signOut() {
     localStorage.removeItem('token');
