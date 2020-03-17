@@ -25,7 +25,7 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 
 This project can be used in two ways:
 
-- Login directly inside the [live app][app-link]]. See [Basic setup](#basic-setup).
+- Login directly inside the [live app][app-link]. See [Basic setup](#basic-setup).
 - Host your own dashboard in order to showcase your maintained projects to others. See [Advanced Setup](#advanced-setup).
 
 ## Screenshots 🖼
@@ -53,7 +53,7 @@ This project can be used in two ways:
 ["project-a", "project-b"]
 ```
 
-4. Open [live app][app-link]] and click on Log in with Github.
+4. Open [live app][app-link] and click on Log in with Github.
 5. Accept permissions and you should be able to see the dashboard with the information of your projects ✨
 
 ## Advanced Setup
