@@ -31,7 +31,7 @@ const CLIENT_SECRET = process.env.REACT_APP_GITHUB_CLIENT_SECRET;
 
 export const authLink = `${AUTHORIZE_URL}?${queryParams({
   client_id: CLIENT_ID,
-  redirect_uri: `${window.location.href}/auth`,
+  redirect_uri: `${window.location.origin}/auth`,
   scope: 'user',
 })}`;
 
