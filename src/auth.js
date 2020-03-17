@@ -1,13 +1,17 @@
 const auth = {
   isAuthenticated: false,
+  isFixedToken: false,
   signIn(token) {
     localStorage.setItem('token', token);
     this.isAuthenticated = true;
   },
   getCredentials() {
-    return (
-      localStorage.getItem('token') || process.env.REACT_APP_GITHUB_ACCESS_TOKEN
-    );
+    if (process.env.REACT_APP_GITHUB_ACCESS_TOKEN) {
+      this.isFixedToken = true;
+      return process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
+    }
+
+    return localStorage.getItem('token');
   },
   signOut() {
     localStorage.removeItem('token');
