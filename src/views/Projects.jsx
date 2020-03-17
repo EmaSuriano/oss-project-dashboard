@@ -1,75 +1,40 @@
-import React from "react";
-import {
-  Card,
-  CardHeader,
-  Container,
-  Row,
-} from "reactstrap";
-import Header from "components/Projects/Header.jsx";
-import Table from "components/Projects/Table.jsx";
-import { gql } from 'apollo-boost';
-import { useQuery } from '@apollo/react-hooks';
-import projects from '../projects.js';
+import React from 'react';
+import { Card, CardHeader, Container, CardBody, Row } from 'reactstrap';
+import Header from 'components/Projects/Header.jsx';
+import Table from 'components/Projects/Table.jsx';
+import getProjects from '../queries/getProjects';
 
-const ProjectInfo = `
-  id
-  url
-  name
-  pullRequests(first: 1, states:OPEN){
-    totalCount
-  }
-  vulnerabilityAlerts(first: 1) {
-    totalCount
-  }
-  issues(first: 1, states:OPEN) {
-    totalCount
-  }
-  stargazers(first:5) {
-    totalCount
-    nodes {
-      id
-      name
-      avatarUrl
-    }
-  }
-`;
-
-const REPOSITORIES_QUERY = gql`
-query { 
-  viewer { 
-    ${projects.list.map(name => `${name.replace(/-/g, '')}: repository(name: "${name}") {
-      ${ProjectInfo}
-    }`).join('\n')}
-  }
-}
-`
+const Error = ({ error }) => (
+  <CardBody>
+    <h4>Something happened ...</h4>
+    <code>{typeof error === 'string' ? error : JSON.stringify(error)}</code>
+  </CardBody>
+);
 
 const Projects = () => {
-  const { error, loading, data } = useQuery(REPOSITORIES_QUERY)
-
-  const projectsData = projects.list
-    .map(name => !(error || loading) && data.viewer[name.replace(/-/g, '')])
-    .filter(Boolean);
+  const { error, loading, data: projects } = getProjects();
 
   return (
     <>
-      <Header projects={projectsData} />
-      {/* Page content */}
+      <Header projects={projects} />
       <Container className="mt--7" fluid>
-        {/* Table */}
         <Row>
           <div className="col">
             <Card className="shadow">
               <CardHeader className="border-0">
                 <h3 className="mb-0">Project List</h3>
               </CardHeader>
-              <Table projects={projectsData} loading={loading} />
+              {error ? (
+                <Error error={error} />
+              ) : (
+                <Table projects={projects} loading={loading} />
+              )}
             </Card>
           </div>
         </Row>
       </Container>
     </>
   );
-}
+};
 
 export default Projects;

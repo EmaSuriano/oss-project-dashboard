@@ -2,7 +2,15 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/060f6655-b693-402a-8eee-39836d3ffca2/deploy-status)](https://app.netlify.com/sites/oss-dashboard-emasuriano/deploys)
 
-> Dashboard to have a quick overview of Open Sources projects in your Github account ✨
+<div align="center">
+  <a href="https://react-hotkey-tooltip.netlify.com/#/">
+    <img alt="logo" src="./doc/logo.png" height="150px" />
+  </a>
+</div>
+
+<div align="center">
+  <strong>A Dashboard to have a quick overview of Open Sources projects in your Github account ✨</strong>
+</div>
 
 Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
 
@@ -27,7 +35,6 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 
 ```text
 NODE_PATH=./src
-REACT_APP_GH_TOKEN=YOUR_GITHUB_ACCESS_TOKEN
 ```
 
 2. Change the name of the project inside the [projects.js](https://github.com/EmaSuriano/oss-project-dashboard/blob/master/src/projects.js). They need to be the same as the URL in Github: `https://github.com/USER_NAME/PROJECT_NAME`

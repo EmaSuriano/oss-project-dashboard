@@ -1,16 +1,16 @@
-// import Index from "views/Index.jsx";
+// import Index from 'views/Index.jsx';
 // import Profile from "views/examples/Profile.jsx";
 // import Maps from "views/examples/Maps.jsx";
 // import Register from "views/examples/Register.jsx";
-// import Login from "views/examples/Login.jsx";
+import Login from 'views/Login.jsx';
 // import Tables from "views/examples/Tables.jsx";
 // import Icons from 'argon-dashboard-react/src/views/examples/Icons.jsx';
-import Projects from './views/Projects.jsx';
+import Projects from 'views/Projects.jsx';
 
 var routes = [
   {
-    path: '/index',
-    name: 'Projects',
+    path: '/',
+    name: 'Dashboard',
     icon: 'ni ni-favourite-28 text-blue',
     component: Projects,
     layout: '/admin',
@@ -23,11 +23,11 @@ var routes = [
   //   layout: '/admin',
   // },
   // {
-  //   path: "/index",
-  //   name: "Dashboard",
-  //   icon: "ni ni-tv-2 text-primary",
+  //   path: '/index',
+  //   name: 'Dashboard',
+  //   icon: 'ni ni-tv-2 text-primary',
   //   component: Index,
-  //   layout: "/admin"
+  //   layout: '/auth',
   // },
   // {
   //   path: "/maps",
@@ -50,13 +50,13 @@ var routes = [
   //   component: Tables,
   //   layout: "/admin"
   // },
-  // {
-  //   path: "/login",
-  //   name: "Login",
-  //   icon: "ni ni-key-25 text-info",
-  //   component: Login,
-  //   layout: "/auth"
-  // },
+  {
+    path: '/',
+    name: 'Login',
+    icon: 'ni ni-key-25 text-info',
+    component: Login,
+    layout: '/auth',
+  },
   // {
   //   path: "/register",
   //   name: "Register",
