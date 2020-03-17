@@ -25,16 +25,14 @@ const CardInfo = ({ label, value, icon, background }) => (
   </Col>
 );
 
-const Header = ({ projects }) => {
-  const projectsNumber = projects.length > 0 && projects.length;
-  const issuesNumber = projects.reduce(
-    (acc, curr) => acc + curr.issues.totalCount,
-    0,
-  );
-  const pullRequestsNumber = projects.reduce(
-    (acc, curr) => acc + curr.pullRequests.totalCount,
-    0,
-  );
+const reduceAllIssues = (acc, curr) => acc + curr.issues.totalCount;
+const reduceAllPullRequests = (acc, curr) => acc + curr.pullRequests.totalCount;
+
+const Header = ({ projects, ready }) => {
+  const projectsNumber = projects.length;
+  const issuesNumber = projects.reduce(reduceAllIssues, 0);
+  const pullRequestsNumber = projects.reduce(reduceAllPullRequests, 0);
+
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -44,21 +42,21 @@ const Header = ({ projects }) => {
             <Row>
               <CardInfo
                 label="Projects"
-                value={projectsNumber}
+                value={ready && projectsNumber}
                 icon="trophy"
                 background="success"
               />
 
               <CardInfo
                 label="Issues"
-                value={projectsNumber && issuesNumber}
+                value={ready && issuesNumber}
                 icon="bullhorn"
                 background="warning"
               />
 
               <CardInfo
                 label="Pull Requests"
-                value={projectsNumber && pullRequestsNumber}
+                value={ready && pullRequestsNumber}
                 icon="list"
                 background="danger"
               />

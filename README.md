@@ -1,6 +1,6 @@
 # Open Source Github Dashboard
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/060f6655-b693-402a-8eee-39836d3ffca2/deploy-status)](https://app.netlify.com/sites/oss-dashboard-emasuriano/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
 <div align="center">
   <a href="https://react-hotkey-tooltip.netlify.com/#/">
@@ -14,14 +14,19 @@
 
 Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
 
-**[Live demo ✨](https://oss-dashboard.netlify.com)**
+**[Live app ✨][app-link]**
 
 ## What does it include? 📦
 
 - Responsive Design
-- Github API
-- Easy setup
-- Project list configuration
+- Simple login with Github
+- GraphQL API Github
+- Project list powered by Github Gist
+
+This project can be used in two ways:
+
+- Login directly inside the [live app][app-link]]. See [Basic setup](#basic-setup).
+- Host your own dashboard in order to showcase your maintained projects to others. See [Advanced Setup](#advanced-setup).
 
 ## Screenshots 🖼
 
@@ -29,31 +34,59 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 | ------------------------------ | ---------------------------- | ---------------------------- |
 | ![Desktop](./docs/desktop.png) | ![Tablet](./docs/tablet.png) | ![Mobile](./docs/mobile.png) |
 
-## Configuration 🛠
+##
 
-1. Create a `.env` file at the root level with the following structure
+## Basic setup
+
+### Requirements
+
+- Have a Github account.
+- Have at least one project linked to that account (can be private or public).
+
+### Steps
+
+1. Go to [Github Gists](https://gist.github.com/).
+2. Create a new file with the name of `oss-projects.json`.
+3. Inside the content of the file add a plain list containing the name of the project that you want to add to the dashboard. Example:
+
+```json
+["project-a", "project-b"]
+```
+
+4. Open [live app][app-link]] and click on Log in with Github.
+5. Accept permissions and you should be able to see the dashboard with the information of your projects ✨
+
+## Advanced Setup
+
+The main difference with the [live app][app-link] is that login is not needed anymore in order to see the projects and there is no logout option. However the deployed application will show the projects of **only** one user.
+
+This is very handy when you want to showcase your projects to other or when you want to have an easy way to have a quick overview of your maintained projects.
+
+### Steps
+
+1. Go to your Github Developer Settings, create a new Auth token and copy its content.
+2. Create a `.env` file in the root of the project with the following information
 
 ```text
 NODE_PATH=./src
+REACT_APP_GITHUB_ACCESS_TOKEN_=<<REPLACE_WITH_YOUR_TOKEN>>
 ```
-
-2. Change the name of the project inside the [projects.js](https://github.com/EmaSuriano/oss-project-dashboard/blob/master/src/projects.js). They need to be the same as the URL in Github: `https://github.com/USER_NAME/PROJECT_NAME`
 
 3. Install dependencies by running `yarn` and then `yarn start` to start the server.
 
-NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere!
+NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere! I recommend building it with [Netlify](http://netlify.com/) because it provides a nice set of tools and it has a great integration with Github.
 
-## Features
+## Development
 
 ### Component Shadowing out of the box 🤯
 
-Inside the Webpack configuration I setup `enhanced-resolve` that allows to reference an alias with one or more possible directories. This is the key that I was looking for because it allows the same feature as in Gatsby of `shadowing`.
+Inside the Webpack configuration you can find the plugin of `enhanced-resolve` that allows to reference an alias with one or more possible directories. This gives to the product a similar to `shadowing` in Gatsby.
 
-The way it works is:
-
-You set the plugin alias by modifying the plugins inside the Webpack configuration.
+**Example**
 
 ```javascript
+// webpack.config.js
+
 config.resolve.plugins = [
   new AliasPlugin(
     'described-resolve',
@@ -66,11 +99,8 @@ config.resolve.plugins = [
     'resolve',
   ),
 ];
-```
 
-Then, inside the code you require a resource, can be `.js`, `.css`, or a `.png` image.
-
-```javascript
+// src/example.js
 import MyCoolComponent from 'components/myCoolComponent`;
 
 export default () => <MyCoolComponent />
@@ -89,3 +119,5 @@ In case you are interested in the project this is the current [Roadmap 🛣](./R
 ## License 📝
 
 MIT.
+
+[app-link]: https://oss-dashboard.netlify.com

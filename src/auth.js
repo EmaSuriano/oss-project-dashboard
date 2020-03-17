@@ -1,3 +1,5 @@
+import { withCors, queryParams } from './utils/url';
+
 const auth = {
   isAuthenticated: false,
   isFixedToken: false,
@@ -19,11 +21,6 @@ const auth = {
   },
 };
 
-const queryParams = params =>
-  Object.keys(params)
-    .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-    .join('&');
-
 const CLIENT_ID = process.env.REACT_APP_GITHUB_CLIENT_ID;
 const AUTHORIZE_URL = 'https://github.com/login/oauth/authorize';
 const ACCESS_TOKEN_URL = 'https://github.com/login/oauth/access_token';
@@ -36,10 +33,12 @@ export const authLink = `${AUTHORIZE_URL}?${queryParams({
 })}`;
 
 export const buildAccessTokenLink = code =>
-  `https://cors-anywhere.herokuapp.com/${ACCESS_TOKEN_URL}?${queryParams({
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    code,
-  })}`;
+  withCors(
+    `${ACCESS_TOKEN_URL}?${queryParams({
+      client_id: CLIENT_ID,
+      client_secret: CLIENT_SECRET,
+      code,
+    })}`,
+  );
 
 export default auth;

@@ -3,6 +3,7 @@ import { Card, CardHeader, Container, CardBody, Row } from 'reactstrap';
 import Header from 'components/Projects/Header.jsx';
 import Table from 'components/Projects/Table.jsx';
 import getProjects from '../queries/getProjects';
+import { isQueryReady } from '../utils/queries';
 
 const Error = ({ error }) => (
   <CardBody>
@@ -12,11 +13,13 @@ const Error = ({ error }) => (
 );
 
 const Projects = () => {
-  const { error, loading, data: projects } = getProjects();
+  const projectsQuery = getProjects();
+  const { projects, error, loading } = projectsQuery;
+  const ready = isQueryReady(projectsQuery);
 
   return (
     <>
-      <Header projects={projects} />
+      <Header projects={projects} ready={ready} />
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
