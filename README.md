@@ -12,7 +12,7 @@
   <strong>A Dashboard to have a quick overview of Open Sources projects in your Github account ✨</strong>
 </div>
 
-Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
+Powered by [Argon Dashboard ⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
 
 **[Live app ✨][app-link]**
 
@@ -26,7 +26,7 @@ Powered by [Argon Dashboard⚛️](https://github.com/creativetimofficial/argon-
 This project can be used in two ways:
 
 - Login directly inside the [live app][app-link]. See [Basic setup](#basic-setup).
-- Host your own dashboard in order to showcase your maintained projects to others. See [Advanced Setup](#advanced-setup).
+- Host your own dashboard in order to showcase your maintained projects to others. See [Host your own Dashboard](#host-your-own-dashboard).
 
 ## Screenshots 🖼
 
@@ -36,14 +36,14 @@ This project can be used in two ways:
 
 ##
 
-## Basic setup
+## Basic setup ⚙️
 
-### Requirements
+### Requirements 📝
 
-- Have a Github account.
+- Have a [Github](https://github.com/) account.
 - Have at least one project linked to that account (can be private or public).
 
-### Steps
+### Steps 🏃‍♂️
 
 1. Go to [Github Gists](https://gist.github.com/).
 2. Create a new file with the name of `oss-projects.json`.
@@ -56,15 +56,15 @@ This project can be used in two ways:
 4. Open [live app][app-link] and click on Log in with Github.
 5. Accept permissions and you should be able to see the dashboard with the information of your projects ✨
 
-## Advanced Setup
+## Host your own Dashboard 🙆‍♂️
 
 The main difference with the [live app][app-link] is that login is not needed anymore in order to see the projects and there is no logout option. However the deployed application will show the projects of **only** one user.
 
 This is very handy when you want to showcase your projects to other or when you want to have an easy way to have a quick overview of your maintained projects.
 
-### Steps
+### Steps 🏃‍♂️
 
-1. Go to your Github Developer Settings, create a new Auth token and copy its content.
+1. Go to your [Github Developer Settings](https://github.com/settings/tokens), create a new Auth token and copy its content.
 2. Create a `.env` file in the root of the project with the following information
 
 ```text
@@ -76,7 +76,7 @@ REACT_APP_GITHUB_ACCESS_TOKEN_=<<REPLACE_WITH_YOUR_TOKEN>>
 
 NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere! I recommend building it with [Netlify](http://netlify.com/) because it provides a nice set of tools and it has a great integration with Github.
 
-## Development
+## Development 🛠
 
 ### Component Shadowing out of the box 🤯
 
