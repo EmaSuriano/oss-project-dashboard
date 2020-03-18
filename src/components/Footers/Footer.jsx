@@ -45,7 +45,11 @@ const Footer = () => {
 
         <Col xl={twoColumn ? '6' : '12'}>
           <div className="copyright text-center text-xl-right text-muted">
-            Built with ❤️ by
+            Built with{' '}
+            <span role="img" aria-label="love">
+              ❤️
+            </span>{' '}
+            by
             <a
               className="font-weight-bold ml-1"
               href="https://github.com/EmaSuriano"

@@ -4,7 +4,7 @@
 
 <div align="center">
   <a href="https://react-hotkey-tooltip.netlify.com/#/">
-    <img alt="logo" src="./doc/logo.png" height="150px" />
+    <img alt="logo" src="./docs/logo.png" height="150px" />
   </a>
 </div>
 
@@ -113,8 +113,6 @@ This feature is quite handy when you are working with templates like `argon-dash
 ## Contribution 💪
 
 I'm always open for Pull Requests and Issues, so don't be afraid of collaborating!
-
-In case you are interested in the project this is the current [Roadmap 🛣](./ROADMAP.md) of features and bug!
 
 ## License 📝
 

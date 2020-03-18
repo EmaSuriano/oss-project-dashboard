@@ -13,13 +13,12 @@ const Error = ({ error }) => (
 );
 
 const Projects = () => {
-  const projectsQuery = getProjects();
-  const { projects, error, loading } = projectsQuery;
-  const ready = isQueryReady(projectsQuery);
+  const queryResult = getProjects();
+  const ready = isQueryReady(queryResult);
 
   return (
     <>
-      <Header projects={projects} ready={ready} />
+      <Header projects={queryResult.data} ready={ready} />
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
@@ -27,10 +26,13 @@ const Projects = () => {
               <CardHeader className="border-0">
                 <h3 className="mb-0">Project List</h3>
               </CardHeader>
-              {error ? (
-                <Error error={error} />
+              {queryResult.error ? (
+                <Error error={queryResult.error} />
               ) : (
-                <Table projects={projects} loading={loading} />
+                <Table
+                  projects={queryResult.data}
+                  loading={queryResult.loading}
+                />
               )}
             </Card>
           </div>

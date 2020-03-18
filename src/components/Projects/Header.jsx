@@ -29,9 +29,9 @@ const reduceAllIssues = (acc, curr) => acc + curr.issues.totalCount;
 const reduceAllPullRequests = (acc, curr) => acc + curr.pullRequests.totalCount;
 
 const Header = ({ projects, ready }) => {
-  const projectsNumber = projects.length;
-  const issuesNumber = projects.reduce(reduceAllIssues, 0);
-  const pullRequestsNumber = projects.reduce(reduceAllPullRequests, 0);
+  const projectsNumber = ready && projects.length;
+  const issuesNumber = ready && projects.reduce(reduceAllIssues, 0);
+  const pullRequestsNumber = ready && projects.reduce(reduceAllPullRequests, 0);
 
   return (
     <>
@@ -42,21 +42,21 @@ const Header = ({ projects, ready }) => {
             <Row>
               <CardInfo
                 label="Projects"
-                value={ready && projectsNumber}
+                value={projectsNumber}
                 icon="trophy"
                 background="success"
               />
 
               <CardInfo
                 label="Issues"
-                value={ready && issuesNumber}
+                value={issuesNumber}
                 icon="bullhorn"
                 background="warning"
               />
 
               <CardInfo
                 label="Pull Requests"
-                value={ready && pullRequestsNumber}
+                value={pullRequestsNumber}
                 icon="list"
                 background="danger"
               />

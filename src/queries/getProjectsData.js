@@ -40,7 +40,7 @@ query {
 }
 `;
 
-const getProjectsData = projectList => {
+const getProjectsData = (projectList = []) => {
   const repositoriesQuery = useQuery(REPOSITORIES_QUERY(projectList), {
     skip: projectList.length === 0,
   });
