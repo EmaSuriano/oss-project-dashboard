@@ -23,6 +23,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
+    "test": "percy exec -t 350 -- cypress run",
+    "test:ci": "start-server-and-test 3000",
     "postinstall": "patch-package && yarn --cwd ./node_modules/argon-dashboard-react minify-sass"
   },
   "eslintConfig": {
@@ -42,9 +44,14 @@
     "babel-loader": "8.0.5",
     "enhanced-resolve": "^5.0.0-beta.4",
     "graphql": "^14.6.0",
-    "query-string": "^6.11.1",
     "patch-package": "^6.2.1",
+    "query-string": "^6.11.1",
     "react-app-rewired": "^2.1.5",
     "react-scripts": "2.1.8"
+  },
+  "devDependencies": {
+    "@percy/cypress": "^2.3.1",
+    "cypress": "^4.2.0",
+    "start-server-and-test": "^1.10.11"
   }
 }
