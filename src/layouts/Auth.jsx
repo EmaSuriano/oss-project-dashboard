@@ -44,7 +44,10 @@ class Auth extends React.Component {
                     <h1 className="text-white">Welcome!</h1>
                     <p className="text-lead text-light">
                       A Dashboard to have a quick overview of Open Sources
-                      projects in your Github account ✨
+                      projects in your Github account{' '}
+                      <span role="img" aria-label="sparkles">
+                        ✨
+                      </span>
                     </p>
                   </Col>
                 </Row>
