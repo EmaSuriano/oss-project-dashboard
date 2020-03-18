@@ -5,7 +5,7 @@ import getProjectsList from './getProjectsList';
 
 const errorsFromQueries = (...queries) => queries.find(({ error }) => error);
 const loadingFromQueries = (...queries) =>
-  queries.find(({ loading }) => loading);
+  queries.some(({ loading }) => loading);
 
 const getProjects = () => {
   const gistsQuery = getProjectsGist();
