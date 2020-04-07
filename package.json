@@ -44,7 +44,7 @@
     "babel-loader": "8.0.5",
     "enhanced-resolve": "^5.0.0-beta.4",
     "graphql": "^14.6.0",
-    "patch-package": "^6.2.1",
+    "patch-package": "^6.2.2",
     "query-string": "^6.11.1",
     "react-app-rewired": "^2.1.5",
     "react-scripts": "2.1.8"
