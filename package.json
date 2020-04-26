@@ -47,7 +47,7 @@
     "patch-package": "^6.2.2",
     "query-string": "^6.12.1",
     "react-app-rewired": "^2.1.5",
-    "react-scripts": "2.1.8"
+    "react-scripts": "3.4.1"
   },
   "devDependencies": {
     "@percy/cypress": "^2.3.1",
