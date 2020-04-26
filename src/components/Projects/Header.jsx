@@ -10,7 +10,9 @@ const CardInfo = ({ label, value, icon, background }) => (
             <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
               {label}
             </CardTitle>
-            <span className="h2 font-weight-bold mb-0">{value}</span>
+            <span e2e-id={label} className="h2 font-weight-bold mb-0">
+              {value}
+            </span>
           </div>
           <Col className="col-auto">
             <div

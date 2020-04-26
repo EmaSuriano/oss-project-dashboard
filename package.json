@@ -24,6 +24,7 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "percy exec -t 350 -- cypress run",
+    "test:open": "percy exec -t 350 -- cypress open",
     "test:ci": "start-server-and-test 3000",
     "postinstall": "patch-package && yarn --cwd ./node_modules/argon-dashboard-react minify-sass"
   },
