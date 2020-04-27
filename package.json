@@ -41,7 +41,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
     "apollo-boost": "^0.4.7",
-    "argon-dashboard-react": "1.0.0",
+    "argon-dashboard-react": "1.1.0",
     "babel-loader": "8.0.5",
     "enhanced-resolve": "^5.0.0-beta.4",
     "graphql": "^14.6.0",
