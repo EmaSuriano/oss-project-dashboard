@@ -15,7 +15,7 @@ const BadgeCount = ({ count }) => {
   );
 };
 
-const renderProjectInfo = project => (
+const renderProjectInfo = (project, projectIndex) => (
   <tr key={project.id}>
     <th scope="row">
       <Media className="align-items-center">
@@ -36,21 +36,22 @@ const renderProjectInfo = project => (
     <td>
       <Media className="align-items-center">
         <span className="avatar-group">
-          {project.stargazers.nodes.map((user, i) => (
+          {project.stargazers.nodes.map((user, index) => (
             <Fragment key={user.id}>
-              <a
+              <span
                 className="avatar avatar-sm"
-                href="#pablo"
-                id={`tooltip_${i}`}
-                onClick={e => e.preventDefault()}
+                id={`tooltip_${projectIndex}_${index}`}
               >
                 <img
                   alt={user.name}
                   className="rounded-circle"
                   src={user.avatarUrl}
                 />
-              </a>
-              <UncontrolledTooltip delay={0} target={`tooltip_${i}`}>
+              </span>
+              <UncontrolledTooltip
+                delay={0}
+                target={`tooltip_${projectIndex}_${index}`}
+              >
                 {user.name}
               </UncontrolledTooltip>
             </Fragment>
@@ -78,36 +79,39 @@ const EmptyProject = () => (
   </tr>
 );
 
-const GithubTable = ({ projects, loading }) => (
-  <Table className="align-items-center table-flush" responsive>
-    <thead className="thead-light">
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Issues</th>
-        <th scope="col">Vulnerabilities</th>
-        <th scope="col">Pull Requests</th>
-        <th scope="col">Stargazers</th>
-      </tr>
-    </thead>
-    <tbody>
-      {loading ? (
+const GithubTable = ({ data, loading }) => {
+  const { projects } = data;
+  return (
+    <Table className="align-items-center table-flush" responsive>
+      <thead className="thead-light">
         <tr>
-          <td colSpan="5">
-            <Media
-              className="align-items-center"
-              style={{ justifyContent: 'center' }}
-            >
-              <Loader />
-            </Media>
-          </td>
+          <th scope="col">Name</th>
+          <th scope="col">Issues</th>
+          <th scope="col">Vulnerabilities</th>
+          <th scope="col">Pull Requests</th>
+          <th scope="col">Stargazers</th>
         </tr>
-      ) : projects.length === 0 ? (
-        <EmptyProject />
-      ) : (
-        projects.map(renderProjectInfo)
-      )}
-    </tbody>
-  </Table>
-);
+      </thead>
+      <tbody>
+        {loading ? (
+          <tr>
+            <td colSpan="5">
+              <Media
+                className="align-items-center"
+                style={{ justifyContent: 'center' }}
+              >
+                <Loader />
+              </Media>
+            </td>
+          </tr>
+        ) : projects.length === 0 ? (
+          <EmptyProject />
+        ) : (
+          projects.map(renderProjectInfo)
+        )}
+      </tbody>
+    </Table>
+  );
+};
 
 export default GithubTable;

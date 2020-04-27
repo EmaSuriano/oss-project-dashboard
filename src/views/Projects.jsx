@@ -5,12 +5,15 @@ import Table from 'components/Projects/Table.jsx';
 import getProjects from '../queries/getProjects';
 import { isQueryReady } from '../utils/queries';
 
-const Error = ({ error }) => (
-  <CardBody>
-    <h4>Something happened ...</h4>
-    <code>{typeof error === 'string' ? error : JSON.stringify(error)}</code>
-  </CardBody>
-);
+const Error = ({ error }) => {
+  console.error(error);
+  return (
+    <CardBody>
+      <h4>Something happened ...</h4>
+      {/* <code>{typeof error === 'string' ? error : JSON.stringify(error)}</code> */}
+    </CardBody>
+  );
+};
 
 const Projects = () => {
   const queryResult = getProjects();
@@ -18,7 +21,7 @@ const Projects = () => {
 
   return (
     <>
-      <Header projects={queryResult.data} ready={ready} />
+      <Header data={queryResult.data} ready={ready} />
       <Container className="mt--7" fluid>
         <Row>
           <div className="col">
@@ -29,10 +32,7 @@ const Projects = () => {
               {queryResult.error ? (
                 <Error error={queryResult.error} />
               ) : (
-                <Table
-                  projects={queryResult.data}
-                  loading={queryResult.loading}
-                />
+                <Table data={queryResult.data} loading={queryResult.loading} />
               )}
             </Card>
           </div>

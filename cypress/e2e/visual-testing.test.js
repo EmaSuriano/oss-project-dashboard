@@ -8,15 +8,12 @@ describe('Visual Testing', () => {
     });
   });
 
-  // it('Project Page', () => {
-  //   cy.visit('/');
-  //   cy.window().then(({ localStorage }) =>
-  //     localStorage.setItem(
-  //       'token',
-  //       process.env.REACT_APP_GITHUB_ACCESS_TOKEN_TRAVIS,
-  //     ),
-  //   );
-  //   cy.reload();
-  //   cy.screenshot();
-  // });
+  it('Project Page', () => {
+    cy.visit('/');
+    cy.login();
+    cy.get('.loading').should('not.be.visible');
+    cy.percySnapshot('Project page Responsive', {
+      widths: SCREENS,
+    });
+  });
 });
