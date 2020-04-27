@@ -1,31 +1,33 @@
-import { isQueryReady } from '../utils/queries';
+import {
+  isQueryReady,
+  errorsFromQueries,
+  loadingFromQueries,
+} from '../utils/queries';
 import getProjectsData from './getProjectsData';
-import getProjectsGist from './getProjectsGist';
-import getProjectsList from './getProjectsList';
+import getUserConfig from './getUserConfig';
 
-const errorsFromQueries = (...queries) => queries.find(({ error }) => error);
-const loadingFromQueries = (...queries) =>
-  queries.some(({ loading }) => loading);
+const EMPTY_DATA = {
+  projects: [],
+};
 
 const getProjects = () => {
-  const gistsQuery = getProjectsGist();
-  const gistName = isQueryReady(gistsQuery) ? gistsQuery.output.name : '';
-
-  const projectsListQuery = getProjectsList(gistName);
-  const projectList = isQueryReady(projectsListQuery)
-    ? projectsListQuery.output
+  const gistDataQuery = getUserConfig();
+  const projectList = isQueryReady(gistDataQuery)
+    ? gistDataQuery.output.projects
     : [];
 
   const projectsDataQuery = getProjectsData(projectList);
-
+  // const projectsDataQuery = { output: [] };
+  console.log(projectsDataQuery);
   return {
-    error: errorsFromQueries(projectsDataQuery, projectsListQuery, gistsQuery),
-    loading: loadingFromQueries(
-      projectsDataQuery,
-      projectsListQuery,
-      gistsQuery,
-    ),
-    data: projectsDataQuery.output,
+    error: errorsFromQueries(projectsDataQuery, gistDataQuery),
+    loading: loadingFromQueries(projectsDataQuery, gistDataQuery),
+    data: isQueryReady(projectsDataQuery)
+      ? {
+          projects: projectsDataQuery.output,
+          threshold: gistDataQuery.output.threshold,
+        }
+      : EMPTY_DATA,
   };
 };
 

@@ -25,21 +25,25 @@ const ProjectInfo = `
   }
 `;
 
-const REPOSITORIES_QUERY = projects => gql`
-query { 
-  viewer { 
-    id
-    ${projects
-      .map(
-        name => `${name.replace(/-/g, '')}: repository(name: "${name}") {
-      ${ProjectInfo}
-    }`,
-      )
-      .join('\n')}
-  }
+const REPOSITORIES_QUERY = (projectList) => gql`
+query {
+  __typename 
+  ${projectList
+    .map((project) => {
+      const [user, name] = project.split('/');
+      const key = name.replace(/-/g, '');
+      return `${key}: repository(name: "${name}", owner: "${user}") {
+        ${ProjectInfo}
+      }`;
+    })
+    .join('\n')}
 }
 `;
-
+/**
+ *
+ * @param {string} projectList
+ * @returns Project information
+ */
 const getProjectsData = (projectList = []) => {
   const repositoriesQuery = useQuery(REPOSITORIES_QUERY(projectList), {
     skip: projectList.length === 0,
@@ -47,7 +51,10 @@ const getProjectsData = (projectList = []) => {
 
   repositoriesQuery.output = isQueryReady(repositoriesQuery)
     ? projectList
-        .map(name => repositoriesQuery.data.viewer[name.replace(/-/g, '')])
+        .map((name) => {
+          const key = name.split('/')[1].replace(/-/g, '');
+          return repositoriesQuery.data[key];
+        })
         .filter(Boolean)
     : [];
 

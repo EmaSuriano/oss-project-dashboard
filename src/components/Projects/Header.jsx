@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardBody, CardTitle, Container, Row, Col } from 'reactstrap';
 
-const CardInfo = ({ label, value, icon, background }) => (
+const CardInfo = ({ label, value, icon, background = 'primary' }) => (
   <Col lg="6" xl="3">
     <Card className="card-stats mb-4 mb-xl-0">
       <CardBody>
@@ -30,7 +30,14 @@ const CardInfo = ({ label, value, icon, background }) => (
 const reduceAllIssues = (acc, curr) => acc + curr.issues.totalCount;
 const reduceAllPullRequests = (acc, curr) => acc + curr.pullRequests.totalCount;
 
-const Header = ({ projects, ready }) => {
+const thresholdToColor = (value, threshold) => {
+  if (!threshold) return;
+  if (value > threshold) return 'danger';
+  return value > threshold / 2 ? 'warning' : 'success';
+};
+
+const Header = ({ data, ready }) => {
+  const { projects, threshold = {} } = data;
   const projectsNumber = ready && projects.length;
   const issuesNumber = ready && projects.reduce(reduceAllIssues, 0);
   const pullRequestsNumber = ready && projects.reduce(reduceAllPullRequests, 0);
@@ -42,25 +49,23 @@ const Header = ({ projects, ready }) => {
           <div className="header-body">
             {/* Card stats */}
             <Row>
-              <CardInfo
-                label="Projects"
-                value={projectsNumber}
-                icon="trophy"
-                background="success"
-              />
+              <CardInfo label="Projects" value={projectsNumber} icon="trophy" />
 
               <CardInfo
                 label="Issues"
                 value={issuesNumber}
                 icon="bullhorn"
-                background="warning"
+                background={thresholdToColor(issuesNumber, threshold.issues)}
               />
 
               <CardInfo
                 label="Pull Requests"
                 value={pullRequestsNumber}
                 icon="list"
-                background="danger"
+                background={thresholdToColor(
+                  pullRequestsNumber,
+                  threshold.pullRequests,
+                )}
               />
             </Row>
           </div>
