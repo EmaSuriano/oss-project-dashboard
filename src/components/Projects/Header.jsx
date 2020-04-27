@@ -10,12 +10,11 @@ const CardInfo = ({ label, value, icon, background = 'primary' }) => (
             <CardTitle tag="h5" className="text-uppercase text-muted mb-0">
               {label}
             </CardTitle>
-            <span e2e-id={label} className="h2 font-weight-bold mb-0">
-              {value}
-            </span>
+            <span className="h2 font-weight-bold mb-0">{value}</span>
           </div>
           <Col className="col-auto">
             <div
+              e2e-id={label}
               className={`icon icon-shape bg-${background} text-white rounded-circle shadow`}
             >
               <i className={`fas fa-${icon}`} />
@@ -32,8 +31,8 @@ const reduceAllPullRequests = (acc, curr) => acc + curr.pullRequests.totalCount;
 
 const thresholdToColor = (value, threshold) => {
   if (!threshold) return;
-  if (value > threshold) return 'danger';
-  return value > threshold / 2 ? 'warning' : 'success';
+  if (value >= threshold) return 'danger';
+  return value > threshold - threshold / 4 ? 'warning' : 'success';
 };
 
 const Header = ({ data, ready }) => {

@@ -45,7 +45,6 @@ const getProjectsFromQuery = (projectsQuery, onError) => {
  */
 const getUserConfig = () => {
   const gistNameQuery = getGistName();
-  console.log('gistName', gistNameQuery.output, !!gistNameQuery.output);
 
   const projectsQuery = useQuery(PROJECT_QUERY, {
     variables: { name: gistNameQuery.output },

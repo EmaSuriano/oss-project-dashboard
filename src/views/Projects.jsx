@@ -10,13 +10,7 @@ const Error = ({ error }) => {
   return (
     <CardBody>
       <h4>Something happened ...</h4>
-      {/* <code>
-      {typeof error === 'string'
-        ? error
-        : JSON.stringify(error, (key, value) =>
-            key === 'parent' ? value.id : value,
-          )}
-    </code> */}
+      {/* <code>{typeof error === 'string' ? error : JSON.stringify(error)}</code> */}
     </CardBody>
   );
 };

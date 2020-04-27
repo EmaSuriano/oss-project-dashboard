@@ -17,8 +17,7 @@ const getProjects = () => {
     : [];
 
   const projectsDataQuery = getProjectsData(projectList);
-  // const projectsDataQuery = { output: [] };
-  console.log(projectsDataQuery);
+
   return {
     error: errorsFromQueries(projectsDataQuery, gistDataQuery),
     loading: loadingFromQueries(projectsDataQuery, gistDataQuery),
