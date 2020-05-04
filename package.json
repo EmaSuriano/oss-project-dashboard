@@ -47,7 +47,7 @@
     "graphql": "^14.6.0",
     "patch-package": "^6.2.2",
     "query-string": "^6.12.1",
-    "react-app-rewired": "^2.1.5",
+    "react-app-rewired": "^2.1.6",
     "react-scripts": "2.1.8"
   },
   "devDependencies": {
