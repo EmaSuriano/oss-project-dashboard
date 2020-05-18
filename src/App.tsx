@@ -21,9 +21,6 @@ export const App = () => (
         <Box gridArea="main" overflow="auto" fill background="light-2">
           <Switch>
             <Route path="/" exact component={Dashboard} />
-            {/* The following are placeholders for future pages */}
-            {/* <Route path="/stakeholders" component={Stakeholders} />
-                <Route path="/calculator" component={Calculator} /> */}
           </Switch>
         </Box>
       </Grid>

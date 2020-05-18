@@ -1,32 +1,31 @@
-import React, { useRef, useState, useContext } from 'react';
-import {
-  Box,
-  ResponsiveContext,
-  Button,
-  Drop,
-  BoxProps,
-  Menu,
-  Text,
-} from 'grommet';
-import { Analytics, Calculator, Stakeholder, Gremlin } from 'grommet-icons';
+import React, { useContext } from 'react';
+import { Box, ResponsiveContext, BoxProps, Menu, Text } from 'grommet';
+import { Analytics, Github, Configure } from 'grommet-icons';
+import { SidebarItem } from './SidebarItem';
 
 export const Sidebar = (props: BoxProps) => {
   const size = useContext(ResponsiveContext);
+  const spacing = size === 'small' ? 'medium' : 'small';
 
   return (
-    <Box background="brand" overflow="auto" {...props}>
-      <Box align="center" pad={{ vertical: 'small' }}>
-        <GradientGremlin />
-      </Box>
-      <Box align="center" gap={size === 'small' ? 'medium' : 'small'}>
-        {['Analytics', 'Stakeholder', 'Calculator'].map((iconName, index) => (
-          <TooltipButton key={iconName} iconName={iconName} index={index} />
-        ))}
-      </Box>
+    <Box
+      align="center"
+      fill="vertical"
+      pad={{ vertical: spacing }}
+      gap={spacing}
+      width="sidebar"
+      background="brand"
+      {...props}
+    >
+      <GradientGithub />
+      <SidebarItem title="Dashboard" href="/">
+        <Analytics size="large" />
+      </SidebarItem>
+      <SidebarItem title="Settings" href="/settings">
+        <Configure size="large" />
+      </SidebarItem>
       <Box flex />
-      <Box pad={{ vertical: 'small' }}>
-        <UserMenu />
-      </Box>
+      <UserMenu />
     </Box>
   );
 };
@@ -42,7 +41,7 @@ const UserMenu = ({ items = [] }: UserMenuProps) => (
     items={items.map((item) => ({
       ...item,
       label: <Text size="small">{item.label}</Text>,
-      onClick: () => {}, // no-op
+      onClick: () => alert(`clicked on ${item.label}`), // no-op
     }))}
     label={
       <Box
@@ -58,65 +57,14 @@ const UserMenu = ({ items = [] }: UserMenuProps) => (
   />
 );
 
-const TooltipButton = ({
-  iconName,
-  index,
-}: {
-  iconName: string;
-  index: number;
-}) => {
-  const [over, setOver] = useState(false);
-  const iconsMap = (color: string) => [
-    <Analytics color={color} />,
-    <Stakeholder color={color} />,
-    <Calculator color={color} />,
-  ];
-
-  const tooltipColor = { color: 'accent-1', opacity: 0.9 };
-  const ref = useRef<any>();
-
-  return (
-    <Box width="100%">
-      {/* eslint-disable-next-line jsx-a11y/mouse-events-have-key-events */}
-      <Button
-        ref={ref}
-        onMouseOver={() => setOver(true)}
-        onMouseLeave={() => setOver(false)}
-        fill="horizontal"
-        hoverIndicator={tooltipColor}
-        plain
-      >
-        {({ hover }: { hover: boolean }) => (
-          <Box pad={{ vertical: 'small' }} align="center">
-            {iconsMap(hover ? 'black' : 'white')[index]}
-          </Box>
-        )}
-      </Button>
-      {ref.current && over && (
-        <Drop align={{ left: 'right' }} target={ref.current} plain>
-          <Box
-            animation="slideRight"
-            margin="xsmall"
-            pad="small"
-            background={tooltipColor}
-            round={{ size: 'medium', corner: 'right' }}
-          >
-            {iconName}
-          </Box>
-        </Drop>
-      )}
-    </Box>
-  );
-};
-
-export const GradientGremlin = () => (
+export const GradientGithub = () => (
   <Box
     background="linear-gradient(#6FFFB0 0%, #7D4CDB 100%)"
     border={{ color: 'white', size: 'small' }}
-    margin={{ bottom: 'medium' }}
+    margin={{ vertical: 'medium' }}
     pad="xsmall"
     round="small"
   >
-    <Gremlin color="white" />
+    <Github color="white" size="large" />
   </Box>
 );

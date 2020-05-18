@@ -1,26 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import { Box, Heading, BoxProps } from 'grommet';
-import { Configure } from 'grommet-icons';
 
 type PageHeaderProps = BoxProps & {
   name: string;
+  action?: ReactNode;
 };
 
-export const PageHeader = ({ name, ...rest }: PageHeaderProps) => (
-  <Box
-    flex={false}
-    margin={{ bottom: 'small' }}
-    justify="between"
-    direction="row"
-    border={{ side: 'bottom', color: 'light-4' }}
-    {...rest}
-  >
-    <Heading level={2} size="xsmall">
-      {name}
-    </Heading>
-    <Box alignSelf="center">
-      <Configure color="brand" />
-    </Box>
+export const PageHeader = ({ name, action, ...rest }: PageHeaderProps) => (
+  <Box justify="between" direction="row" {...rest}>
+    <Heading level={1}>{name}</Heading>
+    {action && <Box alignSelf="center">{action}</Box>}
   </Box>
 );
