@@ -1,5 +1,5 @@
 import React, { useRef, useState, ReactNode } from 'react';
-import { Box, Button, Drop, Anchor } from 'grommet';
+import { Box, Button, Drop, Anchor, Text } from 'grommet';
 
 type Props = { children: ReactNode; title: string; href: string };
 
@@ -27,9 +27,10 @@ export const SidebarItem = ({ children, title, href }: Props) => {
             animation="slideRight"
             pad="medium"
             background="accent-1"
+            height={ref.current.height}
             round={{ size: 'small', corner: 'right' }}
           >
-            {title}
+            <Text size="large">{title}</Text>
           </Box>
         </Drop>
       )}
