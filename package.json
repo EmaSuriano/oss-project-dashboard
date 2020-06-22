@@ -43,7 +43,7 @@
     "apollo-boost": "^0.4.7",
     "argon-dashboard-react": "1.0.0",
     "babel-loader": "8.0.5",
-    "enhanced-resolve": "^5.0.0-beta.4",
+    "enhanced-resolve": "^5.0.0-beta.7",
     "graphql": "^14.6.0",
     "patch-package": "^6.2.2",
     "query-string": "^6.12.1",
