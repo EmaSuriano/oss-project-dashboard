@@ -1,4 +1,4 @@
-import { withCors, queryParams } from './utils/url';
+import { withCors, queryParams } from './url';
 
 const auth = {
   isAuthenticated: false,

@@ -15,10 +15,11 @@ export const SidebarItem = ({ children, title, href }: Props) => {
         onMouseLeave={() => setOver(false)}
         fill="horizontal"
         hoverIndicator="accent-1"
+        href={href}
         plain
       >
         <Box pad="medium" align="center">
-          <Anchor href={href} label={children} a11yTitle={title} />
+          <Anchor label={children} a11yTitle={title} />
         </Box>
       </Button>
       {ref.current && over && (

@@ -1,0 +1,34 @@
+import { isQueryReady } from '../utils/queries';
+import { useQuery } from '@apollo/react-hooks';
+import { Query, QueryData } from '../queries/RepositoriesQuery';
+import { QueryResult } from '@apollo/react-common';
+import Project from '../types/Project';
+
+type ProjectDataQueryResult = QueryResult<QueryData> & { output: Project[] };
+
+const DEFAULT: string[] = [];
+
+const useProjectDataQuery = (projects = DEFAULT) => {
+  const repositoriesQuery = useQuery<QueryData>(Query(projects), {
+    skip: projects.length === 0,
+  });
+
+  const result: ProjectDataQueryResult = Object.assign(repositoriesQuery, {
+    output: [],
+  });
+
+  if (isQueryReady(repositoriesQuery)) {
+    const projectsWithData = projects
+      .map((name) => {
+        const key = name.split('/')[1].replace(/-/g, '');
+        return repositoriesQuery.data![key] as Project;
+      })
+      .filter(Boolean);
+
+    result.output = projectsWithData;
+  }
+
+  return result;
+};
+
+export default useProjectDataQuery;

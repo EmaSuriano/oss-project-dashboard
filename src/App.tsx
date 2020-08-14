@@ -4,25 +4,12 @@ import { Box, Grid, Grommet } from 'grommet';
 import { Sidebar } from './components';
 import { theme } from './theme';
 import { Dashboard } from './pages/Dashboard';
-import ApolloClient from 'apollo-boost';
-import { ApolloProvider } from '@apollo/react-hooks';
-import auth from './auth';
-
-const client = new ApolloClient({
-  uri: 'https://api.github.com/graphql',
-  request: (operation) => {
-    const token = auth.getCredentials();
-    operation.setContext(() => ({
-      headers: {
-        authorization: token ? `token ${token}` : '',
-      },
-    }));
-  },
-});
+import Settings from './pages/Settings';
+import Apollo from './components/Apollo';
 
 export const App = () => (
   <Router>
-    <ApolloProvider client={client}>
+    <Apollo>
       <Grommet theme={theme} full>
         <Grid
           fill
@@ -37,10 +24,11 @@ export const App = () => (
           <Box gridArea="main" overflow="auto" fill background="light-2">
             <Switch>
               <Route path="/" exact component={Dashboard} />
+              <Route path="/settings" exact component={Settings} />
             </Switch>
           </Box>
         </Grid>
       </Grommet>
-    </ApolloProvider>
+    </Apollo>
   </Router>
 );
