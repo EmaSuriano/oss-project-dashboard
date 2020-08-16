@@ -1,9 +1,11 @@
+export type Threshold = {
+  pullRequests?: number;
+  issues?: number;
+};
+
 export type Settings = {
   projects: string[];
-  threshold?: {
-    pullRequests?: number;
-    issues?: number;
-  };
+  threshold?: Threshold;
 };
 
 export default Settings;

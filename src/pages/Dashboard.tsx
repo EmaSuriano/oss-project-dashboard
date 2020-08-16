@@ -1,45 +1,27 @@
 import React from 'react';
 
-import { Button, Grid } from 'grommet';
+import { Button } from 'grommet';
 import { Notification } from '../components/Notification';
-import { VirtualMachinesCard } from '../components/VirtualMachinesCard';
-import { hardware, utilization, vms, notification } from './data';
+import Summary from '../components/Summary';
+import { hardware, utilization } from './data';
 import { Hardware1, Hardware2 } from '../components/Hardware';
 import { UtilizationCard } from '../components/UtlizationCard';
 import { Configure } from 'grommet-icons';
 import { Layout, Column } from '../components/Layout';
 import useProjectsQuery from '../hooks/useProjectsQuery';
-import LoadingSection from '../components/LoadingSection';
 
 export const Dashboard = () => {
   const { loading, error, data } = useProjectsQuery();
 
   const ready = !loading && !error;
-  console.log(data);
-
+  const { projects, settings } = data!;
+  console.log('loading', loading);
   return (
     <Layout name="Dashboard" action={SettingsButton}>
-      {loading && 'Loading'}
+      {/* {loading && 'Loading'} */}
       {error && 'Something happened ...'}
-      {ready && (
+      {true && (
         <>
-          Loading
-          <Grid
-            areas={[
-              { name: 'nav', start: [0, 0], end: [0, 0] },
-              { name: 'main', start: [1, 0], end: [1, 0] },
-              { name: 'side', start: [2, 0], end: [2, 0] },
-              { name: 'foot', start: [0, 1], end: [2, 1] },
-            ]}
-            columns={['small', 'flex', 'small']}
-            rows={['medium', 'small']}
-            gap="small"
-          >
-            <LoadingSection gridArea="nav" />
-            <LoadingSection gridArea="main" />
-            <LoadingSection gridArea="side" />
-            <LoadingSection gridArea="foot" />
-          </Grid>
           <Column>
             <Notification
               title="Something happened"
@@ -58,7 +40,11 @@ export const Dashboard = () => {
               status="warning"
               closable
             />
-            <VirtualMachinesCard {...vms} />
+            <Summary
+              projects={projects}
+              threshold={settings.threshold}
+              loading={loading}
+            />
           </Column>
           <Column>
             {utilization.map((data) => (
