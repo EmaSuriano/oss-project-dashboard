@@ -1,5 +1,12 @@
 # Open Source Github Dashboard
 
+Design Feedback:
+
+- Summary Card: split it into 3 sections ( justify-content: space-around;)
+- Font is different
+- Color not blend correctly.
+- Increase text on the message of the Section
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
 <div align="center">
@@ -12,7 +19,7 @@
   <strong>A Dashboard to have a quick overview of Open Sources projects in your Github account ✨</strong>
 </div>
 
-Powered by [Argon Dashboard ⚛️](https://github.com/creativetimofficial/argon-dashboard-react).
+Powered by [Grommet](https://v2.grommet.io/components).
 
 **[Live app ✨][app-link]**
 
