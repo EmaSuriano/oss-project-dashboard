@@ -9,15 +9,20 @@ import { Query, QueryData } from '../queries/ProjectQuery';
 
 type SettingsQueryResult = QueryResult<QueryData> & { output: Settings };
 
+const EMPTY_RESULT = {
+  output: EMPTY_SETTINGS,
+};
+
 const useSettingsQuery = (gistName: string) => {
   const projectsQuery = useQuery<QueryData>(Query, {
     variables: { name: gistName },
     skip: !gistName,
   });
 
-  const result: SettingsQueryResult = Object.assign(projectsQuery, {
-    output: EMPTY_SETTINGS,
-  });
+  const result: SettingsQueryResult = Object.assign(
+    EMPTY_RESULT,
+    projectsQuery,
+  );
 
   if (isQueryReady(projectsQuery)) {
     const { viewer } = projectsQuery.data!;

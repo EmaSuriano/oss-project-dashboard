@@ -33,7 +33,7 @@ const animation = (duration: number) =>
   `;
 
 export const LoadingBox = styled(Box)<{ loading?: boolean }>`
-  animation: ${(props) => animation(props.loading ? 1 : 0)};
+  animation: ${(props) => animation(props.loading ? 0.5 : 0)};
 
   & > * {
     transition: opacity 1s ease;

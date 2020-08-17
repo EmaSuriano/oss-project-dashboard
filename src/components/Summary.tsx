@@ -1,25 +1,36 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Box, Text, Heading } from 'grommet';
 import Project from '../types/Project';
 import { Threshold } from '../types/Settings';
 import Section, { Props as SectionProps } from './Section';
+import { EMPTY_THRESHOLD } from '../utils/constant';
 
 type Props = Omit<SectionProps, 'title' | 'children'> & {
   projects: Project[];
   threshold?: Threshold;
 };
 
-const Summary = ({ projects, threshold, ...rest }: Props) => (
-  <Section title="Summary" {...rest}>
-    <Info title="Projects" count={projects.length} />
-    <Info title="Issues" count={projects.length} limit={threshold?.issues} />
-    <Info
-      title="Pulls"
-      count={projects.length}
-      limit={threshold?.pullRequests}
-    />
-  </Section>
-);
+const Summary = ({ projects, threshold = EMPTY_THRESHOLD, ...rest }: Props) => {
+  const issuesCount = useMemo(
+    () => projects.reduce((acc, curr) => acc + curr.issues.totalCount, 0),
+    [projects],
+  );
+
+  const pullsCount = useMemo(
+    () => projects.reduce((acc, curr) => acc + curr.pullRequests.totalCount, 0),
+    [projects],
+  );
+
+  const { issues: limitIssues, pullRequests: limitPulls } = threshold;
+
+  return (
+    <Section title="Summary" {...rest}>
+      <Info title="Projects" count={projects.length} />
+      <Info title="Issues" count={issuesCount} limit={limitIssues} />
+      <Info title="Pulls" count={pullsCount} limit={limitPulls} />
+    </Section>
+  );
+};
 
 type InfoProps = {
   title: string;
@@ -35,6 +46,7 @@ const limitToColor = (count: number, limit?: number) => {
 
 const Info = ({ title, count, limit }: InfoProps) => {
   const color = `status-${limitToColor(count, limit)}`;
+
   return (
     <Box>
       <Heading level="3" margin="none" size="small">

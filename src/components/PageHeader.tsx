@@ -8,7 +8,13 @@ type PageHeaderProps = BoxProps & {
 };
 
 export const PageHeader = ({ name, action, ...rest }: PageHeaderProps) => (
-  <Box justify="between" direction="row" {...rest}>
+  <Box
+    justify="between"
+    direction="row"
+    align="center"
+    margin={{ horizontal: 'small' }}
+    {...rest}
+  >
     <Heading level={1}>{name}</Heading>
     {action && <Box alignSelf="center">{action}</Box>}
   </Box>

@@ -7,9 +7,11 @@ import { Query, QueryData } from '../queries/GistNameQuery';
 
 type GistNameQueryResult = QueryResult<QueryData> & { output: string };
 
+const EMPTY_RESULT = { output: '' };
+
 const useGistNameQuery = () => {
   const gistsQuery = useQuery<QueryData>(Query);
-  const result: GistNameQueryResult = Object.assign(gistsQuery, { output: '' });
+  const result: GistNameQueryResult = Object.assign(EMPTY_RESULT, gistsQuery);
 
   if (isQueryReady(gistsQuery)) {
     const { viewer } = gistsQuery.data!;
