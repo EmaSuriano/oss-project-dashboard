@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Box, Text, Heading } from 'grommet';
 import Project from '../types/Project';
 import { Threshold } from '../types/Settings';

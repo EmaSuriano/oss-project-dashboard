@@ -37,8 +37,11 @@ export const Layout = ({ name, action, children }: LayoutProps) => {
           {children}
         </Box>
         <Text textAlign="end" margin="small">
-          Develop with ❤️ by{' '}
-          <Anchor href="http://emasuriano.com/">Ema Suriano</Anchor>
+          Develop with{' '}
+          <span role="img" aria-label="love">
+            ❤️
+          </span>{' '}
+          by <Anchor href="http://emasuriano.com/">Ema Suriano</Anchor>
         </Text>
       </Box>
     </Box>
