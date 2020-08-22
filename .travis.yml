@@ -24,4 +24,4 @@ install:
 
 script:
   - yarn build
-  - yarn test:ci
+  # - yarn test:ci
