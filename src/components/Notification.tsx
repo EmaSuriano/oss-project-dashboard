@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Button, Text, BoxProps } from 'grommet';
+import React, { useState, useContext } from 'react';
+import { Box, Button, Text, BoxProps, ResponsiveContext } from 'grommet';
 import { FormClose } from 'grommet-icons';
 
 type NotificationProps = BoxProps & {
@@ -16,28 +16,38 @@ export const Notification = ({
   status = 'unknown',
   ...rest
 }: NotificationProps) => {
+  const size = useContext(ResponsiveContext);
+  const width = size === 'small' ? '100%' : 'medium';
+
   const [visible, setVisible] = useState(true);
 
   if (!visible) return null;
 
   return (
-    <Box round direction="column" background={`status-${status}`} {...rest}>
-      <Box direction="row" justify="between" pad="medium">
-        <Box direction="column" gap="small">
+    <Box
+      round
+      direction="column"
+      background={`status-${status}`}
+      animation="fadeIn"
+      width={width}
+      height="fit-content"
+      pad="medium"
+      {...rest}
+    >
+      <Box direction="column" gap="small">
+        <Box direction="row" justify="between">
           <Text color="white" size="large" weight="bold">
             {title}
           </Text>
-          <Text color="white">{message}</Text>
-        </Box>
-        {closable && (
-          <Box>
+          {closable && (
             <Button
               plain
               icon={<FormClose color="white" size="large" />}
               onClick={() => setVisible(false)}
             />
-          </Box>
-        )}
+          )}
+        </Box>
+        <Text color="white">{message}</Text>
       </Box>
     </Box>
   );

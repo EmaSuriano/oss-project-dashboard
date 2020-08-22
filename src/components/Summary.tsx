@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Text, Heading } from 'grommet';
+import React, { useContext } from 'react';
+import { Box, Text, Heading, ResponsiveContext } from 'grommet';
 import Project from '../types/Project';
 import { Threshold } from '../types/Settings';
 import Section, { Props as SectionProps } from './Section';
@@ -12,6 +12,9 @@ type Props = Omit<SectionProps, 'title' | 'children'> & {
 };
 
 const Summary = ({ projects, threshold = EMPTY_THRESHOLD, ...rest }: Props) => {
+  const size = useContext(ResponsiveContext);
+  const width = size === 'small' ? '100%' : 'medium';
+
   const issuesCount = projects.reduce(
     (acc, { issues }) => acc + issues.totalCount,
     0,
@@ -23,7 +26,7 @@ const Summary = ({ projects, threshold = EMPTY_THRESHOLD, ...rest }: Props) => {
   );
 
   return (
-    <Section title="Summary" {...rest}>
+    <Section title="Summary" width={width} {...rest}>
       <Info title="Projects" count={projects.length} />
       <Info title="Issues" count={issuesCount} limit={threshold.issues} />
       <Info title="Pulls" count={pullsCount} limit={threshold.pullRequests} />

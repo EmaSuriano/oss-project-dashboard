@@ -4,19 +4,22 @@ import { PageHeader } from './PageHeader';
 
 type Props = {
   children: ReactNode;
-  side?: boolean;
 };
 
-export const Column = ({ children, side }: Props) => {
+export const Side = ({ children }: Props) => {
   const size = useContext(ResponsiveContext);
-  console.log(size);
+  const direction = size === 'medium' ? 'row' : 'column';
+
   return (
-    <Box
-      gap="medium"
-      flex={side ? 'shrink' : 'grow'}
-      margin="small"
-      width={side ? (size === 'large' ? 'medium' : 'large') : 'inherit'}
-    >
+    <Box gap="medium" flex="shrink" margin="small" direction={direction}>
+      {children}
+    </Box>
+  );
+};
+
+export const Content = ({ children }: Props) => {
+  return (
+    <Box gap="medium" flex="grow" margin="small">
       {children}
     </Box>
   );

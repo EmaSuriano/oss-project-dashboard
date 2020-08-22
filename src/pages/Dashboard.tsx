@@ -4,7 +4,7 @@ import { Button } from 'grommet';
 import { Notification } from '../components/Notification';
 import Summary from '../components/Summary';
 import { Configure } from 'grommet-icons';
-import { Layout, Column } from '../components/Layout';
+import { Layout, Side, Content } from '../components/Layout';
 import useProjectsQuery from '../hooks/useProjectsQuery';
 import Overview from '../components/Overview';
 import HealthStatus from '../components/HealthStatus';
@@ -15,7 +15,7 @@ export const Dashboard = () => {
 
   return (
     <Layout name="Dashboard" action={SettingsButton}>
-      <Column side>
+      <Side>
         <Summary
           projects={projects}
           threshold={settings.threshold}
@@ -31,10 +31,10 @@ export const Dashboard = () => {
         {!loading && (
           <HealthStatus projects={projects} threshold={settings.threshold} />
         )}
-      </Column>
-      <Column>
+      </Side>
+      <Content>
         <Overview projects={projects} loading={loading} />
-      </Column>
+      </Content>
     </Layout>
   );
 };
