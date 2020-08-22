@@ -42,7 +42,7 @@ export const theme = deepMerge(grommet, {
     input: {
       weight: 100,
     },
-    size: { avatar: '36px', sidebar: '90px' },
+    size: { avatar: '40px', sidebar: '90px' },
   },
   icon: {
     size: {
