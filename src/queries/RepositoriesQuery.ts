@@ -14,7 +14,7 @@ const PROJECT_INFO = `
   issues(first: 1, states:OPEN) {
     totalCount
   }
-  stargazers(first:5) {
+  stargazers(last:3) {
     totalCount
     nodes {
       id

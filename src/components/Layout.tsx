@@ -1,14 +1,22 @@
-import React, { ReactNode } from 'react';
-import { Box } from 'grommet';
+import React, { ReactNode, useContext } from 'react';
+import { Box, ResponsiveContext, Text, Anchor } from 'grommet';
 import { PageHeader } from './PageHeader';
 
 type Props = {
   children: ReactNode;
+  side?: boolean;
 };
 
-export const Column = ({ children }: Props) => {
+export const Column = ({ children, side }: Props) => {
+  const size = useContext(ResponsiveContext);
+  console.log(size);
   return (
-    <Box gap="medium" flex="grow" margin="small">
+    <Box
+      gap="medium"
+      flex={side ? 'shrink' : 'grow'}
+      margin="small"
+      width={side ? (size === 'large' ? 'medium' : 'large') : 'inherit'}
+    >
       {children}
     </Box>
   );
@@ -28,6 +36,10 @@ export const Layout = ({ name, action, children }: LayoutProps) => {
         <Box flex={false} direction="row-responsive" wrap>
           {children}
         </Box>
+        <Text textAlign="end" margin="small">
+          Develop with ❤️ by{' '}
+          <Anchor href="http://emasuriano.com/">Ema Suriano</Anchor>
+        </Text>
       </Box>
     </Box>
   );

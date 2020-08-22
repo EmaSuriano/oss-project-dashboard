@@ -15,8 +15,7 @@ export type Project = {
   pullRequests: Countable;
   vulnerabilityAlerts: Countable;
   issues: Countable;
-  stargazers: {
-    totalCount: number;
+  stargazers: Countable & {
     nodes: Stargazer[];
   };
 };

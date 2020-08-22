@@ -3,21 +3,19 @@ import React from 'react';
 import { Button } from 'grommet';
 import { Notification } from '../components/Notification';
 import Summary from '../components/Summary';
-import { hardware, utilization } from './data';
-import { Hardware1, Hardware2 } from '../components/Hardware';
-import { UtilizationCard } from '../components/UtlizationCard';
 import { Configure } from 'grommet-icons';
 import { Layout, Column } from '../components/Layout';
 import useProjectsQuery from '../hooks/useProjectsQuery';
+import Overview from '../components/Overview';
+import HealthStatus from '../components/HealthStatus';
 
 export const Dashboard = () => {
   const { loading, error, data } = useProjectsQuery();
-
-  const ready = !loading && !error;
   const { projects, settings } = data!;
+
   return (
     <Layout name="Dashboard" action={SettingsButton}>
-      <Column>
+      <Column side>
         <Summary
           projects={projects}
           threshold={settings.threshold}
@@ -28,24 +26,14 @@ export const Dashboard = () => {
             title="Something happened"
             message="Super bad error :/"
             status="error"
-            closable
           />
         )}
-        <Notification
-          title="Warning!"
-          message="Man you should check your deps ..."
-          status="warning"
-          closable
-        />
+        {!loading && (
+          <HealthStatus projects={projects} threshold={settings.threshold} />
+        )}
       </Column>
       <Column>
-        {utilization.map((data) => (
-          <UtilizationCard key={data.name} data={data} />
-        ))}
-      </Column>
-      <Column>
-        <Hardware1 {...hardware.Hardware} />
-        <Hardware2 {...hardware.Hypervisor} />
+        <Overview projects={projects} loading={loading} />
       </Column>
     </Layout>
   );

@@ -6,7 +6,7 @@ type NotificationProps = BoxProps & {
   title: string;
   message: string;
   closable?: boolean;
-  status?: 'critical' | 'error' | 'warning' | 'ok' | 'unknown' | 'disabled';
+  status?: 'error' | 'warning' | 'ok' | 'unknown' | 'disabled';
 };
 
 export const Notification = ({
@@ -21,32 +21,19 @@ export const Notification = ({
   if (!visible) return null;
 
   return (
-    <Box
-      round
-      pad={{ horizontal: 'small' }}
-      direction="column"
-      background={`status-${status}`}
-      {...rest}
-    >
-      <Box direction="row" justify="between" pad={{ vertical: 'small' }}>
-        <Box
-          direction="column"
-          gap="small"
-          pad={{ vertical: 'small' }}
-          margin={{ horizontal: 'small' }}
-        >
-          <Text color="white" size="medium" weight="bold">
+    <Box round direction="column" background={`status-${status}`} {...rest}>
+      <Box direction="row" justify="between" pad="medium">
+        <Box direction="column" gap="small">
+          <Text color="white" size="large" weight="bold">
             {title}
           </Text>
-          <Text size="small" color="white">
-            {message}
-          </Text>
+          <Text color="white">{message}</Text>
         </Box>
         {closable && (
           <Box>
             <Button
               plain
-              icon={<FormClose color="white" />}
+              icon={<FormClose color="white" size="large" />}
               onClick={() => setVisible(false)}
             />
           </Box>
