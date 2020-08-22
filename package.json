@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "prestart": "./generate-validators.sh",
-    "build": "react-scripts build",
+    "build": "CI=true react-scripts build",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",
     "test:ci": "start-server-and-test 3000"

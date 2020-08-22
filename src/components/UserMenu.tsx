@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import User from '../types/User';
 import { Menu, Box, Image } from 'grommet';
 import { Mail, Github, Logout } from 'grommet-icons';
-import { GradientGithub } from './Sidebar';
 
 type Props = {
   user: User;
@@ -18,11 +17,6 @@ const UserMenu = ({ user }: Props) => {
       icon={false}
       plain
       items={items}
-      // items={[].map((item) => ({
-      //   ...item,
-      //   label: <Text size="small">{item.label}</Text>,
-      //   onClick: () => alert(`clicked on ${item.label}`), // no-op
-      // }))}
       alignSelf="center"
       label={
         <Box

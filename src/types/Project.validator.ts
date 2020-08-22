@@ -45,42 +45,55 @@ export const ProjectSchema = {
       "type": "object"
     },
     "stargazers": {
-      "defaultProperties": [
-      ],
-      "properties": {
-        "nodes": {
-          "items": {
-            "defaultProperties": [
-            ],
-            "properties": {
-              "avatarUrl": {
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "avatarUrl",
-              "id",
-              "name"
-            ],
-            "type": "object"
+      "allOf": [
+        {
+          "defaultProperties": [
+          ],
+          "properties": {
+            "totalCount": {
+              "type": "number"
+            }
           },
-          "type": "array"
+          "required": [
+            "totalCount"
+          ],
+          "type": "object"
         },
-        "totalCount": {
-          "type": "number"
+        {
+          "defaultProperties": [
+          ],
+          "properties": {
+            "nodes": {
+              "items": {
+                "defaultProperties": [
+                ],
+                "properties": {
+                  "avatarUrl": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "avatarUrl",
+                  "id",
+                  "name"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "required": [
+            "nodes"
+          ],
+          "type": "object"
         }
-      },
-      "required": [
-        "nodes",
-        "totalCount"
-      ],
-      "type": "object"
+      ]
     },
     "url": {
       "type": "string"

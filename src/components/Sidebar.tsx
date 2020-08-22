@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Box, ResponsiveContext, BoxProps, Menu, Text } from 'grommet';
+import { Box, ResponsiveContext, BoxProps } from 'grommet';
 import { Analytics, Github, Configure } from 'grommet-icons';
 import { SidebarItem } from './SidebarItem';
 import UserMenu from './UserMenu';

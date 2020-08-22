@@ -1,5 +1,4 @@
 import { gql } from 'apollo-boost';
-import Gist from '../types/Gist';
 
 export const Query = gql`
   query {

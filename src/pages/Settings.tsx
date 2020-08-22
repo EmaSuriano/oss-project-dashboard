@@ -1,14 +1,12 @@
 import React from 'react';
-import { Layout, Side, Content } from '../components/Layout';
-import { Button, Box, Text, Anchor, Heading } from 'grommet';
+import { Layout, Content } from '../components/Layout';
+import { Button, Text, Anchor, Heading } from 'grommet';
 import { Analytics } from 'grommet-icons';
 import Gist from 'react-gist';
 import useGistNameQuery from '../hooks/useGistNameQuery';
-import { Notification } from '../components/Notification';
 
 const Settings = () => {
-  const { error, loading, output } = useGistNameQuery();
-  const ready = !loading && !error;
+  const { output: id } = useGistNameQuery();
 
   return (
     <Layout name="Settings" action={DashboardButton}>
@@ -22,7 +20,7 @@ const Settings = () => {
 
         <Heading level={2}>Your Configuration</Heading>
 
-        <Gist id={output} />
+        <Gist id={id} />
 
         <Text size="large">
           For more information about configuring this project, please refer to
