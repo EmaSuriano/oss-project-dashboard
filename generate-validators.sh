@@ -1,15 +1,16 @@
 #!/usr/bin/env bash
 
-echo "Generating validators from Types ..."
+DIR=$1
 
-for i in $(find src/types -type f \( -iname "*.ts" ! -iname "*.validator.ts" \) ); 
+echo "Generating validators from $DIR ..."
+
+for i in $(find $DIR -type f \( -iname "*.ts" ! -iname "*.validator.ts" \) ); 
 do
     NAME=$(basename $i .ts)
-    echo "Creating src/types/$NAME.validator.ts"
 
-    typescript-json-validator src/types/$NAME.ts $NAME
+    typescript-json-validator $DIR/$NAME.ts $NAME
     
-    sed -i '' '/^export {/d' ./src/types/$NAME.validator.ts
+    echo " - $NAME.validator.ts created!"
+    # Fix for https://github.com/ForbesLindesay/typescript-json-validator/issues/34
+    sed -i '' '/^export {/d' ./$DIR/$NAME.validator.ts
 done
-
-echo "Validators generated!"

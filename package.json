@@ -21,8 +21,9 @@
     "url": "https://github.com/EmaSuriano/oss-project-dashboard/issues"
   },
   "scripts": {
+    "prestart": "./generate-validators.sh src/types",
     "start": "react-scripts start",
-    "prestart": "./generate-validators.sh",
+    "prebuild": "./generate-validators.sh src/types",
     "build": "CI=true react-scripts build",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",

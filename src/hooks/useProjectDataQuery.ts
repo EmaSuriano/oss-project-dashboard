@@ -22,15 +22,13 @@ const useProjectDataQuery = (projects = DEFAULT) => {
   );
 
   if (isQueryReady(repositoriesQuery)) {
-    console.log('data', repositoriesQuery.data);
-    // console.log('projects', projects);
     const projectsWithData = projects
       .map((name) => {
         const key = name.split('/')[1].replace(/-/g, '');
-        return repositoriesQuery.data![key] as Project;
+        return repositoriesQuery.data![key];
       })
       .filter(Boolean);
-    // console.log('entered!', projectsWithData);
+
     result.output = projectsWithData;
   }
 
