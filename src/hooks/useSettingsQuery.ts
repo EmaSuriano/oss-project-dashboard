@@ -9,20 +9,11 @@ import { Query, QueryData } from '../queries/ProjectQuery';
 
 type SettingsQueryResult = QueryResult<QueryData> & { output: Settings };
 
-const EMPTY_RESULT = {
-  output: EMPTY_SETTINGS,
-};
-
-const useSettingsQuery = (gistName: string) => {
+const useSettingsQuery = (gistName: string): SettingsQueryResult => {
   const projectsQuery = useQuery<QueryData>(Query, {
     variables: { name: gistName },
     skip: !gistName,
   });
-
-  const result: SettingsQueryResult = Object.assign(
-    EMPTY_RESULT,
-    projectsQuery,
-  );
 
   if (isQueryReady(projectsQuery)) {
     const { viewer } = projectsQuery.data!;
@@ -32,15 +23,25 @@ const useSettingsQuery = (gistName: string) => {
 
     try {
       const settings = validateSettings(gistContent);
-      result.output = settings;
+      return {
+        ...projectsQuery,
+        output: settings,
+      };
     } catch (error) {
-      result.error = new ApolloError({
-        errorMessage: `Problem while parsing "${PROJECT_FILE_NAME}" content: ${error}`,
-      });
+      return {
+        ...projectsQuery,
+        error: new ApolloError({
+          errorMessage: `Problem while parsing "${PROJECT_FILE_NAME}" content: ${error}`,
+        }),
+        output: EMPTY_SETTINGS,
+      };
     }
   }
 
-  return result;
+  return {
+    ...projectsQuery,
+    output: EMPTY_SETTINGS,
+  };
 };
 
 export default useSettingsQuery;

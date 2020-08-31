@@ -7,11 +7,8 @@ import { Query, QueryData } from '../queries/GistNameQuery';
 
 type GistNameQueryResult = QueryResult<QueryData> & { output: string };
 
-const EMPTY_RESULT = { output: '' };
-
-const useGistNameQuery = () => {
+const useGistNameQuery = (): GistNameQueryResult => {
   const gistsQuery = useQuery<QueryData>(Query);
-  const result: GistNameQueryResult = Object.assign(EMPTY_RESULT, gistsQuery);
 
   if (isQueryReady(gistsQuery)) {
     const { viewer } = gistsQuery.data!;
@@ -21,16 +18,25 @@ const useGistNameQuery = () => {
     );
 
     if (!gist) {
-      result.error = new ApolloError({
-        errorMessage: `No "${PROJECT_FILE_NAME}" file found inside your Github Gists`,
-      });
-      return result;
+      return {
+        ...gistsQuery,
+        error: new ApolloError({
+          errorMessage: `No "${PROJECT_FILE_NAME}" file found inside your Github Gists`,
+        }),
+        output: '',
+      };
     }
 
-    result.output = gist.name;
+    return {
+      ...gistsQuery,
+      output: gist.name,
+    };
   }
 
-  return result;
+  return {
+    ...gistsQuery,
+    output: '',
+  };
 };
 
 export default useGistNameQuery;

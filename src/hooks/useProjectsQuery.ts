@@ -6,12 +6,11 @@ import useSettingsQuery from './useSettingsQuery';
 import useProjectDataQuery from './useProjectDataQuery';
 import Settings from '../types/Settings';
 
-type ProjectsResult = QueryResult<{
-  projects: Project[];
-  settings: Settings;
-}>;
+type ProjectsResult = QueryResult & {
+  data: { projects: Project[]; settings: Settings };
+};
 
-const useProjectsQuery = () => {
+const useProjectsQuery = (): ProjectsResult => {
   const gistNameQuery = useGistNameQuery();
   const settingsQuery = useSettingsQuery(gistNameQuery.output);
   const projectDataQuery = useProjectDataQuery(settingsQuery.output.projects);
@@ -28,19 +27,15 @@ const useProjectsQuery = () => {
     projectDataQuery,
   );
 
-  const result: ProjectsResult = Object.assign(
-    projectDataQuery as QueryResult,
-    {
-      loading,
-      error,
-      data: {
-        projects: projectDataQuery.output,
-        settings: settingsQuery.output,
-      },
+  return {
+    ...projectDataQuery,
+    loading,
+    error,
+    data: {
+      projects: projectDataQuery.output,
+      settings: settingsQuery.output,
     },
-  );
-
-  return result;
+  };
 };
 
 export default useProjectsQuery;

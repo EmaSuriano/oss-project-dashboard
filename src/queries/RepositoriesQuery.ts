@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost';
 import Project from '../types/Project';
+import { projectNameToParts } from '../utils/string';
 
 const PROJECT_INFO = `
   id
@@ -28,13 +29,13 @@ export const Query = (projects: string[]) => gql`
 query {
   __typename
   ${projects
-    .map((project) => {
-      const [user, name] = project.split('/');
-      const key = name.replace(/-/g, ''); // hack to create a dynamic query :fire:
-      return `${key}: repository(name: "${name}", owner: "${user}") {
+    .map(projectNameToParts)
+    .map(
+      ({ user, name, key }) =>
+        `${key}: repository(name: "${name}", owner: "${user}") {
         ${PROJECT_INFO}
-      }`;
-    })
+      }`,
+    )
     .join('\n')}
 }
 `;
