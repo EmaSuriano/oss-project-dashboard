@@ -9,6 +9,7 @@ const VALIDATOR_EXTENSION = '.validator.ts';
 
 const [dir] = process.argv.slice(2);
 if (!dir) throw new Error('Please specify a directory ...');
+console.log(`Generating validators from ${dir} ...`);
 
 const types = readdirSync(dir)
   .filter((x) => !x.endsWith(VALIDATOR_EXTENSION))

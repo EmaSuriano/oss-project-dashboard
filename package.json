@@ -23,7 +23,7 @@
   "scripts": {
     "prestart": "ts-node --skip-project generate-validators.ts src/types",
     "start": "react-scripts start",
-    "prebuild": "ts-node skip-project generate-validators.ts src/types",
+    "prebuild": "ts-node --skip-project generate-validators.ts src/types",
     "build": "CI=true react-scripts build",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",
