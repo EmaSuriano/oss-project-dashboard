@@ -1,4 +1,6 @@
-import { readdirSync } from 'fs';
+import { statSync } from 'fs';
+import { watch } from 'chokidar';
+import { basename } from 'path';
 import { promisify } from 'util';
 
 const exec = promisify(require('child_process').exec);
@@ -8,32 +10,35 @@ const writeFile = promisify(require('fs').writeFile);
 const VALIDATOR_EXTENSION = '.validator.ts';
 
 const [dir] = process.argv.slice(2);
-if (!dir) throw new Error('Please specify a directory ...');
+if (!statSync(dir).isDirectory)
+  throw new Error('Please specify a directory ...');
+
 console.log(`Generating validators from ${dir} ...`);
 
-const types = readdirSync(dir)
-  .filter((x) => !x.endsWith(VALIDATOR_EXTENSION))
-  .map((type) => type.split('.')[0]);
+const generateValidator = async (path: string) => {
+  const { stderr } = await exec(
+    `yarn typescript-json-validator ${path} ${basename(path, '.ts')}`,
+  );
+  if (stderr)
+    throw new Error(
+      `There was an error while creating the validators: ${stderr}`,
+    );
 
-Promise.all(
-  types.map(async (type) => {
-    const command = `yarn typescript-json-validator ${dir}/${type}.ts ${type}`;
-    const { stderr } = await exec(command);
-    if (stderr)
-      throw new Error(
-        `There was an error while creating the validators: ${stderr}`,
-      );
+  await fixIssue(path);
+  console.log(`- ${path.replace('.ts', VALIDATOR_EXTENSION)} created!`);
+};
 
-    await fixIssue(type);
-    console.log(`- ${type}${VALIDATOR_EXTENSION} created!`);
-  }),
-);
+watch(dir, {
+  ignored: `**/*${VALIDATOR_EXTENSION}`,
+})
+  .on('add', generateValidator)
+  .on('change', generateValidator);
 
 // Fix for https://github.com/ForbesLindesay/typescript-json-validator/issues/34
-const fixIssue = async (type) => {
-  const filePath = `${dir}/${type}${VALIDATOR_EXTENSION}`;
+const fixIssue = async (path) => {
+  const filePath = path.replace('.ts', VALIDATOR_EXTENSION);
   const data = await readFile(filePath, 'utf8');
-  const result = data.replace(`export {${type}};`, '');
+  const result = data.replace(`export {${basename(path, '.ts')}};`, '');
 
   await writeFile(filePath, result, 'utf8');
 };
