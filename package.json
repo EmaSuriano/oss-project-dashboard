@@ -51,7 +51,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "rsuite": "^4.6.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.2.0"
   },
   "devDependencies": {
     "@percy/cypress": "^2.3.1",
