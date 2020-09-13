@@ -28,10 +28,12 @@ const useSettingsQuery = (gistName: string): SettingsQueryResult => {
         output: settings,
       };
     } catch (error) {
+      console.error(error);
       return {
         ...projectsQuery,
         error: new ApolloError({
-          errorMessage: `Problem while parsing "${PROJECT_FILE_NAME}" content: ${error}`,
+          errorMessage: `There was a problem while parsing "${PROJECT_FILE_NAME}" content ...`,
+          extraInfo: error,
         }),
         output: EMPTY_SETTINGS,
       };

@@ -24,11 +24,11 @@ export const Dashboard = () => {
         {error && (
           <Notification
             title="Something happened"
-            message="Super bad error :/"
+            message={error.message}
             status="error"
           />
         )}
-        {!loading && (
+        {!error && !loading && (
           <HealthStatus projects={projects} threshold={settings.threshold} />
         )}
       </Side>

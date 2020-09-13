@@ -5,6 +5,7 @@ import { QueryResult } from '@apollo/react-common';
 import Project from '../types/Project';
 import validateProject from '../types/Project.validator';
 import { projectNameToParts } from '../utils/string';
+import { ApolloError } from 'apollo-boost';
 
 type ProjectDataQueryResult = QueryResult<QueryData> & { output: Project[] };
 
@@ -16,18 +17,30 @@ const useProjectDataQuery = (projects = DEFAULT): ProjectDataQueryResult => {
   });
 
   if (isQueryReady(repositoriesQuery)) {
-    const projectsWithData = projects
-      .map((projectName) => {
-        const { key } = projectNameToParts(projectName);
-        return repositoriesQuery.data![key];
-      })
-      .filter(Boolean)
-      .map(validateProject);
+    try {
+      const projectsWithData = projects
+        .map((projectName) => {
+          const { key } = projectNameToParts(projectName);
+          return repositoriesQuery.data![key];
+        })
+        .filter(Boolean)
+        .map(validateProject);
 
-    return {
-      ...repositoriesQuery,
-      output: projectsWithData,
-    };
+      return {
+        ...repositoriesQuery,
+        output: projectsWithData,
+      };
+    } catch (error) {
+      console.error(error);
+      return {
+        ...repositoriesQuery,
+        error: new ApolloError({
+          errorMessage: `There was a problem while parsing Projects ...`,
+          extraInfo: error,
+        }),
+        output: [],
+      };
+    }
   }
 
   return {

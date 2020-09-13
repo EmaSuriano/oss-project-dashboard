@@ -24,6 +24,7 @@ const Table = <T extends Object>({ data, config }: Props<T>) => {
         <TableRow>
           {config.map(({ title, size }, i) => (
             <TableCell
+              key={title}
               scope="col"
               border="bottom"
               margin={{ vertical: 'small' }}
@@ -40,10 +41,15 @@ const Table = <T extends Object>({ data, config }: Props<T>) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {data.map((item) => (
-          <TableRow>
-            {config.map(({ render, size }) => (
-              <TableCell scope="row" margin={{ vertical: 'small' }} size={size}>
+        {data.map((item, i) => (
+          <TableRow key={i}>
+            {config.map(({ render, size }, j) => (
+              <TableCell
+                scope="row"
+                margin={{ vertical: 'small' }}
+                size={size}
+                key={j}
+              >
                 {render(item)}
               </TableCell>
             ))}

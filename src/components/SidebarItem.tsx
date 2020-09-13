@@ -1,5 +1,5 @@
 import React, { useRef, useState, ReactNode } from 'react';
-import { Box, Button, Drop, Anchor, Text } from 'grommet';
+import { Box, Button, Drop, Text } from 'grommet';
 
 type Props = { children: ReactNode; title: string; href: string };
 
@@ -18,8 +18,8 @@ export const SidebarItem = ({ children, title, href }: Props) => {
         href={href}
         plain
       >
-        <Box pad="medium" align="center">
-          <Anchor label={children} a11yTitle={title} />
+        <Box pad="medium" align="center" a11yTitle={title}>
+          {children}
         </Box>
       </Button>
       {ref.current && over && (

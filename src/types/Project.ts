@@ -1,6 +1,6 @@
 export type Stargazer = {
   id: string;
-  name: string;
+  name: string | null;
   avatarUrl: string;
 };
 

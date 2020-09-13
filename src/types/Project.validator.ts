@@ -76,7 +76,10 @@ export const ProjectSchema = {
                     "type": "string"
                   },
                   "name": {
-                    "type": "string"
+                    "type": [
+                      "null",
+                      "string"
+                    ]
                   }
                 },
                 "required": [

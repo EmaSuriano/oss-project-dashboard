@@ -21,9 +21,9 @@
     "url": "https://github.com/EmaSuriano/oss-project-dashboard/issues"
   },
   "scripts": {
-    "prestart": "ts-node --skip-project generate-validators.ts src/types",
-    "start": "react-scripts start",
-    "prebuild": "ts-node --skip-project generate-validators.ts src/types",
+    "generate-validators": "ts-node --skip-project generate-validators.ts src/types",
+    "prebuild": "yarn generate-validators",
+    "start": "yarn generate-validators --watch & react-scripts start",
     "build": "CI=true react-scripts build",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",
@@ -60,6 +60,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
     "@types/styled-components": "^5.1.3",
+    "chokidar": "^3.4.2",
     "cypress": "^4.12.1",
     "start-server-and-test": "^1.11.3",
     "ts-node": "^9.0.0",
