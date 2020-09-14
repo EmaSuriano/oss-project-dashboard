@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Box, ResponsiveContext, BoxProps } from 'grommet';
-import { Analytics, Github, Configure } from 'grommet-icons';
+import { Analytics, Configure } from 'grommet-icons';
 import { SidebarItem } from './SidebarItem';
 import UserMenu from './UserMenu';
 import useUserQuery from '../hooks/useUserQuery';
@@ -22,7 +22,6 @@ export const Sidebar = (props: BoxProps) => {
       background="brand"
       {...props}
     >
-      <GradientGithub />
       <SidebarItem title="Dashboard" href="/">
         <Analytics size="large" />
       </SidebarItem>
@@ -34,15 +33,3 @@ export const Sidebar = (props: BoxProps) => {
     </Box>
   );
 };
-
-export const GradientGithub = () => (
-  <Box
-    background="linear-gradient(#6FFFB0 0%, #7D4CDB 100%)"
-    border={{ color: 'white', size: 'small' }}
-    margin={{ vertical: 'medium' }}
-    pad="xsmall"
-    round="small"
-  >
-    <Github color="white" size="large" />
-  </Box>
-);

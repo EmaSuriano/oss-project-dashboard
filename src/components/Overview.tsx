@@ -69,12 +69,17 @@ const StargazerRenderer = ({ stargazers }: Project) => {
         {stargazers.nodes.map((avatar) => (
           <Avatar
             src={avatar.avatarUrl}
+            key={avatar.id}
             border={{ color: 'white', size: 'small' }}
             margin={{ left: calcMargin() }}
           />
         ))}
 
-        {rest > 0 && <Text margin={{ left: calcMargin(20) }}>+ {rest}</Text>}
+        {rest > 0 && (
+          <Text weight="bold" margin={{ left: calcMargin(20) }}>
+            + {rest}
+          </Text>
+        )}
       </Stack>
     </Box>
   );

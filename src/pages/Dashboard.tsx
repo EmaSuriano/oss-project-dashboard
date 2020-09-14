@@ -14,7 +14,7 @@ export const Dashboard = () => {
   const { projects, settings } = data!;
 
   return (
-    <Layout name="Dashboard" action={SettingsButton}>
+    <Layout name="Dashboard" action={SettingsButton} withTime>
       <Side>
         <Summary
           projects={projects}

@@ -21,7 +21,7 @@ const useGistNameQuery = (): GistNameQueryResult => {
       return {
         ...gistsQuery,
         error: new ApolloError({
-          errorMessage: `No "${PROJECT_FILE_NAME}" file found inside your Github Gists`,
+          errorMessage: `No "${PROJECT_FILE_NAME}" file found inside your Github Gists.`,
         }),
         output: '',
       };

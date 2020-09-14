@@ -1,38 +1,32 @@
 import { isQueryReady } from '../utils/queries';
-import { useQuery } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
 import { ApolloError } from 'apollo-boost';
 import { PROJECT_FILE_NAME, EMPTY_SETTINGS } from '../utils/constant';
 import { Settings } from '../types/Settings';
 import validateSettings from '../types/Settings.validator';
-import { Query, QueryData } from '../queries/ProjectQuery';
+import { QueryData } from '../queries/ProjectQuery';
+import useGistQuery from './useGistQuery';
 
-type SettingsQueryResult = QueryResult<QueryData> & { output: Settings };
+type SettingsQueryResult = QueryResult<QueryData> & {
+  output: Settings;
+};
 
 const useSettingsQuery = (gistName: string): SettingsQueryResult => {
-  const projectsQuery = useQuery<QueryData>(Query, {
-    variables: { name: gistName },
-    skip: !gistName,
-  });
+  const gistQuery = useGistQuery(gistName);
 
-  if (isQueryReady(projectsQuery)) {
-    const { viewer } = projectsQuery.data!;
-
-    const gistFile = viewer.gist.files[0];
-    const gistContent = JSON.parse(gistFile.text);
-
+  if (isQueryReady(gistQuery)) {
     try {
-      const settings = validateSettings(gistContent);
+      const settings = validateSettings(gistQuery.output);
       return {
-        ...projectsQuery,
+        ...gistQuery,
         output: settings,
       };
     } catch (error) {
       console.error(error);
       return {
-        ...projectsQuery,
+        ...gistQuery,
         error: new ApolloError({
-          errorMessage: `There was a problem while parsing "${PROJECT_FILE_NAME}" content ...`,
+          errorMessage: `Invalid settings schema inside "${PROJECT_FILE_NAME}" content ...`,
           extraInfo: error,
         }),
         output: EMPTY_SETTINGS,
@@ -41,7 +35,7 @@ const useSettingsQuery = (gistName: string): SettingsQueryResult => {
   }
 
   return {
-    ...projectsQuery,
+    ...gistQuery,
     output: EMPTY_SETTINGS,
   };
 };

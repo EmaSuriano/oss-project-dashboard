@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
-import ApolloClient from 'apollo-boost';
+import ApolloClient, { InMemoryCache } from 'apollo-boost';
 import auth from '../utils/auth';
+
 import { ApolloProvider } from '@apollo/react-hooks';
 
 const client = new ApolloClient({
@@ -13,6 +14,7 @@ const client = new ApolloClient({
       },
     }));
   },
+  cache: new InMemoryCache(),
 });
 
 type Props = {
