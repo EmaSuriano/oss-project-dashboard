@@ -24,18 +24,6 @@ const PrivateRoute = ({
     {...rest}
     render={(props) => {
       return auth.isAuthenticated() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to="/login" />
-      );
-    }}
-  />
-);
-
-export const App = () => (
-  <Router>
-    <Apollo>
-      <Grommet theme={theme} full>
         <Grid
           fill
           rows={['auto']}
@@ -47,14 +35,26 @@ export const App = () => (
         >
           <Sidebar gridArea="sidebar" />
           <Box gridArea="main" overflow="auto" fill background="light-2">
-            <Switch>
-              <PrivateRoute path="/" exact component={Dashboard} />
-              <PrivateRoute path="/settings" exact component={Settings} />
-              <Route path="/logout" exact component={Logout} />
-              <Route path="/login" exact component={Login} />
-            </Switch>
+            <Component {...props} />
           </Box>
         </Grid>
+      ) : (
+        <Redirect to="/login" />
+      );
+    }}
+  />
+);
+
+export const App = () => (
+  <Router>
+    <Apollo>
+      <Grommet theme={theme} full>
+        <Switch>
+          <PrivateRoute path="/" exact component={Dashboard} />
+          <PrivateRoute path="/settings" exact component={Settings} />
+          <Route path="/logout" exact component={Logout} />
+          <Route path="/login" exact component={Login} />
+        </Switch>
       </Grommet>
     </Apollo>
   </Router>

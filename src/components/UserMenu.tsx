@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import User from '../types/User';
 import { Menu, Box, Image } from 'grommet';
 import { Mail, Github, Logout } from 'grommet-icons';
@@ -9,7 +9,7 @@ type Props = {
 };
 
 const UserMenu = ({ user }: Props) => {
-  const items = useMemo(() => buildItems(user), [user]);
+  const items = buildItems(user);
   return (
     <Menu
       dropProps={{

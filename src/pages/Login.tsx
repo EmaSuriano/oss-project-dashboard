@@ -5,7 +5,7 @@ import { Button, Heading, Paragraph, Main } from 'grommet';
 import { Github } from 'grommet-icons';
 import queryString from 'query-string';
 import { Footer } from '../components/Footer';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 type RouteParams = { code: string };
 type Props = RouteChildrenProps<RouteParams>;
@@ -38,7 +38,13 @@ const Login = ({ location }: Props) => {
   }
 
   return (
-    <Main pad="large" gap="medium" justify="center" align="center" wrap>
+    <MainWithBackground
+      pad="large"
+      gap="medium"
+      justify="center"
+      align="center"
+      wrap
+    >
       <Heading textAlign="center">Open Source Dashboard</Heading>
       <Paragraph margin={{ top: 'none' }} textAlign="center" size="xxlarge">
         A Dashboard to have a quick overview of Open Sources projects in your
@@ -47,21 +53,18 @@ const Login = ({ location }: Props) => {
           ✨
         </span>
       </Paragraph>
-      {signing ? (
-        'Loadinggg'
-      ) : (
-        <Button
-          label="Log in with Github"
-          primary
-          icon={<Github />}
-          href={authLink}
-        />
-      )}
+      <Button
+        label={signing ? 'Logging ... ' : 'Log in with Github'}
+        primary
+        disabled={signing}
+        icon={<Github />}
+        href={authLink}
+      />
 
       <ForceFooter>
         <Footer />
       </ForceFooter>
-    </Main>
+    </MainWithBackground>
   );
 };
 
@@ -69,6 +72,24 @@ const ForceFooter = styled.div`
   bottom: 0;
   position: absolute;
   right: 0;
+`;
+
+const gradient = keyframes`
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+`;
+
+const MainWithBackground = styled(Main)`
+  background: linear-gradient(-45deg, #bd85ff, #ecdbff, #ffc1ff);
+  background-size: 400% 400%;
+  animation: ${gradient} 15s ease infinite;
 `;
 
 export default Login;
