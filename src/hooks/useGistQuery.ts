@@ -2,8 +2,9 @@ import { isQueryReady } from '../utils/queries';
 import { useQuery } from '@apollo/react-hooks';
 import { QueryResult } from '@apollo/react-common';
 import { ApolloError } from 'apollo-boost';
-import { PROJECT_FILE_NAME, EMPTY_SETTINGS } from '../utils/constant';
+import { EMPTY_SETTINGS } from '../utils/constant';
 import { Query, QueryData } from '../queries/ProjectQuery';
+import { PARSING_GIST_ERROR } from '../utils/error';
 
 type GistQueryResult = QueryResult<QueryData> & {
   output: Object;
@@ -30,7 +31,7 @@ const useGistQuery = (gistName: string): GistQueryResult => {
       return {
         ...projectsQuery,
         error: new ApolloError({
-          errorMessage: `There was a problem while parsing "${PROJECT_FILE_NAME}" content ...`,
+          errorMessage: PARSING_GIST_ERROR,
           extraInfo: error,
         }),
         output: EMPTY_SETTINGS,

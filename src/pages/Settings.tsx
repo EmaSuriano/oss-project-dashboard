@@ -8,6 +8,10 @@ import useGistNameQuery from '../hooks/useGistNameQuery';
 import useGistQuery from '../hooks/useGistQuery';
 import { errorsFromQueries, loadingFromQueries } from '../utils/queries';
 import validateSettings from '../types/Settings.validator';
+import { GIST_NOT_FOUND_ERROR, PARSING_GIST_ERROR } from '../utils/error';
+import { PROJECT_FILE_NAME } from '../utils/constant';
+import { ApolloError } from 'apollo-boost';
+import { Notification } from '../components/Notification';
 
 const isValidSettings = (obj: Object) => {
   try {
@@ -19,7 +23,6 @@ const isValidSettings = (obj: Object) => {
 };
 
 const syntaxStyle = {
-  margin: 0,
   backgroundColor: 'white',
   borderRadius: '10px',
 };
@@ -33,8 +36,15 @@ const Settings = () => {
   const error = errorsFromQueries(gistNameQuery, settingsQuery);
   const loading = loadingFromQueries(gistNameQuery, settingsQuery);
   const validSettings = isValidSettings(settingsQuery.output);
-  const ready = !error && !loading;
 
+  const information =
+    (error && error.message) ||
+    (loading && 'Loading your Settings ...') ||
+    `Your Settings seems to be ${validSettings ? 'valid 😎' : 'invalid 😕'}`;
+
+  const recommendation = !loading && getRecommendation(error, validSettings);
+
+  console.log(recommendation);
   return (
     <Layout name="Settings" action={DashboardButton}>
       <Content>
@@ -48,13 +58,17 @@ const Settings = () => {
         <Heading level={2}>Your Configuration</Heading>
 
         <Box direction={isMobile ? 'column' : 'row'} gap="medium">
-          <Box width={isMobile ? '100%' : 'medium'} gap="medium">
-            <Text size="large">
-              {(error && error.message) ||
-                (loading && 'Loading your Settings ...') ||
-                `Your Settings seems to be 
-            ${validSettings ? 'valid 😎' : 'invalid 😕'}`}
-            </Text>
+          <Box width={isMobile ? '100%' : '500px'} gap="medium">
+            <Text size="large">{information}</Text>
+
+            {recommendation && (
+              <Notification
+                closable
+                title="Action to Take"
+                message={recommendation}
+                status="ok"
+              ></Notification>
+            )}
             <Text>
               For more information about configuring this project, please refer
               to the official documentation inside the{' '}
@@ -65,7 +79,7 @@ const Settings = () => {
             </Text>
           </Box>
 
-          {ready && (
+          {!loading && (
             <Box animation="fadeIn" fill="horizontal">
               <SyntaxHighlighter language="json" customStyle={syntaxStyle}>
                 {JSON.stringify(settingsQuery.output, null, 2)}
@@ -81,5 +95,38 @@ const Settings = () => {
 const DashboardButton = (
   <Button label="Dashboard" primary icon={<Analytics />} href="/" />
 );
+
+const getRecommendation = (
+  error: ApolloError | undefined,
+  isValid: boolean,
+) => {
+  if (error?.message === GIST_NOT_FOUND_ERROR)
+    return (
+      <Text>
+        Please create a Gist file inside{' '}
+        <Anchor href="https://gist.github.com/">Github Gist</Anchor> with the
+        name of "{PROJECT_FILE_NAME}".
+      </Text>
+    );
+  console.log(error?.message);
+  if (error?.message === PARSING_GIST_ERROR)
+    return (
+      <Text>
+        Invalid content inside "{PROJECT_FILE_NAME}", please check the JSON
+        Structure is a valid one.
+      </Text>
+    );
+
+  if (!isValid)
+    return (
+      <Text>
+        Please check the structure of the configuration is following the{' '}
+        <Anchor href="https://github.com/EmaSuriano/oss-project-dashboard">
+          Official Documentation
+        </Anchor>
+        .
+      </Text>
+    );
+};
 
 export default Settings;

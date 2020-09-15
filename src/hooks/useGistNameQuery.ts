@@ -4,6 +4,7 @@ import { QueryResult } from '@apollo/react-common';
 import { isQueryReady } from '../utils/queries';
 import { PROJECT_FILE_NAME } from '../utils/constant';
 import { Query, QueryData } from '../queries/GistNameQuery';
+import { GIST_NOT_FOUND_ERROR } from '../utils/error';
 
 type GistNameQueryResult = QueryResult<QueryData> & { output: string };
 
@@ -21,7 +22,7 @@ const useGistNameQuery = (): GistNameQueryResult => {
       return {
         ...gistsQuery,
         error: new ApolloError({
-          errorMessage: `No "${PROJECT_FILE_NAME}" file found inside your Github Gists.`,
+          errorMessage: GIST_NOT_FOUND_ERROR,
         }),
         output: '',
       };

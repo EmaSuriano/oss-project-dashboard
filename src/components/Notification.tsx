@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, ReactNode } from 'react';
 import { Box, Button, Text, BoxProps, ResponsiveContext } from 'grommet';
 import { FormClose } from 'grommet-icons';
 
 type NotificationProps = BoxProps & {
   title: string;
-  message: string;
+  message: string | ReactNode;
   closable?: boolean;
   status?: 'error' | 'warning' | 'ok' | 'unknown' | 'disabled';
 };
