@@ -47,9 +47,13 @@ const Info = ({ title, count, limit }: InfoProps) => {
       <Heading level="3" margin="none" size="small">
         {title}
       </Heading>
-      <Text size="90px" weight="bold" color={color}>
-        {count}
-      </Text>
+      {!!count && (
+        <Box animation="fadeIn">
+          <Text size="90px" weight="bold" color={color}>
+            {count}
+          </Text>
+        </Box>
+      )}
     </Box>
   );
 };

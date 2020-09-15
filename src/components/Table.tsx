@@ -49,6 +49,7 @@ const Table = <T extends Object>({ data, config }: Props<T>) => {
                 margin={{ vertical: 'small' }}
                 size={size}
                 key={j}
+                animation="fadeIn"
               >
                 {render(item)}
               </TableCell>

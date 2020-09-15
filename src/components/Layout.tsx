@@ -46,8 +46,8 @@ export const Layout = ({
       <Box>
         <Box flex={false} direction="row-responsive" wrap {...rest}>
           {children}
+          <Footer withTime={withTime} />
         </Box>
-        <Footer withTime={withTime} />
       </Box>
     </Box>
   );

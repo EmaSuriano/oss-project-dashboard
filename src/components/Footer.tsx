@@ -20,13 +20,7 @@ export const Footer = ({ withTime }: Props) => {
   }, [time]);
 
   return (
-    <Box direction="row" justify="between">
-      {withTime && (
-        <Text textAlign="end" margin="small">
-          Last Update:{' '}
-          <b>{minutes === 0 ? 'Just now' : `${minutes} minutes`}</b>
-        </Text>
-      )}
+    <Box direction="row-reverse" justify="between" fill="horizontal">
       <Text textAlign="end" margin="small">
         Develop with{' '}
         <span role="img" aria-label="love">
@@ -34,6 +28,12 @@ export const Footer = ({ withTime }: Props) => {
         </span>{' '}
         by <Anchor href="http://emasuriano.com/">Ema Suriano</Anchor>
       </Text>
+      {withTime && (
+        <Text textAlign="end" margin="small">
+          Last Update:{' '}
+          <b>{minutes === 0 ? 'Just now' : `${minutes} minutes`}</b>
+        </Text>
+      )}
     </Box>
   );
 };

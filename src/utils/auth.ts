@@ -1,17 +1,26 @@
 import { withCors, queryParams } from './url';
 
+const AUTH_ID = 'auth_token';
+
 const auth = {
+  isFixedAuth() {
+    return !!process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
+  },
   isAuthenticated() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem(AUTH_ID);
   },
   signIn(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem(AUTH_ID, token);
   },
   getCredentials() {
-    return localStorage.getItem('token');
+    if (this.isFixedAuth()) {
+      return process.env.REACT_APP_GITHUB_ACCESS_TOKEN;
+    }
+
+    return localStorage.getItem(AUTH_ID);
   },
   signOut() {
-    localStorage.removeItem('token');
+    localStorage.removeItem(AUTH_ID);
   },
 };
 
@@ -22,11 +31,11 @@ const local = process.env.NODE_ENV !== 'production';
 
 const CLIENT_ID = local
   ? process.env.REACT_APP_GITHUB_CLIENT_ID_LOCAL
-  : process.env.REACT_APP_GITHUB_CLIENT_ID_PROD;
+  : process.env.REACT_APP_GITHUB_CLIENT_ID;
 
 const CLIENT_SECRET = local
   ? process.env.REACT_APP_GITHUB_CLIENT_SECRET_LOCAL
-  : process.env.REACT_APP_GITHUB_CLIENT_SECRET_PROD;
+  : process.env.REACT_APP_GITHUB_CLIENT_SECRET;
 
 export const authLink = `${AUTHORIZE_URL}?${queryParams({
   client_id: CLIENT_ID,
