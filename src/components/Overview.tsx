@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Table from './Table';
 import Project from '../types/Project';
 import Section, { Props as SectionProps } from './Section';
@@ -31,26 +30,48 @@ const Overview = ({ projects, ...rest }: Props) => {
   ];
 
   return (
-    <Section title="Overview" {...rest}>
-      <Table data={projects} config={config} />
+    <Section title="Projects Overview" {...rest}>
+      <Table data={projects} config={config} minWidth="700px" />
     </Section>
   );
 };
 
 const NameRenderer = ({ name, url }: Project) => (
-  <Anchor href={url}>{name}</Anchor>
+  <Text weight="bold">
+    <Anchor href={url}>{name}</Anchor>
+  </Text>
 );
 
-const IssueRenderer = ({ issues }: Project) => (
-  <Text textAlign="center">{issues.totalCount}</Text>
+const IssueRenderer = ({ issues, url }: Project) => (
+  <Text textAlign="center">
+    {issues.totalCount > 0 ? (
+      <Anchor href={`${url}/issues`}>{issues.totalCount}</Anchor>
+    ) : (
+      issues.totalCount
+    )}
+  </Text>
 );
 
-const VulnerabilityRenderer = ({ vulnerabilityAlerts }: Project) => (
-  <Text textAlign="center">{vulnerabilityAlerts.totalCount}</Text>
+const VulnerabilityRenderer = ({ vulnerabilityAlerts, url }: Project) => (
+  <Text textAlign="center">
+    {vulnerabilityAlerts.totalCount > 0 ? (
+      <Anchor href={`${url}/network/alerts`}>
+        {vulnerabilityAlerts.totalCount}
+      </Anchor>
+    ) : (
+      vulnerabilityAlerts.totalCount
+    )}
+  </Text>
 );
 
-const PullRequestRenderer = ({ pullRequests }: Project) => (
-  <Text textAlign="center">{pullRequests.totalCount}</Text>
+const PullRequestRenderer = ({ pullRequests, url }: Project) => (
+  <Text textAlign="center">
+    {pullRequests.totalCount > 0 ? (
+      <Anchor href={`${url}/pulls`}>{pullRequests.totalCount}</Anchor>
+    ) : (
+      pullRequests.totalCount
+    )}
+  </Text>
 );
 
 const StargazerRenderer = ({ stargazers }: Project) => {
@@ -64,7 +85,7 @@ const StargazerRenderer = ({ stargazers }: Project) => {
   };
 
   return (
-    <Box justify="center">
+    <Box justify="center" width="200px">
       <Stack anchor="left">
         {stargazers.nodes.map((avatar) => (
           <Avatar

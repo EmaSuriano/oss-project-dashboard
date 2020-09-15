@@ -32,7 +32,6 @@ const useProjectDataQuery = (projects = DEFAULT): ProjectDataQueryResult => {
         output: projectsWithData,
       };
     } catch (error) {
-      console.error(error);
       return {
         ...repositoriesQuery,
         error: new ApolloError({

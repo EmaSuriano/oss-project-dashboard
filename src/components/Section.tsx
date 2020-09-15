@@ -14,7 +14,7 @@ const Section = ({ title, children, loading, ...rest }: Props) => {
       <Heading level="2" margin={{ bottom: 'small', top: 'none' }}>
         {title}
       </Heading>
-      <Box direction="row" justify="between">
+      <Box direction="row" justify="between" overflow="auto">
         {children}
       </Box>
     </LoadingBox>

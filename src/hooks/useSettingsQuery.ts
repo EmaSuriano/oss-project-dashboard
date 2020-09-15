@@ -23,7 +23,6 @@ const useSettingsQuery = (gistName: string): SettingsQueryResult => {
         output: settings,
       };
     } catch (error) {
-      console.error(error);
       return {
         ...gistQuery,
         error: new ApolloError({

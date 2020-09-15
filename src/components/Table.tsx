@@ -10,6 +10,7 @@ import {
 
 type Props<T extends Object> = {
   data: T[];
+  minWidth?: string;
   config: {
     title: string;
     render: (item: T) => any;
@@ -17,9 +18,9 @@ type Props<T extends Object> = {
   }[];
 };
 
-const Table = <T extends Object>({ data, config }: Props<T>) => {
+const Table = <T extends Object>({ data, config, minWidth }: Props<T>) => {
   return (
-    <GrommetTable style={{ width: '100%' }}>
+    <GrommetTable style={{ width: '100%', minWidth }}>
       <TableHeader>
         <TableRow>
           {config.map(({ title, size }, i) => (

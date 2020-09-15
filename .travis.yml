@@ -1,6 +1,5 @@
 notifications:
   email:
-    on_success: always
     on_failure: always
 
 language: node_js

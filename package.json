@@ -1,7 +1,7 @@
 {
-  "name": "oss-project-dashboard-react",
+  "name": "oss-project-dashboard",
   "version": "1.0.0",
-  "description": "Argon Dashboard to show the status of github projects",
+  "description": "A Dashboard to have a quick overview of Open Sources projects in your Github account ",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -10,10 +10,7 @@
   "keywords": [
     "github",
     "open source",
-    "dashboard",
-    "dashboard-react",
-    "argon-dashboard",
-    "argon-dashboard-react"
+    "dashboard"
   ],
   "author": "Ema Suriano",
   "license": "MIT",
@@ -34,9 +31,7 @@
   },
   "browserslist": [
     ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
+    "not dead"
   ],
   "homepage": "https://oss-dashboard.netlify.com/",
   "dependencies": {

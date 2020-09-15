@@ -3,9 +3,10 @@ import { Box, Text, Anchor } from 'grommet';
 
 export type Props = {
   withTime?: boolean;
+  background?: boolean;
 };
 
-export const Footer = ({ withTime }: Props) => {
+export const Footer = ({ withTime, background }: Props) => {
   const [time] = useState(Date.now());
   const [minutes, setMinutes] = useState(0);
 
@@ -20,7 +21,13 @@ export const Footer = ({ withTime }: Props) => {
   }, [time]);
 
   return (
-    <Box direction="row-reverse" justify="between" fill="horizontal">
+    <Box
+      direction="row-reverse"
+      justify="between"
+      fill="horizontal"
+      background={background ? 'white' : 'transparent'}
+      style={{ borderRadius: '24px 0 0 0' }}
+    >
       <Text textAlign="end" margin="small">
         Develop with{' '}
         <span role="img" aria-label="love">
