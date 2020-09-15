@@ -1,12 +1,5 @@
 # Open Source Github Dashboard
 
-Design Feedback:
-
-- Summary Card: split it into 3 sections ( justify-content: space-around;)
-- Font is different
-- Color not blend correctly.
-- Increase text on the message of the Section
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
 <div align="center">
@@ -22,8 +15,6 @@ Design Feedback:
 Powered by [Grommet](https://v2.grommet.io/components).
 
 **[Live app ✨][app-link]**
-
-// check Pipedream!
 
 ## What does it include? 📦
 
@@ -43,14 +34,12 @@ This project can be used in two ways:
 | ------------------------------ | ---------------------------- | ---------------------------- |
 | ![Desktop](./docs/desktop.png) | ![Tablet](./docs/tablet.png) | ![Mobile](./docs/mobile.png) |
 
-##
-
 ## Basic setup ⚙️
 
 ### Requirements 📝
 
-- Have a [Github](https://github.com/) account.
-- Have at least one project linked to that account (can be private or public).
+- [Github](https://github.com/) account.
+- A list of projects inside Github to monitor (can be private or public).
 
 ### Steps 🏃‍♂️
 
@@ -73,9 +62,7 @@ This project can be used in two ways:
 
 ## Host your own Dashboard 🙆‍♂️
 
-The main difference with the [live app][app-link] is that login is not needed anymore in order to see the projects and there is no logout option. However the deployed application will show the projects of **only** one user, because there is no logout option 😅
-
-You can check [my Open Source Dashboard](https://oss.emasuriano.com/admin) ✨
+The main difference with the [live app][app-link] is that login is not needed anymore in order to see the projects and there is no logout option. You can check [my Open Source Dashboard](https://oss.emasuriano.com) ✨
 
 Benefits of following this approach:
 
@@ -89,15 +76,16 @@ Benefits of following this approach:
 3. Create a `.env` file in the root of the project with the following information
 
 ```text
-NODE_PATH=./src
 REACT_APP_GITHUB_ACCESS_TOKEN=<<REPLACE_WITH_YOUR_TOKEN>>
 ```
 
-4. Install dependencies by running `yarn` and then `yarn start` to start the server.
+1. Install dependencies by running `yarn` and then `yarn start` to start the server.
 
 NIT: This project is using `react-scripts` v2, which can build your project and export a static website, so you can easily deploy it anywhere! I recommend building it with [Netlify](http://netlify.com/) because it provides a nice set of tools and it has a great integration with Github.
 
 ### Setting automatic alerts
+
+⚠️ WIP ⚠️
 
 Oh great, you decided to host your own Open Source Dashboard 💪 One of the great advantages is that you can set up periodically builds with any CI (Travis, CircleCI, etc.) which will check can if the amount of Pull Requests or Issues is greater than your expected. Ideal for maintainers with several projects. At the moment, this feature only check the **total amount** of both values.
 
@@ -132,40 +120,6 @@ The CI is going to run two scripts:
 - `yarn test:ci`: check if the amount of PRs and issues are greater than the threshold define inside the configuration.
 
 In case any of these scripts failed, then it's going to notify the owner of the Travis account via email and remind you to keep your open source projects up to date 😄
-
-## Development 🛠
-
-### Component Shadowing out of the box 🤯
-
-Inside the Webpack configuration you can find the plugin of `enhanced-resolve` that allows to reference an alias with one or more possible directories. This gives to the product a similar to `shadowing` in Gatsby.
-
-**Example**
-
-```javascript
-// webpack.config.js
-
-config.resolve.plugins = [
-  new AliasPlugin(
-    'described-resolve',
-    [
-      {
-        name: 'components',
-        alias: ['src/components', 'node_modules/my-dep/src/components'],
-      },
-    ],
-    'resolve',
-  ),
-];
-
-// src/example.js
-import MyCoolComponent from 'components/myCoolComponent`;
-
-export default () => <MyCoolComponent />
-```
-
-The plugin will first look into the first alias provided, my local `src` folder, if the file is present then it will require that one. Otherwise it will go to the next alias, until the chain ends.
-
-This feature is quite handy when you are working with templates like `argon-dashboard-react`.
 
 ## Contribution 💪
 
