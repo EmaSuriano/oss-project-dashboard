@@ -11,6 +11,10 @@ import {
 } from 'grommet';
 import { Github, Globe } from 'grommet-icons';
 import queryString from 'query-string';
+// @ts-ignore-start
+import Tilt from 'react-tilt'; // @ts-ignore line
+// @ts-ignore-end
+
 import { Footer } from '../components/Footer';
 import styled, { keyframes } from 'styled-components';
 import Overview from '../components/Overview';
@@ -89,8 +93,10 @@ const Login = ({ location }: Props) => {
           />
         </Box>
       </Box>
-      <Box>
-        <Overview loading={false} projects={MOCKED_PROJECTS} />
+      <Box animation="fadeIn">
+        <Tilt className="Tilt" options={{ max: 10, scale: 1 }}>
+          <Overview loading={false} projects={MOCKED_PROJECTS} />
+        </Tilt>
       </Box>
 
       <ForceFooter>

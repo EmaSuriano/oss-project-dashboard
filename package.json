@@ -47,6 +47,7 @@
     "react-scripts": "^3.4.3",
     "react-simple-code-editor": "^0.11.0",
     "react-syntax-highlighter": "^13.5.3",
+    "react-tilt": "^0.1.4",
     "styled-components": "^5.2.0"
   },
   "devDependencies": {
