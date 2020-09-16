@@ -97,7 +97,7 @@ const Login = ({ location }: Props) => {
         </Box>
       </Box>
       <Box animation="fadeIn">
-        <Tilt className="Tilt" options={{ max: 10, scale: 1 }}>
+        <Tilt className="Tilt" options={{ max: 15, scale: 1.02 }}>
           <Overview loading={false} projects={MOCKED_PROJECTS} />
         </Tilt>
       </Box>
