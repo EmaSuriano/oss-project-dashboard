@@ -1,31 +1,37 @@
 import React, { useContext } from 'react';
-import { Box, ResponsiveContext, BoxProps } from 'grommet';
+import { Box, BoxProps, ResponsiveContext } from 'grommet';
 import { Analytics, Configure } from 'grommet-icons';
 import { SidebarItem } from './SidebarItem';
 import UserMenu from './UserMenu';
 import useUserQuery from '../hooks/useUserQuery';
 
-export const Sidebar = (props: BoxProps) => {
-  const { loading, error, output } = useUserQuery();
-  const ready = !loading && !error;
+type Props = BoxProps;
 
+export const Sidebar = (props: Props) => {
+  const { loading, error, output } = useUserQuery();
   const size = useContext(ResponsiveContext);
-  const spacing = size === 'small' ? 'medium' : 'small';
+
+  const ready = !loading && !error;
+  const isMobile = size === 'small';
 
   return (
     <Box
       align="center"
-      fill="vertical"
-      pad={{ vertical: spacing }}
-      gap={spacing}
-      width="sidebar"
+      style={{ position: 'fixed' }}
+      fill={isMobile ? 'horizontal' : 'vertical'}
+      direction={isMobile ? 'row' : 'column'}
+      pad={{
+        vertical: isMobile ? '0' : 'small',
+        horizontal: isMobile ? 'small' : '0',
+      }}
+      gap="medium"
       background="brand"
       {...props}
     >
-      <SidebarItem title="Dashboard" href="/">
+      <SidebarItem title="Dashboard" href="/" disableTooltip={isMobile}>
         <Analytics size="large" />
       </SidebarItem>
-      <SidebarItem title="Settings" href="/settings">
+      <SidebarItem title="Settings" href="/settings" disableTooltip={isMobile}>
         <Configure size="large" />
       </SidebarItem>
       <Box flex />

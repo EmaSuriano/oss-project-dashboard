@@ -24,20 +24,7 @@ const PrivateRoute = ({
     {...rest}
     render={(props) => {
       return auth.isAuthenticated() ? (
-        <Grid
-          fill
-          rows={['auto']}
-          columns={['auto', 'flex']}
-          areas={[
-            { name: 'sidebar', start: [0, 0], end: [0, 0] },
-            { name: 'main', start: [1, 0], end: [1, 0] },
-          ]}
-        >
-          <Sidebar gridArea="sidebar" />
-          <Box gridArea="main" overflow="auto" fill background="light-2">
-            <Component {...props} />
-          </Box>
-        </Grid>
+        <Component {...props} />
       ) : (
         <Redirect to="/login" />
       );
