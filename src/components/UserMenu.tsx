@@ -42,13 +42,15 @@ const buildItems = (user: User) => {
     {
       label: 'Github Profile',
       icon: <Github />,
-      onClick: () => window.open(user.url),
+      onClick: () => {
+        window.open(user.url);
+      },
     },
     {
       label: 'Contact me',
       icon: <Mail />,
       onClick: () => {
-        window.location.href = `mailto:${user.email}`;
+        window.open(`mailto:${user.email}`);
       },
     },
   ];
@@ -57,7 +59,9 @@ const buildItems = (user: User) => {
     items.push({
       label: 'Logout',
       icon: <Logout />,
-      onClick: () => window.location.replace('/logout'),
+      onClick: () => {
+        window.location.replace('/logout');
+      },
     });
   }
 
