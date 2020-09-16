@@ -61,8 +61,9 @@ const Login = ({ location }: Props) => {
       justify="center"
       direction={isDesktop ? 'row' : 'column'}
       gap="large"
+      overflow="auto"
     >
-      <Box gap="medium" align="center">
+      <Box gap="medium" align="center" style={{ minHeight: 'auto' }}>
         <Heading textAlign="center" color="white">
           Open Source Dashboard
         </Heading>
