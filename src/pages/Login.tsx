@@ -19,6 +19,7 @@ import { Footer } from '../components/Footer';
 import styled, { keyframes } from 'styled-components';
 import Overview from '../components/Overview';
 import { MOCKED_PROJECTS } from '../mocks/projects';
+import { Fixed } from '../components/Fixed';
 
 type RouteParams = { code: string };
 type Props = RouteChildrenProps<RouteParams>;
@@ -87,6 +88,7 @@ const Login = ({ location }: Props) => {
           />
 
           <Button
+            color="accent-1"
             label="Check Demo"
             icon={<Globe color="white" />}
             href="https://oss.emasuriano.com/"
@@ -99,18 +101,12 @@ const Login = ({ location }: Props) => {
         </Tilt>
       </Box>
 
-      <ForceFooter>
+      <Fixed position="bottom">
         <Footer background />
-      </ForceFooter>
+      </Fixed>
     </MainWithBackground>
   );
 };
-
-const ForceFooter = styled.div`
-  bottom: 0;
-  position: absolute;
-  right: 0;
-`;
 
 const gradient = keyframes`
     0% {
@@ -125,9 +121,16 @@ const gradient = keyframes`
 `;
 
 const MainWithBackground = styled(Main)`
-  background: linear-gradient(45deg, #693ac7, #21008b);
+  background-image: linear-gradient(
+    to right top,
+    #7d4cdb,
+    #6a3cc9,
+    #572bb6,
+    #431aa5,
+    #2d0693
+  );
   background-size: 400% 400%;
-  animation: ${gradient} 15s ease infinite;
+  animation: ${gradient} 5s ease infinite;
 `;
 
 export default Login;
