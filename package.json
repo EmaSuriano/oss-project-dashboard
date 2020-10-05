@@ -39,7 +39,7 @@
     "apollo-boost": "^0.4.9",
     "graphql": "^14.7.0",
     "grommet": "^2.15.0",
-    "query-string": "^6.13.3",
+    "query-string": "^6.13.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-gist": "^1.2.2",
