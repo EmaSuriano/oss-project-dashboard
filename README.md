@@ -2,15 +2,7 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
-<div align="center">
-  <a href="https://react-hotkey-tooltip.netlify.com/#/">
-    <img alt="logo" src="./docs/logo.png" height="150px" />
-  </a>
-</div>
-
-<div align="center">
-  <strong>A Dashboard to have a quick overview of Open Sources projects in your Github account ✨</strong>
-</div>
+![Banner](./docs/banner.jpg)
 
 Powered by [Grommet](https://v2.grommet.io/components).
 
