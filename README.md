@@ -24,7 +24,7 @@ This project can be used in two ways:
 
 | Desktop                        | Tablet                       | Mobile                       |
 | ------------------------------ | ---------------------------- | ---------------------------- |
-| ![Desktop](./docs/desktop.png) | ![Tablet](./docs/tablet.png) | ![Mobile](./docs/mobile.png) |
+| ![Desktop](./docs/desktop.jpg) | ![Tablet](./docs/tablet.jpg) | ![Mobile](./docs/mobile.jpg) |
 
 ## Basic setup ⚙️
 
@@ -41,11 +41,7 @@ This project can be used in two ways:
 
 ```json
 {
-  "projects": [
-    "MyUser/project-a",
-    "MyUser/project-b",
-    "AnotherCompany/another-project"
-  ]
+  "projects": ["MyUser/project-a", "MyUser/project-b", "AnotherUser/project-c"]
 }
 ```
 
@@ -89,11 +85,7 @@ Steps:
 
 ```json
 {
-  "projects": [
-    "MyUser/project-a",
-    "MyUser/project-b",
-    "AnotherCompany/another-project"
-  ],
+  "projects": ["MyUser/project-a", "MyUser/project-b", "AnotherUser/project-c"],
   "threshold": {
     "pullRequests": 10,
     "issues": 5
@@ -104,7 +96,7 @@ Steps:
 2. Add your project to travis and add the same environment variables as in the previous step: `NODE_PATH` and `REACT_APP_GITHUB_ACCESS_TOKEN`
 3. Set up Cron job to run the time you want, I recommend to run it every week.
 
-![Alerts](./docs/alerts.png)
+![Alerts](./docs/alerts.jpg)
 
 The CI is going to run two scripts:
 

@@ -24,7 +24,9 @@
     "build": "CI=true react-scripts build",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",
-    "test:ci": "start-server-and-test 3000"
+    "test:ci": "start-server-and-test 3000",
+    "png-to-jpg": "ls -1 ./docs/*.png | xargs -n 1 bash -c 'convert \"$0\" \"${0%.png}.jpg\"'",
+    "optimize-images": "imageoptim './docs/*.jpg'"
   },
   "eslintConfig": {
     "extends": "react-app"
