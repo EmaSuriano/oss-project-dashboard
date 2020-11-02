@@ -50,7 +50,7 @@
     "react-simple-code-editor": "^0.11.0",
     "react-syntax-highlighter": "^15.2.1",
     "react-tilt": "^0.1.4",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "@percy/cypress": "^2.3.2",
