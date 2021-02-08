@@ -1953,12 +1953,13 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.14.1":
-  version "16.14.1"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.1.tgz#da2ecb638385614a5573e16e4aa7daf936dbead5"
-  integrity sha512-32mxrbX62m5b+lMTSzucFKNIr8Eq4T6T3rDVxYzKqyRwyfnPcwZppWW0YXUlPNPUE+r6phBtHXYRgr8ad/Zl9A==
+"@types/react@*", "@types/react@^16.14.3":
+  version "16.14.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.14.3.tgz#f5210f5deecf35d8794845549c93c2c3ad63aa9c"
+  integrity sha512-zPrXn03hmPYqh9DznqSFQsoRtrQ4aHgnZDO+hMGvsE/PORvDTdJCHQ6XvJV31ic+0LzF73huPFXUb++W6Kri0Q==
   dependencies:
     "@types/prop-types" "*"
+    csstype "^3.0.2"
 
 "@types/sinonjs__fake-timers@^6.0.1":
   version "6.0.1"
