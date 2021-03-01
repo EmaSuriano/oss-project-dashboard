@@ -19,14 +19,14 @@
   },
   "scripts": {
     "generate-validators": "ts-node --skip-project generate-validators.ts src/types",
+    "prestart": "yarn generate-validators",
+    "start": "react-scripts start",
     "prebuild": "yarn generate-validators",
-    "start": "yarn generate-validators --watch & react-scripts start",
     "build": "CI=true react-scripts build",
+    "check-types": "tsc -p .",
     "test": "percy exec -t 350 -- cypress run",
     "test:open": "percy exec -t 350 -- cypress open",
-    "test:ci": "start-server-and-test 3000",
-    "png-to-jpg": "ls -1 ./docs/*.png | xargs -n 1 bash -c 'convert \"$0\" \"${0%.png}.jpg\"'",
-    "optimize-images": "imageoptim './docs/*.jpg'"
+    "test:ci": "start-server-and-test 3000"
   },
   "eslintConfig": {
     "extends": "react-app"
