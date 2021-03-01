@@ -11,10 +11,11 @@ import { Sidebar } from './components';
 import { theme } from './theme';
 import { Dashboard } from './pages/Dashboard';
 import Settings from './pages/Settings';
-import Apollo from './components/Apollo';
+import client from './utils/apollo-client';
 import auth from './utils/auth';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 const PrivateRoute = ({
   component: Component,
@@ -47,7 +48,7 @@ const PrivateRoute = ({
 
 export const App = () => (
   <Router>
-    <Apollo>
+    <ApolloProvider client={client}>
       <Grommet theme={theme} full>
         <Switch>
           <PrivateRoute path="/" exact component={Dashboard} />
@@ -56,6 +57,6 @@ export const App = () => (
           <Route path="/login" exact component={Login} />
         </Switch>
       </Grommet>
-    </Apollo>
+    </ApolloProvider>
   </Router>
 );
