@@ -1,0 +1,42 @@
+<mjml>
+  <mj-head>
+    <mj-title>{{subject}}</mj-title>
+    <mj-preview>{{subject}}</mj-preview>
+    <mj-breakpoint width="440px" />
+  </mj-head>
+  <mj-body>
+    <mj-section background-color="#445165">
+      <mj-column>
+        <mj-text color="#ffffff" font-size="24px" font-weight="700">
+          {{title}}
+        </mj-text>
+        <mj-text color="#ffffff" font-size="18px" font-weight="400">
+          {{subtitle}}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section background-color="#fbfbfb">
+      <mj-column>
+        <mj-table>
+          <tr>
+            <th>Name</th>
+            <th>Issues</th>
+            <th>Vulnerabilities</th>
+            <th>Pulls</th>
+            <th>Stargazers</th>
+          </tr>
+          {% for project in projects %}
+          <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.issues.totalCount }}</td>
+            <td>{{ project.vulnerabilityAlerts.totalCount }}</td>
+            <td>{{ project.pullRequests.totalCount }}</td>
+            <td>{{ project.stargazers.totalCount }}</td>
+          </tr>
+          {% endfor %}
+        </mj-table>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
