@@ -15,7 +15,7 @@ import {
 
 import { projectNameToParts } from '../utils/string';
 import { PROJECT_FILE_NAME } from '../utils/constant';
-import { createTransport, SendMailOptions } from 'nodemailer';
+import { createTransport } from 'nodemailer';
 
 const macaw = require('macaw');
 // const sendgrid = require('@macaw-email/provider-sendgrid');
