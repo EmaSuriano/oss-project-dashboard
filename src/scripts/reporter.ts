@@ -18,7 +18,6 @@ import { PROJECT_FILE_NAME } from '../utils/constant';
 import { createTransport } from 'nodemailer';
 
 const macaw = require('macaw');
-// const sendgrid = require('@macaw-email/provider-sendgrid');
 
 const {
   REACT_APP_GITHUB_ACCESS_TOKEN: accessToken,
@@ -47,7 +46,6 @@ type ProviderSend = {
 };
 
 const mailer = macaw({
-  // provider: sendgrid({ apiKey: 'aaaaa-bbbbbbb-ccccccc-ddddddd' }),
   provider: {
     send: ({ to, data, from, html }: ProviderSend) => {
       return emailTransporter.sendMail({
