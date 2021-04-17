@@ -23,10 +23,7 @@
     "start": "react-scripts start",
     "prebuild": "yarn generate-validators",
     "build": "CI=true react-scripts build",
-    "check-types": "tsc -p .",
-    "test": "percy exec -t 350 -- cypress run",
-    "test:open": "percy exec -t 350 -- cypress open",
-    "test:ci": "start-server-and-test 3000"
+    "check-types": "tsc -p ."
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,6 +35,9 @@
   "homepage": "https://oss-dashboard.netlify.com/",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@primer/components": "^27.0.0",
+    "@primer/octicons": "^13.0.0",
+    "@primer/octicons-react": "^13.0.0",
     "apollo-boost": "^0.4.9",
     "graphql": "^14.7.0",
     "grommet": "^2.17.1",
@@ -45,6 +45,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-gist": "^1.2.2",
+    "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-simple-code-editor": "^0.11.0",
@@ -53,7 +54,6 @@
     "styled-components": "^5.2.3"
   },
   "devDependencies": {
-    "@percy/cypress": "^2.3.4",
     "@types/jest": "^26.0.22",
     "@types/node": "^14.14.37",
     "@types/prismjs": "^1.16.5",
@@ -63,7 +63,6 @@
     "@types/react-syntax-highlighter": "^13.5.0",
     "@types/styled-components": "^5.1.9",
     "chokidar": "^3.5.1",
-    "cypress": "^6.9.1",
     "start-server-and-test": "^1.12.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",

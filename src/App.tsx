@@ -15,6 +15,7 @@ import Apollo from './components/Apollo';
 import auth from './utils/auth';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import { SimpleDashboard } from './pages/SimpleDashboard';
 
 const PrivateRoute = ({
   component: Component,
@@ -22,40 +23,31 @@ const PrivateRoute = ({
 }: RouteProps & { component: FunctionComponent }) => (
   <Route
     {...rest}
-    render={(props) => {
-      return auth.isAuthenticated() ? (
-        <Grid
-          fill
-          rows={['auto']}
-          columns={['auto', 'flex']}
-          areas={[
-            { name: 'sidebar', start: [0, 0], end: [0, 0] },
-            { name: 'main', start: [1, 0], end: [1, 0] },
-          ]}
-        >
-          <Sidebar gridArea="sidebar" />
-          <Box gridArea="main" overflow="auto" fill background="light-2">
-            <Component {...props} />
-          </Box>
-        </Grid>
+    render={(props) =>
+      auth.isAuthenticated() ? (
+        <Component {...props} />
       ) : (
         <Redirect to="/login" />
-      );
-    }}
+      )
+    }
   />
 );
 
 export const App = () => (
   <Router>
     <Apollo>
-      <Grommet theme={theme} full>
-        <Switch>
-          <PrivateRoute path="/" exact component={Dashboard} />
-          <PrivateRoute path="/settings" exact component={Settings} />
-          <Route path="/logout" exact component={Logout} />
-          <Route path="/login" exact component={Login} />
-        </Switch>
-      </Grommet>
+      {/* <Grommet theme={theme} full> */}
+      <Switch>
+        <PrivateRoute path="/" exact component={Dashboard} />
+        <PrivateRoute path="/settings" exact component={Settings} />
+        <PrivateRoute path="/new" exact component={SimpleDashboard} />
+        <Route path="/logout" exact component={Logout} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/">
+          <Redirect to="/" />
+        </Route>
+      </Switch>
+      {/* </Grommet> */}
     </Apollo>
   </Router>
 );
