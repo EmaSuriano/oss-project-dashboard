@@ -28,6 +28,9 @@ export const SettingsSchema = {
         },
         "pullRequests": {
           "type": "number"
+        },
+        "vulnerabilities": {
+          "type": "number"
         }
       },
       "type": "object"

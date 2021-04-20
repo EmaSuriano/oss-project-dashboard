@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import {
   ThemeProvider,
   Header,
   Avatar,
   Text,
-  Popover,
   StyledOcticon,
   Dropdown,
   Box,
-  Heading,
   SubNav,
   Flex,
   BaseStyles,
@@ -20,23 +18,66 @@ import { useLocation } from 'react-router-dom';
 
 import { MarkGithubIcon } from '@primer/octicons-react';
 import Apollo from '../components/Apollo';
-import useUserQuery from '../hooks/useUserQuery';
 import useProjectsQuery from '../hooks/useProjectsQuery';
 import Project from '../types/Project';
-import { Threshold } from '../types/Settings';
+import Settings, { Threshold } from '../types/Settings';
 import styled from 'styled-components';
+import { Octokit } from '@octokit/core';
+import { useQuery, QueryClient, QueryClientProvider } from 'react-query';
+import { Endpoints } from '@octokit/types';
+import { PROJECT_FILE_NAME } from '../utils/constant';
+import { GIST_NOT_FOUND_ERROR } from '../utils/error';
+import { DataTable } from 'grommet';
+import { responsePathAsArray } from 'graphql';
+import validateSettings from '../types/Settings.validator';
 
-const VIEWS = {
-  ALL: '#',
-  ISSUES: '#issues',
-  VULNERABILITIES: '#vulnerabilities',
-  PULL_REQUESTS: '#pull-requests',
+type TabId = keyof Threshold | 'all';
+
+const VIEWS: Record<TabId, string> = {
+  all: '#',
+  issues: '#issues',
+  vulnerabilityAlerts: '#vulnerabilities',
+  pullRequests: '#pull-requests',
 };
+
+const queryClient = new QueryClient();
 
 const Separator = () => <Box bg="border.primary" height="1px" my={2} />;
 
+const octokit = new Octokit({
+  auth: process.env.REACT_APP_GITHUB_ACCESS_TOKEN,
+});
+
+const requests = {
+  getUser: () =>
+    octokit
+      .request('/user')
+      .then(({ data }) => data as Endpoints['GET /user']['response']['data']),
+
+  getSettings: async () => {
+    const gists = await octokit
+      .request('/gists')
+      .then(({ data }) => data as Endpoints['GET /gists']['response']['data']);
+
+    const gist = gists.find(({ files }) => files[PROJECT_FILE_NAME]);
+
+    if (!gist) throw Error(GIST_NOT_FOUND_ERROR);
+
+    const gistContent = await fetch(
+      gist.files[PROJECT_FILE_NAME]!.raw_url!,
+    ).then((response) => response.json());
+
+    return validateSettings(gistContent);
+  },
+  getThreshold: async () => {
+    const settings = await requests.getSettings();
+
+    return settings.threshold;
+  },
+};
+
 const AppHeader = () => {
-  const user = useUserQuery();
+  const { data } = useQuery(['user'], requests.getUser);
 
   return (
     <>
@@ -51,20 +92,17 @@ const AppHeader = () => {
         <Header.Item mr={0}>
           <Dropdown css={{}}>
             <Box as="summary" sx={{ cursor: 'pointer' }}>
-              <Avatar
-                src={user.data?.viewer.avatarUrl}
-                alt={user.data?.viewer.login}
-              />
+              <Avatar src={data?.avatar_url} alt={data?.login} />
               <Dropdown.Caret />
             </Box>
             <Dropdown.Menu direction="sw" mt={2}>
               <Box as="li" color="text.primary" px={3}>
                 Signed in as <br />
-                <b>{user.data?.viewer.login}</b>
+                <b>{data?.login}</b>
               </Box>
               <Separator />
               <Dropdown.Item>
-                <a href={user.data?.viewer.url}>Your Profile</a>
+                <a href={data?.url}>Your Profile</a>
               </Dropdown.Item>
               <Dropdown.Item>
                 <a href="/logout">Sign out</a>
@@ -77,117 +115,132 @@ const AppHeader = () => {
   );
 };
 
-export const limitToStatus = (count: number, limit?: number) => {
-  if (!limit) return 'label.primary.border';
-  if (count >= limit) return 'label.danger.border';
-  return count > limit - limit / 4
-    ? 'label.warning.border'
-    : 'label.success.border';
+enum ThresholdStatus {
+  None,
+  Ok,
+  Warn,
+  Bad,
+}
+
+const STATUS_TO_COLOR = {
+  [ThresholdStatus.None]: 'label.primary.border',
+  [ThresholdStatus.Ok]: 'label.success.border',
+  [ThresholdStatus.Warn]: 'label.warning.border',
+  [ThresholdStatus.Bad]: 'label.danger.border',
 };
 
-const Summary = ({
-  projects = [],
-  threshold,
-}: {
+export const limitToStatus = (count: number, limit?: number) => {
+  if (!limit) return ThresholdStatus.None;
+  if (count >= limit) return ThresholdStatus.Bad;
+  return count > limit - limit / 4 ? ThresholdStatus.Warn : ThresholdStatus.Ok;
+};
+
+type TabProps = {
+  type: TabId;
   projects: Project[];
   threshold?: Threshold;
-}) => {
+};
+
+const Tab = ({ type, projects, threshold }: TabProps) => {
   const { hash } = useLocation();
 
-  const issuesCount = projects.reduce(
-    (acc, { issues }) => acc + issues.totalCount,
-    0,
-  );
+  if (type === 'all') {
+    return (
+      <SubNav.Link href={VIEWS[type]} selected={!hash}>
+        All
+      </SubNav.Link>
+    );
+  }
 
-  const pullsCount = projects.reduce(
-    (acc, { pullRequests }) => acc + pullRequests.totalCount,
-    0,
-  );
+  const count = projects.reduce((acc, p) => acc + p[type].totalCount, 0);
+  const limit = threshold?.[type];
+  const color = STATUS_TO_COLOR[limitToStatus(count, limit)];
+  const title = VIEWS[type]
+    .substring(1)
+    .split('-')
+    .map((tab) => tab[0].toUpperCase() + tab.substring(1))
+    .join(' ');
 
-  const vulnerabilitiesCount = projects.reduce(
-    (acc, { vulnerabilityAlerts }) => acc + vulnerabilityAlerts.totalCount,
-    0,
+  return (
+    <SubNav.Link href={VIEWS[type]} selected={hash === VIEWS[type]}>
+      {title}
+      <Label ml={1} bg={color}>
+        {count}
+      </Label>
+    </SubNav.Link>
   );
+};
+
+const Summary = ({ projects }: { projects: Project[] }) => {
+  const { data: threshold } = useQuery(['threshold'], requests.getThreshold);
 
   return (
     <SubNav aria-label="Main">
       <SubNav.Links>
-        <SubNav.Link href={VIEWS.ALL} selected={!hash}>
-          All
-        </SubNav.Link>
-        <SubNav.Link href={VIEWS.ISSUES} selected={hash === VIEWS.ISSUES}>
-          Issues
-          <Label ml={1} bg={limitToStatus(issuesCount, threshold?.issues)}>
-            {issuesCount}
-          </Label>
-        </SubNav.Link>
-        <SubNav.Link
-          href={VIEWS.VULNERABILITIES}
-          selected={hash === VIEWS.VULNERABILITIES}
-        >
-          Vulnerabilities
-          <Label
-            ml={1}
-            bg={limitToStatus(vulnerabilitiesCount, threshold?.vulnerabilities)}
-          >
-            {vulnerabilitiesCount}
-          </Label>
-        </SubNav.Link>
-        <SubNav.Link
-          href={VIEWS.PULL_REQUESTS}
-          selected={hash === VIEWS.PULL_REQUESTS}
-        >
-          Pull Requests
-          <Label ml={1} bg={limitToStatus(pullsCount, threshold?.pullRequests)}>
-            {pullsCount}
-          </Label>
-        </SubNav.Link>
+        {Object.keys(VIEWS).map((x) => (
+          <Tab
+            type={x as TabId}
+            projects={projects}
+            threshold={threshold}
+            key={x}
+          />
+        ))}
       </SubNav.Links>
     </SubNav>
   );
 };
 
-const TableRow = styled(Flex)<{ header: boolean }>`
+const TableRow = styled(Flex).attrs({ as: 'tr', p: 3 })<{ header: boolean }>`
   background: ${({ theme, header }) =>
     header ? theme.colors.bg.secondary : theme.colors.bg.primary};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border.primary};
 
   &:hover {
     background: ${({ theme }) => theme.colors.bg.secondary};
   }
 `;
 
-const ViewList = ({ projects = [] }: { projects: Project[] }) => {
+const TableItem = styled(Flex)`
+  flex-flow: row nowrap;
+  flex-grow: ${(props) => props.flexGrow || 1};
+  justify-content: ${(props) => (props.flexGrow ? 'left' : 'center')};
+  flex-basis: 0;
+  word-break: break-word;
+`;
+
+const ViewList = ({ projects }: { projects: Project[] }) => {
   const { hash } = useLocation();
 
   switch (hash) {
-    case VIEWS.ISSUES:
-    case VIEWS.PULL_REQUESTS:
-    case VIEWS.VULNERABILITIES:
+    case VIEWS.issues:
+    case VIEWS.pullRequests:
+    case VIEWS.vulnerabilityAlerts:
     default:
       return (
-        <BorderBox mt={3}>
-          <TableRow flexWrap="nowrap" p={3} header>
-            <Box flexGrow={4}>Name</Box>
-            <Box flexGrow={1}>Issues</Box>
-            <Box flexGrow={1}>Vulnerabilities</Box>
-            <Box flexGrow={1}>Pulls</Box>
-            <Box flexGrow={1}>Stargazers</Box>
+        <BorderBox mt={3} as="table" width="100%">
+          <TableRow header>
+            <TableItem flexGrow={2} as="th">
+              Name
+            </TableItem>
+            <TableItem as="th">Issues</TableItem>
+            <TableItem as="th">Vulnerabilities</TableItem>
+            <TableItem as="th">Pulls</TableItem>
+            <TableItem as="th">Stargazers</TableItem>
           </TableRow>
           {projects.map((project: Project) => (
-            <React.Fragment key={project.id}>
-              <Box bg="border.primary" height="1px" />
-              <TableRow flexWrap="nowrap" p={3}>
-                <Box flexGrow={4}>
-                  <Link fontWeight="bold" href={project.url}>
-                    {project.name}
-                  </Link>
-                </Box>
-                <Box flexGrow={1}>{project.issues.totalCount}</Box>
-                <Box flexGrow={1}>{project.vulnerabilityAlerts.totalCount}</Box>
-                <Box flexGrow={1}>{project.pullRequests.totalCount}</Box>
-                <Box flexGrow={1}>{project.stargazers.totalCount}</Box>
-              </TableRow>
-            </React.Fragment>
+            <TableRow key={project.id}>
+              <TableItem flexGrow={2} as="td">
+                <Link fontWeight="bold" href={project.url}>
+                  {project.name}
+                </Link>
+              </TableItem>
+              <TableItem as="td">{project.issues.totalCount}</TableItem>
+              <TableItem as="td">
+                {project.vulnerabilityAlerts.totalCount}
+              </TableItem>
+              <TableItem as="td">{project.pullRequests.totalCount}</TableItem>
+              <TableItem as="td">{project.stargazers.totalCount}</TableItem>
+            </TableRow>
           ))}
         </BorderBox>
       );
@@ -239,19 +292,16 @@ export const SimpleDashboard = () => {
 
   return (
     <ThemeProvider>
-      <BaseStyles>
-        <Apollo>
+      <QueryClientProvider client={queryClient}>
+        <BaseStyles>
           <AppHeader />
           <Box maxWidth="large" mx="auto" p={4}>
-            <Summary
-              projects={data.projects}
-              threshold={data.settings.threshold}
-            />
+            <Summary projects={data.projects} />
             <ViewList projects={data.projects} />
           </Box>
           <Footer />
-        </Apollo>
-      </BaseStyles>
+        </BaseStyles>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };

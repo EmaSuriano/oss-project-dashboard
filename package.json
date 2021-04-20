@@ -35,6 +35,9 @@
   "homepage": "https://oss-dashboard.netlify.com/",
   "dependencies": {
     "@apollo/react-hooks": "^3.1.5",
+    "@octokit/core": "^3.4.0",
+    "@octokit/graphql": "^4.6.1",
+    "@octokit/types": "^6.13.0",
     "@primer/components": "^27.0.0",
     "@primer/octicons": "^13.0.0",
     "@primer/octicons-react": "^13.0.0",
@@ -46,6 +49,7 @@
     "react-dom": "^16.14.0",
     "react-gist": "^1.2.2",
     "react-icons": "^4.2.0",
+    "react-query": "^3.13.10",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-simple-code-editor": "^0.11.0",

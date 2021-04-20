@@ -1,7 +1,7 @@
 export type Threshold = {
   pullRequests?: number;
   issues?: number;
-  vulnerabilities?: number;
+  vulnerabilityAlerts?: number;
 };
 
 export type Settings = {
