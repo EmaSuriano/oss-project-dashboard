@@ -2,15 +2,13 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
-![Banner](./docs/banner.jpg)
+> Quick overview of all your Open Sources projects in Github ✨
 
-Powered by [Grommet](https://v2.grommet.io/components).
-
-**[Live app ✨][app-link]**
+**[Live app][app-link]**
 
 ## What does it include? 📦
 
-- Responsive Design
+- Components based on [Primer UI](https://primer.style/components/).
 - Simple login with Github
 - GraphQL API Github
 - Project list powered by Github Gist
@@ -22,9 +20,7 @@ This project can be used in two ways:
 
 ## Screenshots 🖼
 
-| Desktop                        | Tablet                       | Mobile                       |
-| ------------------------------ | ---------------------------- | ---------------------------- |
-| ![Desktop](./docs/desktop.jpg) | ![Tablet](./docs/tablet.jpg) | ![Mobile](./docs/mobile.jpg) |
+![Summary](./docs/summary.png)
 
 ## Basic setup ⚙️
 
@@ -97,13 +93,6 @@ Steps:
 3. Set up Cron job to run the time you want, I recommend to run it every week.
 
 ![Alerts](./docs/alerts.jpg)
-
-The CI is going to run two scripts:
-
-- `yarn build`: which is checks that the static website can be generate it successfully.
-- `yarn test:ci`: check if the amount of PRs and issues are greater than the threshold define inside the configuration.
-
-In case any of these scripts failed, then it's going to notify the owner of the Travis account via email and remind you to keep your open source projects up to date 😄
 
 ## Contribution 💪
 

@@ -1,10 +1,7 @@
-import React from 'react';
 import { Redirect } from 'react-router';
-import auth from '../utils/auth';
+import auth from '../helpers/auth';
 
-const Logout = () => {
+export const Logout = () => {
   auth.signOut();
   return <Redirect to="/login" />;
 };
-
-export default Logout;

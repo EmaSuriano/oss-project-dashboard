@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Text, Anchor } from 'grommet';
+import { useEffect, useState } from 'react';
+import { Flex, Link, Text } from '@primer/components';
 
-export type Props = {
-  withTime?: boolean;
-  background?: boolean;
-};
-
-export const Footer = ({ withTime, background }: Props) => {
+export const Footer = () => {
   const [time] = useState(Date.now());
   const [minutes, setMinutes] = useState(0);
+
+  const minutesDiff = (d1: number, d2: number) => {
+    const seconds = Math.floor((d2 - d1) / 1000);
+    const minutesDiff = Math.floor(seconds / 60);
+    return minutesDiff;
+  };
 
   useEffect(() => {
     const interval = setInterval(
@@ -21,32 +22,17 @@ export const Footer = ({ withTime, background }: Props) => {
   }, [time]);
 
   return (
-    <Box
-      direction="row-reverse"
-      justify="between"
-      fill="horizontal"
-      background={background ? 'white' : 'transparent'}
-      style={{ borderRadius: '24px 0 0 0' }}
-    >
+    <Flex mx={3} justifyContent="space-between">
       <Text textAlign="end" margin="small">
+        Last Update: <b>{minutes === 0 ? 'Just now' : `${minutes} minutes`}</b>
+      </Text>
+      <Text as="p">
         Develop with{' '}
         <span role="img" aria-label="love">
           ❤️
         </span>{' '}
-        by <Anchor href="http://emasuriano.com/">Ema Suriano</Anchor>
+        by <Link href="http://emasuriano.com/">Ema Suriano</Link>
       </Text>
-      {withTime && (
-        <Text textAlign="end" margin="small">
-          Last Update:{' '}
-          <b>{minutes === 0 ? 'Just now' : `${minutes} minutes`}</b>
-        </Text>
-      )}
-    </Box>
+    </Flex>
   );
-};
-
-const minutesDiff = (d1: number, d2: number) => {
-  const seconds = Math.floor((d2 - d1) / 1000);
-  const minutesDiff = Math.floor(seconds / 60);
-  return minutesDiff;
 };
