@@ -1,61 +1,68 @@
-import React, { useContext } from 'react';
-import { Box, Text, Heading, ResponsiveContext } from 'grommet';
-import Project from '../types/Project';
-import { Threshold } from '../types/Settings';
-import Section, { Props as SectionProps } from './Section';
-import { EMPTY_THRESHOLD } from '../utils/constant';
-import { limitToStatus } from '../utils/status';
+import { Label, SubNav } from '@primer/components';
+import { useLocation } from 'react-router-dom';
+import { STATUS_TO_COLOR, ThresholdStatus, VIEWS } from '../constants';
+import { useProjectsQuery } from '../queries/useProjectsQuery';
+import { useSettingsQuery } from '../queries/useSettingsQuery';
+import { Project, TabId, Threshold } from '../types';
 
-type Props = Omit<SectionProps, 'title' | 'children'> & {
+export const limitToStatus = (count: number, limit?: number) => {
+  if (!limit) return ThresholdStatus.None;
+  if (count >= limit) return ThresholdStatus.Bad;
+  return count > limit - limit / 4 ? ThresholdStatus.Warn : ThresholdStatus.Ok;
+};
+
+type TabProps = {
+  type: TabId;
   projects: Project[];
   threshold?: Threshold;
 };
 
-const Summary = ({ projects, threshold = EMPTY_THRESHOLD, ...rest }: Props) => {
-  const size = useContext(ResponsiveContext);
-  const width = size === 'small' ? '100%' : 'medium';
+const Tab = ({ type, projects, threshold }: TabProps) => {
+  const { hash } = useLocation();
 
-  const issuesCount = projects.reduce(
-    (acc, { issues }) => acc + issues.totalCount,
-    0,
-  );
+  if (type === 'all') {
+    return (
+      <SubNav.Link href={VIEWS[type]} selected={!hash}>
+        All
+      </SubNav.Link>
+    );
+  }
 
-  const pullsCount = projects.reduce(
-    (acc, { pullRequests }) => acc + pullRequests.totalCount,
-    0,
-  );
+  const count = projects.reduce((acc, p) => acc + p[type].totalCount, 0);
+  const limit = threshold?.[type];
+  const color = STATUS_TO_COLOR[limitToStatus(count, limit)];
+  const title = VIEWS[type]
+    .substring(1)
+    .split('-')
+    .map((tab) => tab[0].toUpperCase() + tab.substring(1))
+    .join(' ');
 
   return (
-    <Section title="Summary" width={width} {...rest}>
-      <Info title="Projects" count={projects.length} />
-      <Info title="Issues" count={issuesCount} limit={threshold.issues} />
-      <Info title="Pulls" count={pullsCount} limit={threshold.pullRequests} />
-    </Section>
+    <SubNav.Link href={VIEWS[type]} selected={hash === VIEWS[type]}>
+      {title}
+      <Label ml={1} bg={color}>
+        {count}
+      </Label>
+    </SubNav.Link>
   );
 };
 
-type InfoProps = {
-  title: string;
-  count: number;
-  limit?: number;
-};
+export const Summary = () => {
+  const settingsQuery = useSettingsQuery();
+  const projectsQuery = useProjectsQuery();
 
-const Info = ({ title, count, limit }: InfoProps) => {
-  const color = `status-${limitToStatus(count, limit)}`;
   return (
-    <Box>
-      <Heading level="3" margin="none" size="small">
-        {title}
-      </Heading>
-      {!!count && (
-        <Box animation="fadeIn">
-          <Text size="90px" weight="bold" color={color}>
-            {count}
-          </Text>
-        </Box>
-      )}
-    </Box>
+    <SubNav aria-label="Main">
+      <SubNav.Links>
+        {Object.keys(VIEWS).map((view) => (
+          <Tab
+            type={view as TabId}
+            projects={projectsQuery.data || []}
+            threshold={settingsQuery.data?.threshold}
+            key={view}
+          />
+        ))}
+      </SubNav.Links>
+    </SubNav>
   );
 };
-
-export default Summary;

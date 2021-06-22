@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import { PROJECT_FILE_NAME } from '../constants';
 import { graphqlWithAuth } from '../helpers/graphql';
 import { Gist, Settings } from '../types';
 
@@ -35,7 +36,7 @@ export const useSettingsQuery = () => {
   );
 
   const gist = gistsQuery.data?.viewer.gists.nodes.find(({ files }) =>
-    files.find(({ name }) => name === 'oss-projects.json'),
+    files.find(({ name }) => name === PROJECT_FILE_NAME),
   );
 
   const gistQuery = useQuery(

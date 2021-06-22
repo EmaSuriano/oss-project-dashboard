@@ -1,44 +1,20 @@
-import React from 'react';
-
-import { Button } from 'grommet';
-import { Notification } from '../components/Notification';
-import Summary from '../components/Summary';
-import { Configure } from 'grommet-icons';
-import { Layout, Side, Content } from '../components/Layout';
-import useProjectsQuery from '../hooks/useProjectsQuery';
-import Overview from '../components/Overview';
-import HealthStatus from '../components/HealthStatus';
+import { Box } from '@primer/components';
+import { Footer } from '../components/Footer';
+import { Header } from '../components/Header';
+import { TopWrapper } from '../components/TopWrapper';
+import { Summary } from '../components/Summary';
+import { ViewList } from '../components/ViewList';
 
 export const Dashboard = () => {
-  const { loading, error, data } = useProjectsQuery();
-  const { projects, settings } = data!;
-
   return (
-    <Layout name="Dashboard" action={SettingsButton} withTime>
-      <Side>
-        <Summary
-          projects={projects}
-          threshold={settings.threshold}
-          loading={loading}
-        />
-        {error && (
-          <Notification
-            title="Something happened"
-            message={error.message}
-            status="error"
-          />
-        )}
-        {!error && !loading && (
-          <HealthStatus projects={projects} threshold={settings.threshold} />
-        )}
-      </Side>
-      <Content>
-        <Overview projects={projects} loading={loading} />
-      </Content>
-    </Layout>
+    <TopWrapper>
+      <Header />
+      <Box maxWidth="large" mx="auto" p={4}>
+        <Summary />
+        <ViewList />
+      </Box>
+      <Box bg="border.primary" height="1px" my={2} />
+      <Footer />
+    </TopWrapper>
   );
 };
-
-const SettingsButton = (
-  <Button label="Settings" primary icon={<Configure />} href="/settings" />
-);

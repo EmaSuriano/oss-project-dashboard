@@ -1,36 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, RouteChildrenProps } from 'react-router';
-import auth, { buildAccessTokenLink, authLink } from '../utils/auth';
-import {
-  Button,
-  Heading,
-  Paragraph,
-  Main,
-  Box,
-  ResponsiveContext,
-} from 'grommet';
-import { Github, Globe } from 'grommet-icons';
+import auth, { buildAccessTokenLink, authLink } from '../helpers/auth';
 import queryString from 'query-string';
-// @ts-ignore-start
-import Tilt from 'react-tilt'; // @ts-ignore line
-// @ts-ignore-end
-
-import { Footer } from '../components/Footer';
-import styled, { keyframes } from 'styled-components';
-import Overview from '../components/Overview';
-import { MOCKED_PROJECTS } from '../mocks/projects';
-import { Fixed } from '../components/Fixed';
+import {
+  Box,
+  Button,
+  ButtonPrimary,
+  Flex,
+  Link,
+  StyledOcticon,
+  Text,
+} from '@primer/components';
+import { TopWrapper } from '../components/TopWrapper';
+import { MarkGithubIcon } from '@primer/octicons-react';
 
 type RouteParams = { code: string };
 type Props = RouteChildrenProps<RouteParams>;
 
-const Login = ({ location }: Props) => {
-  const size = useContext(ResponsiveContext);
+export const Login = ({ location }: Props) => {
   const [accessToken, setAccessToken] = useState(auth.getCredentials());
   const [signing, setSigning] = useState(false);
 
   const { code } = queryString.parse(location.search) as RouteParams;
-  const isDesktop = size === 'large';
 
   useEffect(() => {
     const fetchGithubAuth = async (code: string) => {
@@ -55,83 +46,39 @@ const Login = ({ location }: Props) => {
   }
 
   return (
-    <MainWithBackground
-      pad="large"
-      align="center"
-      justify="center"
-      direction={isDesktop ? 'row' : 'column'}
-      gap="large"
-      overflow="auto"
-    >
-      <Box gap="medium" align="center" style={{ minHeight: 'auto' }}>
-        <Heading textAlign="center" color="white">
-          Open Source Dashboard
-        </Heading>
-        <Paragraph
-          margin={{ top: 'none' }}
-          color="white"
-          textAlign="center"
-          size="xlarge"
-        >
-          A Dashboard to have a quick overview of Open Sources projects in your
-          Github account{' '}
+    <TopWrapper>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column"
+        width="500px"
+        margin="auto"
+      >
+        <StyledOcticon icon={MarkGithubIcon} size={80} mt={8} />
+        <Text as="h1">Open Source Dashboard</Text>
+        <Text as="p" textAlign="center">
+          Quick overview of all your Open Sources projects in Github{' '}
           <span role="img" aria-label="sparkles">
             ✨
           </span>
-        </Paragraph>
-        <Box direction="row" gap="medium">
-          <Button
-            label={signing ? 'Logging ... ' : 'Log in with Github'}
-            primary
-            disabled={signing}
-            icon={<Github />}
-            href={authLink}
-          />
+        </Text>
+        <Box my={2}>
+          <ButtonPrimary as="a" href={authLink} css={{}} mr={2}>
+            {signing ? 'Logging ... ' : 'Log in with Github'}
+          </ButtonPrimary>
 
-          <Button
-            color="accent-1"
-            label="Check Demo"
-            icon={<Globe color="white" />}
-            href="https://oss.emasuriano.com/"
-          />
+          <Button as="a" href="https://oss.emasuriano.com/" css={{}}>
+            Check Demo
+          </Button>
         </Box>
-      </Box>
-      <Box animation="fadeIn">
-        <Tilt className="Tilt" options={{ max: 15, scale: 1.02 }}>
-          <Overview loading={false} projects={MOCKED_PROJECTS} />
-        </Tilt>
-      </Box>
-
-      <Fixed position="bottom">
-        <Footer background />
-      </Fixed>
-    </MainWithBackground>
+        <Text as="p">
+          Develop with{' '}
+          <span role="img" aria-label="love">
+            ❤️
+          </span>{' '}
+          by <Link href="http://emasuriano.com/">Ema Suriano</Link>
+        </Text>
+      </Flex>
+    </TopWrapper>
   );
 };
-
-const gradient = keyframes`
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-`;
-
-const MainWithBackground = styled(Main)`
-  background-image: linear-gradient(
-    to right top,
-    #7d4cdb,
-    #6a3cc9,
-    #572bb6,
-    #431aa5,
-    #2d0693
-  );
-  background-size: 400% 400%;
-  animation: ${gradient} 5s ease infinite;
-`;
-
-export default Login;

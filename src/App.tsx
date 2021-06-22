@@ -6,10 +6,10 @@ import {
   RouteProps,
   Switch,
 } from 'react-router-dom';
-import auth from './utils/auth';
-import Login from './pages/Login';
-import Logout from './pages/Logout';
-import { Dashboard } from './clean/pages/Dashboard';
+import auth from './helpers/auth';
+import { Login } from './pages/Login';
+import { Logout } from './pages/Logout';
+import { Dashboard } from './pages/Dashboard';
 
 const PrivateRoute = ({
   component: Component,

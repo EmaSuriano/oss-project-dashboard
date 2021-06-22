@@ -6,7 +6,7 @@ const queryClient = new QueryClient();
 
 export const TopWrapper = ({ children }: { children: ReactNode }) => {
   return (
-    <ThemeProvider>
+    <ThemeProvider colorMode="auto">
       <QueryClientProvider client={queryClient}>
         <BaseStyles>{children}</BaseStyles>
       </QueryClientProvider>
