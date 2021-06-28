@@ -27,7 +27,7 @@ type Stargazer = {
   avatarUrl: string;
 };
 
-type Countable = {
+export type Countable = {
   totalCount: number;
 };
 
