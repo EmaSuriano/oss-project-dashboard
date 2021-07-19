@@ -33,7 +33,7 @@
   "dependencies": {
     "@octokit/core": "^3.4.0",
     "@octokit/graphql": "^4.6.4",
-    "@octokit/types": "^6.18.1",
+    "@octokit/types": "^6.19.0",
     "@primer/components": "^28.2.5",
     "@primer/octicons": "^14.2.2",
     "@primer/octicons-react": "^14.2.2",
