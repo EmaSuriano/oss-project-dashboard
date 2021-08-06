@@ -1,10 +1,15 @@
 import { useState } from 'react';
-import { BorderBox, Flex, Link } from '@primer/components';
+import { Box, Link } from '@primer/components';
 import styled from 'styled-components';
 import { useProjectsQuery } from '../queries/useProjectsQuery';
 import { Project, Countable } from '../types';
 
-const TableRow = styled(Flex).attrs({ as: 'tr', p: 3 })<{
+const TableRow = styled(Box).attrs({
+  as: 'tr',
+  p: 3,
+  display: 'flex',
+  flexWrap: 'nowrap',
+})<{
   header: boolean;
   sorted: boolean;
 }>`
@@ -18,7 +23,7 @@ const TableRow = styled(Flex).attrs({ as: 'tr', p: 3 })<{
   }
 `;
 
-const TableItem = styled(Flex)`
+const TableItem = styled(Box).attrs({ display: 'flex', flexWrap: 'nowrap' })`
   flex-flow: row nowrap;
   flex-grow: ${(props) => props.flexGrow || 1};
   justify-content: ${(props) => (props.flexGrow ? 'left' : 'center')};
@@ -68,7 +73,14 @@ export const AllProjectList = () => {
   };
 
   return (
-    <BorderBox mt={3} as="table" width="100%">
+    <Box
+      as="table"
+      width="100%"
+      borderWidth="1px"
+      borderStyle="solid"
+      borderColor="border.primary"
+      borderRadius={2}
+    >
       <thead>
         <TableRow header>
           <TableItem
@@ -126,6 +138,6 @@ export const AllProjectList = () => {
           </TableRow>
         ))}
       </tbody>
-    </BorderBox>
+    </Box>
   );
 };

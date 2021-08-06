@@ -3,10 +3,10 @@ import { TabId } from './types';
 export const PROJECT_FILE_NAME = 'oss-projects.json';
 
 export const VIEWS: Record<TabId, string> = {
-  all: '',
-  issues: 'issues',
-  vulnerabilityAlerts: 'vulnerabilities',
-  pullRequests: 'pull-requests',
+  all: '/',
+  issues: '/issues',
+  vulnerabilityAlerts: '/vulnerabilities',
+  pullRequests: '/pull-requests',
 };
 
 export enum ThresholdStatus {

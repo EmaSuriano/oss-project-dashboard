@@ -18,30 +18,28 @@ type TabProps = {
 };
 
 const Tab = ({ type, projects, threshold }: TabProps) => {
-  const { hash } = useLocation();
-  const viewType = VIEWS[type];
+  const { pathname } = useLocation();
+  const view = VIEWS[type];
+  const selected = pathname === view;
 
   if (type === 'all') {
     return (
-      <SubNav.Link href={VIEWS[type]} selected={!hash}>
+      <SubNav.Link href={VIEWS[type]} selected={selected}>
         All
       </SubNav.Link>
     );
   }
 
   const count = projects.reduce((acc, p) => acc + p[type].totalCount, 0);
-  const limit = threshold?.[type];
-  const color = STATUS_TO_COLOR[limitToStatus(count, limit)];
-  const title = viewType
+  const color = STATUS_TO_COLOR[limitToStatus(count, threshold?.[type])];
+  const title = view
+    .substring(1)
     .split('-')
     .map((tab) => tab[0].toUpperCase() + tab.substring(1))
     .join(' ');
 
   return (
-    <SubNav.Link
-      href={`#${viewType}`}
-      selected={hash.substring(1) === viewType}
-    >
+    <SubNav.Link href={view} selected={selected}>
       {title}
       <Label ml={1} bg={color}>
         {count}

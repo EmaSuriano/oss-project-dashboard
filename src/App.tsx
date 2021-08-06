@@ -30,12 +30,9 @@ const PrivateRoute = ({
 export const App = () => (
   <Router>
     <Switch>
-      <PrivateRoute path="/" exact component={Dashboard} />
+      <PrivateRoute path="/" component={Dashboard} />
       <Route path="/logout" exact component={Logout} />
       <Route path="/login" exact component={Login} />
-      <Route path="/">
-        <Redirect to="/" />
-      </Route>
     </Switch>
   </Router>
 );

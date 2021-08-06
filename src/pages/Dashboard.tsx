@@ -4,18 +4,23 @@ import { Header } from '../components/Header';
 import { TopWrapper } from '../components/TopWrapper';
 import { Summary } from '../components/Summary';
 import { AllProjectList } from '../components/AllProjectList';
-import { useLocation } from 'react-router-dom';
+import { WorkInProgress as WIP } from '../components/WorkInProgress';
+import { Route, Switch } from 'react-router-dom';
 import { VIEWS } from '../constants';
 
 export const Dashboard = () => {
-  const { hash, ...rest } = useLocation();
-  console.log(hash, rest);
   return (
     <TopWrapper>
       <Header />
       <Box maxWidth="large" mx="auto" p={4}>
         <Summary />
-        {hash === VIEWS.all && <AllProjectList />}
+        <Box mt={3} />
+        <Switch>
+          <Route path={VIEWS.pullRequests} component={WIP} exact></Route>
+          <Route path={VIEWS.vulnerabilityAlerts} component={WIP} exact></Route>
+          <Route path={VIEWS.issues} exact component={WIP}></Route>
+          <Route path={VIEWS.all} component={AllProjectList}></Route>
+        </Switch>
       </Box>
       <Box bg="border.primary" height="1px" my={2} />
       <Footer />
