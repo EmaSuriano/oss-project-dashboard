@@ -32,7 +32,7 @@
   "homepage": "https://oss-dashboard.netlify.com/",
   "dependencies": {
     "@octokit/core": "^3.4.0",
-    "@octokit/graphql": "^4.6.4",
+    "@octokit/graphql": "^4.7.0",
     "@octokit/types": "^6.25.0",
     "@primer/components": "^28.3.2",
     "@primer/octicons": "^15.0.1",
