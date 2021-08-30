@@ -1587,19 +1587,19 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@primer/components@^28.3.2":
-  version "28.3.2"
-  resolved "https://registry.yarnpkg.com/@primer/components/-/components-28.3.2.tgz#205f3e90d7bd105b1d7430957fa406934413123d"
-  integrity sha512-mOEH1/k9O8TQ9Wiq4+3sNZwFxHL5fhN45znffy+d01x3zva7/PtMNvQ/5MGSGzf2uF+/NDSC64kZvwUYO00XGQ==
+"@primer/components@^28.4.0":
+  version "28.4.0"
+  resolved "https://registry.yarnpkg.com/@primer/components/-/components-28.4.0.tgz#d3d84789f0ba5998a576a457d43bb280b1c6edf9"
+  integrity sha512-fsLiueMCqbBfO7T87qgHkNJ4vZmwgWwSflA8OAumZXg+IhnzeZH2zHUGRZlv22vdu3RhrhwumQ2E0Tpgf45oPQ==
   dependencies:
     "@primer/octicons-react" "^13.0.0"
-    "@primer/primitives" "4.5.1"
+    "@primer/primitives" "4.6.4"
     "@styled-system/css" "5.1.5"
     "@styled-system/props" "5.1.5"
     "@styled-system/theme-get" "5.1.2"
     "@types/history" "4.7.8"
     "@types/styled-components" "5.1.11"
-    "@types/styled-system" "5.1.11"
+    "@types/styled-system" "5.1.12"
     "@types/styled-system__css" "5.0.15"
     "@types/styled-system__theme-get" "5.0.1"
     classnames "2.3.1"
@@ -1624,10 +1624,10 @@
   dependencies:
     object-assign "^4.1.1"
 
-"@primer/primitives@4.5.1":
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.5.1.tgz#aede2364d7c33de4489ab1e6473925fc86284208"
-  integrity sha512-dA5EKORl1fqOa5+cDKYXTPLTNK0BuHS6NPHh1b11H4ngSd6cbuXzzVkUCJ1ooTDR6UbOrpeXMdlUbA9EcwwFVA==
+"@primer/primitives@4.6.4":
+  version "4.6.4"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.6.4.tgz#d31c37ee0e143cfbea47838fc02d33d95903c1f1"
+  integrity sha512-KKlP7m+94pbuFl3BYycQrmtNhX5+0gK3ftAh5L4a73Ov4FHbgMyVto3Cr0C5tlpvg0760Nisu+e/4T+/uvx8tA==
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
@@ -2112,10 +2112,10 @@
     "@types/react" "*"
     csstype "^3.0.2"
 
-"@types/styled-system@5.1.11":
-  version "5.1.11"
-  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.11.tgz#158849f3b14cdf8bf27a10f0cf87a2c3a89eb680"
-  integrity sha512-R+JxEZYa5T0HD2urViR/mdklVaGhwbNOtDoWWGQ1+z1CGs/gF1UAKCaS//YwsUwterEKpyaKxgaXyFNKF04GCA==
+"@types/styled-system@5.1.12":
+  version "5.1.12"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.1.12.tgz#4f3ca8da3dffe3c5a6cc3b2a97f51b41464c104a"
+  integrity sha512-7x4BYKKfK9QewfsFC2x5r9BK/OrfX+JF/1P21jKPMHruawDw9gvG7bTZgTVk6YkzDO2JUlsk4i8hdiAepAhD0g==
   dependencies:
     csstype "^3.0.2"
 
