@@ -4,7 +4,7 @@
 
 > Quick overview of all your Open Sources projects in Github ✨
 
-**[Live app][app-link]**
+## [Live app][https://oss-dashboard.netlify.com]
 
 ## What does it include? 📦
 
@@ -101,5 +101,3 @@ I'm always open for Pull Requests and Issues, so don't be afraid of collaboratin
 ## License 📝
 
 MIT.
-
-[app-link]: https://oss-dashboard.netlify.com
