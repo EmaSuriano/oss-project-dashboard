@@ -1,10 +1,11 @@
 # Open Source Github Dashboard
 
+[![Master](https://github.com/EmaSuriano/oss-project-dashboard/actions/workflows/master.yml/badge.svg)](https://github.com/EmaSuriano/oss-project-dashboard/actions/workflows/master.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
 
 > Quick overview of all your Open Sources projects in Github ✨
 
-## [Live app][https://oss-dashboard.netlify.com]
+## [Live app](https://oss-dashboard.netlify.com)
 
 ## What does it include? 📦
 
