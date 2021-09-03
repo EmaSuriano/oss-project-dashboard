@@ -15,16 +15,16 @@ type TabProps = {
   type: TabId;
   projects: Project[];
   threshold?: Threshold;
+  selected: string;
 };
 
-const Tab = ({ type, projects, threshold }: TabProps) => {
-  const { pathname } = useLocation();
+const Tab = ({ type, projects, threshold, selected }: TabProps) => {
   const view = VIEWS[type];
-  const selected = pathname === view;
+  const isSelected = selected === view;
 
   if (type === 'all') {
     return (
-      <SubNav.Link href={VIEWS[type]} selected={selected}>
+      <SubNav.Link href={`#${view}`} selected={isSelected}>
         All
       </SubNav.Link>
     );
@@ -33,13 +33,12 @@ const Tab = ({ type, projects, threshold }: TabProps) => {
   const count = projects.reduce((acc, p) => acc + p[type].totalCount, 0);
   const color = STATUS_TO_COLOR[limitToStatus(count, threshold?.[type])];
   const title = view
-    .substring(1)
     .split('-')
     .map((tab) => tab[0].toUpperCase() + tab.substring(1))
     .join(' ');
 
   return (
-    <SubNav.Link href={view} selected={selected}>
+    <SubNav.Link href={`#${view}`} selected={isSelected}>
       {title}
       <Label ml={1} bg={color}>
         {count}
@@ -49,6 +48,7 @@ const Tab = ({ type, projects, threshold }: TabProps) => {
 };
 
 export const Summary = () => {
+  const location = useLocation();
   const settingsQuery = useSettingsQuery();
   const projectsQuery = useProjectsQuery();
 
@@ -61,6 +61,7 @@ export const Summary = () => {
             projects={projectsQuery.data || []}
             threshold={settingsQuery.data?.threshold}
             key={view}
+            selected={location.hash.replace('#', '')}
           />
         ))}
       </SubNav.Links>

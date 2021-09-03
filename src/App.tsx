@@ -29,10 +29,11 @@ const PrivateRoute = ({
 
 export const App = () => (
   <Router>
-    <Switch>
+    <Dashboard />
+    {/* <Switch>
       <PrivateRoute path="/" component={Dashboard} />
-      <Route path="/logout" exact component={Logout} />
-      <Route path="/login" exact component={Login} />
-    </Switch>
+      <Route path="/logout" component={Logout} />
+      <Route path="/login" component={Login} />
+    </Switch> */}
   </Router>
 );
