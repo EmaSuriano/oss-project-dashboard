@@ -1587,10 +1587,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@primer/components@^28.4.0":
-  version "28.4.0"
-  resolved "https://registry.yarnpkg.com/@primer/components/-/components-28.4.0.tgz#d3d84789f0ba5998a576a457d43bb280b1c6edf9"
-  integrity sha512-fsLiueMCqbBfO7T87qgHkNJ4vZmwgWwSflA8OAumZXg+IhnzeZH2zHUGRZlv22vdu3RhrhwumQ2E0Tpgf45oPQ==
+"@primer/components@^28.5.0":
+  version "28.5.0"
+  resolved "https://registry.yarnpkg.com/@primer/components/-/components-28.5.0.tgz#cd749b33d8e4f19f13b2277e19432bd76aa56fb8"
+  integrity sha512-9LcBgzMdOtJZVDYKd2KA9pJ92VV6O3tBpPp8WvRLEpEMJbiYLFpjSIeFacWa6XnnqWK4BygzWphliZc2HkunUg==
   dependencies:
     "@primer/octicons-react" "^13.0.0"
     "@primer/primitives" "4.6.4"
