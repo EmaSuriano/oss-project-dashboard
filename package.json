@@ -34,7 +34,7 @@
     "@octokit/core": "^3.4.0",
     "@octokit/graphql": "^4.8.0",
     "@octokit/types": "^6.31.0",
-    "@primer/components": "^28.5.0",
+    "@primer/components": "^29.1.1",
     "@primer/octicons": "^15.2.0",
     "@primer/octicons-react": "^15.2.0",
     "query-string": "^7.0.1",
