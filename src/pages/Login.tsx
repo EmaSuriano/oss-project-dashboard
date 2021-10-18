@@ -40,8 +40,6 @@ export const Login = ({ location }: Props) => {
     if (code) fetchGithubAuth(code);
   }, [code]);
 
-  return <p>Emaa</p>;
-
   if (accessToken) {
     return <Redirect to="/" />;
   }
