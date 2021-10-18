@@ -41,7 +41,6 @@ export const Login = ({ location }: Props) => {
   }, [code]);
 
   if (accessToken) {
-    auth.signIn(accessToken);
     return <Redirect to="/" />;
   }
 

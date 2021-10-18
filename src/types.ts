@@ -11,6 +11,11 @@ export type Settings = {
 
 export type TabId = keyof Threshold | 'all';
 
+export enum Order {
+  ASC,
+  DESC,
+}
+
 type File = {
   name: string;
   text: string;
@@ -41,4 +46,20 @@ export type Project = {
   stargazers: Countable & {
     nodes: Stargazer[];
   };
+};
+
+export type PullRequest = {
+  id: string;
+  author: {
+    login: string;
+    avatarUrl: string;
+  };
+  repository: {
+    url: string;
+    name: string;
+  };
+  title: string;
+  project: string;
+  url: string;
+  createdAt: string;
 };

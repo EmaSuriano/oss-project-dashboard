@@ -1,9 +1,9 @@
 import { useQuery } from 'react-query';
-import { graphqlWithAuth } from '../helpers/graphql';
+import { buildProjectsQuery } from '../helpers/query';
 import { Project } from '../types';
 import { useSettingsQuery } from './useSettingsQuery';
 
-const PROJECT_INFO = `
+const SUMMARY_INFO = `
   id
   url
   name
@@ -26,40 +26,15 @@ const PROJECT_INFO = `
   }
 `;
 
-const Query = (projects: string[]) => `
-  query {
-  __typename
-  ${projects
-    .map((project) => {
-      const [user, name] = project.split('/');
-      const key = name.replace(/-/g, '');
-
-      return `${key}: repository(name: "${name}", owner: "${user}") {
-        ${PROJECT_INFO}
-      }`;
-    })
-    .join('\n')}
-}`;
-
-export type ProjectsQuery = Record<string, Project>;
-
 export const useProjectsQuery = () => {
   const settingsQuery = useSettingsQuery();
 
   const projectsDataQuery = useQuery(
-    'projectsData',
-    () => graphqlWithAuth<ProjectsQuery>(Query(settingsQuery.data?.projects!)),
+    'projects',
+    () =>
+      buildProjectsQuery<Project>(settingsQuery.data?.projects!, SUMMARY_INFO),
     { enabled: Boolean(settingsQuery.data?.projects) },
   );
 
-  const projectsQuery = useQuery(
-    'projects',
-    () =>
-      Object.values(projectsDataQuery.data!).filter(
-        (x, i) => Boolean(x) && i !== 0,
-      ),
-    { enabled: Boolean(projectsDataQuery.data) },
-  );
-
-  return projectsQuery;
+  return projectsDataQuery;
 };
