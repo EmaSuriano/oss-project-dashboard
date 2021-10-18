@@ -1,12 +1,16 @@
 import { useQuery } from 'react-query';
 import { buildProjectsQuery } from '../helpers/query';
-import { ProjectWithPullRequest } from '../types';
+import { PullRequest } from '../types';
 import { useSettingsQuery } from './useSettingsQuery';
+
+export type ProjectWithPullRequest = {
+  pullRequests: {
+    nodes: PullRequest[];
+  };
+};
 
 const PULL_REQUEST_INFO = `
   id
-  url
-  name
   pullRequests(last: 20, states:OPEN) {
     nodes {
       id

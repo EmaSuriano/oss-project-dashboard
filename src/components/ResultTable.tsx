@@ -1,128 +1,109 @@
-import { useState } from 'react';
-import { Box, Link, Avatar } from '@primer/components';
+import { useMemo } from 'react';
+import { Box, Link, Avatar, Truncate } from '@primer/components';
 import { useProjectsQuery } from '../queries/useProjectsQuery';
-import { Project, Order, PullRequest } from '../types';
+import { Project, PullRequest } from '../types';
 import { VIEWS } from '../constants';
-import { sortData } from '../helpers/sort';
-import { formatDate } from '../helpers/date';
-import { TableRow, TableItem, LoadingRow } from './Table';
 import { useLocation } from 'react-router-dom';
-import { TableHeader, TableHeaderItem } from './TableHeader';
+import { ReactTable } from './ReactTable';
 import { usePullRequestsQuery } from '../queries/usePullRequestsQuery';
+import { Column } from 'react-table';
+import { formatDate } from '../helpers/date';
 
-export const AllProjectList = () => {
+const CenteredCell = ({ value }: { value: any }) => (
+  <Box display="flex" justifyContent="center">
+    {value}
+  </Box>
+);
+
+export const AllProjectTable = () => {
   const projectsQuery = useProjectsQuery();
-  const [sort, setSort] = useState('');
-  const [order, setOrder] = useState(Order.ASC);
 
-  const onChangeSort = (newSort: string, newOrder: Order) => {
-    if (newOrder !== order) setOrder(newOrder);
-    if (newSort !== sort) setSort(newSort);
-  };
-
-  const renderProjectRow = (project: Project) => (
-    <TableRow key={project.id}>
-      <TableItem flexGrow={2} as="td">
-        <Link fontWeight="bold" href={project.url}>
-          {project.name}
-        </Link>
-      </TableItem>
-      <TableItem as="td">{project.issues.totalCount}</TableItem>
-      <TableItem as="td">{project.vulnerabilityAlerts.totalCount}</TableItem>
-      <TableItem as="td">{project.pullRequests.totalCount}</TableItem>
-      <TableItem as="td">{project.stargazers.totalCount}</TableItem>
-    </TableRow>
+  const columns: Column<Project>[] = useMemo(
+    () => [
+      {
+        Header: 'Name',
+        accessor: 'name',
+        Cell: ({ value, row }) => (
+          <Truncate title={value} maxWidth={180}>
+            <Link fontWeight="bold" href={row.original.url} target="_blank">
+              {value}
+            </Link>
+          </Truncate>
+        ),
+      },
+      {
+        Header: 'Issues',
+        accessor: (row) => row.issues.totalCount,
+        Cell: CenteredCell,
+      },
+      {
+        Header: 'Vulnerabilities',
+        accessor: (row) => row.vulnerabilityAlerts.totalCount,
+        Cell: CenteredCell,
+      },
+      {
+        Header: 'Pulls',
+        accessor: (row) => row.pullRequests.totalCount,
+        Cell: CenteredCell,
+      },
+      {
+        Header: 'Stars',
+        accessor: (row) => row.stargazers.totalCount,
+        Cell: CenteredCell,
+      },
+    ],
+    [],
   );
 
   return (
-    <Box
-      as="table"
-      width="100%"
-      borderWidth="1px"
-      borderStyle="solid"
-      borderColor="border.primary"
-      borderRadius={2}
-    >
-      <thead>
-        <TableHeader onChange={onChangeSort} order={order} sort={sort}>
-          <TableHeaderItem flexGrow={2} name="name" label="Name" />
-          <TableHeaderItem name="issues" label="Issues" />
-          <TableHeaderItem name="vulnerabilityAlerts" label="Vulnerabilities" />
-          <TableHeaderItem name="pullRequests" label="Pulls" />
-          <TableHeaderItem name="stargazers" label="Stars" />
-        </TableHeader>
-      </thead>
-      <tbody>
-        {projectsQuery.isFetched ? (
-          projectsQuery.data?.sort(sortData(sort, order)).map(renderProjectRow)
-        ) : (
-          <LoadingRow />
-        )}
-      </tbody>
-    </Box>
+    <ReactTable
+      data={projectsQuery.data || []}
+      status={projectsQuery.status}
+      columns={columns}
+    />
   );
 };
 
-export const PullRequestList = () => {
+export const PullRequestTable = () => {
   const pullRequestsQuery = usePullRequestsQuery();
-  const [sort, setSort] = useState('');
-  const [order, setOrder] = useState(Order.ASC);
 
-  const onChangeSort = (newSort: string, newOrder: Order) => {
-    if (newOrder !== order) setOrder(newOrder);
-    if (newSort !== sort) setSort(newSort);
-  };
-
-  const renderPullRequestRow = (pullRequest: PullRequest) => (
-    <TableRow key={pullRequest.id}>
-      <TableItem flexGrow={2} as="td">
-        <Link fontWeight="bold" href={pullRequest.url}>
-          {pullRequest.title}
-        </Link>
-      </TableItem>
-      <TableItem as="td">
-        <Link fontWeight="bold" href={`${pullRequest.repository.url}/pulls`}>
-          {pullRequest.repository.name}
-        </Link>
-      </TableItem>
-      <TableItem as="td">{pullRequest.project}</TableItem>
-      <TableItem as="td">{formatDate(pullRequest.createdAt)}</TableItem>
-      <TableItem as="td">
-        <Avatar
-          src={pullRequest.author.avatarUrl}
-          alt={pullRequest.author.login}
-        />
-      </TableItem>
-    </TableRow>
+  const columns: Column<PullRequest>[] = useMemo(
+    () => [
+      {
+        Header: 'Pull Request',
+        accessor: 'title',
+        Cell: ({ value, row }) => (
+          <Truncate title={value} maxWidth={400}>
+            <Avatar
+              alt={row.original.author.login}
+              src={row.original.author.avatarUrl}
+            />
+            <Link
+              ml={2}
+              fontWeight="bold"
+              href={row.original.url}
+              target="_blank"
+            >
+              {value}
+            </Link>
+          </Truncate>
+        ),
+      },
+      {
+        Header: 'Created Date',
+        accessor: (row) => formatDate(row.createdAt),
+        Cell: CenteredCell,
+      },
+    ],
+    [],
   );
 
   return (
-    <Box
-      as="table"
-      width="100%"
-      borderWidth="1px"
-      borderStyle="solid"
-      borderColor="border.primary"
-      borderRadius={2}
-    >
-      <thead>
-        <TableHeader onChange={onChangeSort} order={order} sort={sort}>
-          <TableHeaderItem flexGrow={2} name="title" label="Title" />
-          <TableHeaderItem name="repository" label="Repository" />
-          <TableHeaderItem name="createdAt" label="Created" />
-          <TableHeaderItem name="author" label="Author" />
-        </TableHeader>
-      </thead>
-      <tbody>
-        {pullRequestsQuery.isFetched ? (
-          pullRequestsQuery.data
-            ?.sort(sortData(sort, order))
-            .map(renderPullRequestRow)
-        ) : (
-          <LoadingRow />
-        )}
-      </tbody>
-    </Box>
+    <ReactTable
+      data={pullRequestsQuery.data || []}
+      status={pullRequestsQuery.status}
+      columns={columns}
+    />
   );
 };
 
@@ -131,9 +112,9 @@ export const ResultTable = () => {
 
   switch (location.hash.replace('#', '')) {
     case VIEWS.all:
-      return <AllProjectList />;
+      return <AllProjectTable />;
     case VIEWS.pullRequests:
-      return <PullRequestList />;
+      return <PullRequestTable />;
     case VIEWS.issues:
     case VIEWS.vulnerabilityAlerts:
     default:

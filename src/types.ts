@@ -48,15 +48,6 @@ export type Project = {
   };
 };
 
-export type ProjectWithPullRequest = {
-  id: string;
-  url: string;
-  name: string;
-  pullRequests: Countable & {
-    nodes: PullRequest[];
-  };
-};
-
 export type PullRequest = {
   id: string;
   author: {
