@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, FC } from 'react';
 import { Box, Link, Avatar, Truncate } from '@primer/components';
 import { useProjectsQuery } from '../queries/useProjectsQuery';
 import { Project, PullRequest } from '../types';
@@ -9,9 +9,9 @@ import { usePullRequestsQuery } from '../queries/usePullRequestsQuery';
 import { Column } from 'react-table';
 import { formatDate } from '../helpers/date';
 
-const CenteredCell = ({ value }: { value: any }) => (
+const CenteredCell: FC<{ value?: any }> = ({ value = null, children }) => (
   <Box display="flex" justifyContent="center">
-    {value}
+    {value !== null ? value : children}
   </Box>
 );
 
@@ -47,9 +47,16 @@ export const AllProjectTable = () => {
         Cell: CenteredCell,
       },
       {
-        Header: 'Stars',
-        accessor: (row) => row.stargazers.totalCount,
-        Cell: CenteredCell,
+        Header: 'Status',
+        accessor: 'url',
+        Cell: ({ value }) => (
+          <CenteredCell>
+            <img
+              src={`${value}/actions/workflows/master.yml/badge.svg`}
+              alt="Build"
+            />
+          </CenteredCell>
+        ),
       },
     ],
     [],
