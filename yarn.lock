@@ -1617,10 +1617,10 @@
   resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-16.0.0.tgz#964cf7eac896cf2afdc79dcdd900e6f7471424be"
   integrity sha512-1/DszHbG39lJO5w5el/Eej3Qu2TW0ecDDeYGq5T1cwNsgCWgJmtk2bmyPYJRQyRtGzRQQ8db03E8OeM7ATPSbQ==
 
-"@primer/octicons@^15.2.0":
-  version "15.2.0"
-  resolved "https://registry.yarnpkg.com/@primer/octicons/-/octicons-15.2.0.tgz#0b44509ab164a0424e9a0ca366538691898e1cea"
-  integrity sha512-4cHZzcZ3F/HQNL4EKSaFyVsW7XtITiJkTeB1JDDmRuP/XobyWyF9gWxuV9c+byUa8dOB5KNQn37iRvNrIehPUQ==
+"@primer/octicons@^16.0.0":
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/@primer/octicons/-/octicons-16.0.0.tgz#5f7b3c92f9286b5fb4d70d6c6343c9570a8b6c1a"
+  integrity sha512-FRsFnJIU3YMrWXHnFQku4npNbMTz4wd+qIwXPkA/iA6cnvC1xmcSanT8AzN/pAEg8SLkXFS8nEP56xWUq92tfA==
   dependencies:
     object-assign "^4.1.1"
 
