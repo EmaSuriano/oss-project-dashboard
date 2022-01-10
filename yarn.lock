@@ -1587,32 +1587,30 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@primer/components@^28.5.0":
-  version "28.5.0"
-  resolved "https://registry.yarnpkg.com/@primer/components/-/components-28.5.0.tgz#cd749b33d8e4f19f13b2277e19432bd76aa56fb8"
-  integrity sha512-9LcBgzMdOtJZVDYKd2KA9pJ92VV6O3tBpPp8WvRLEpEMJbiYLFpjSIeFacWa6XnnqWK4BygzWphliZc2HkunUg==
+"@primer/components@^33.1.0":
+  version "33.1.0"
+  resolved "https://registry.yarnpkg.com/@primer/components/-/components-33.1.0.tgz#64d8a4c15396ca61bae54f64ec5e38589ca241b5"
+  integrity sha512-q+Eky5DMiv8PKSCjor/ChJ8wlHCreczDCku5B/GHLzqQXwtjGLsGOK7Qn+c/BYfpVh7am+FfqqHZRlpcMATdQw==
   dependencies:
-    "@primer/octicons-react" "^13.0.0"
-    "@primer/primitives" "4.6.4"
+    "@primer/octicons-react" "^16.1.0"
+    "@primer/primitives" "7.1.1"
+    "@radix-ui/react-polymorphic" "0.0.14"
+    "@react-aria/ssr" "3.1.0"
     "@styled-system/css" "5.1.5"
     "@styled-system/props" "5.1.5"
     "@styled-system/theme-get" "5.1.2"
     "@types/history" "4.7.8"
     "@types/styled-components" "5.1.11"
     "@types/styled-system" "5.1.12"
-    "@types/styled-system__css" "5.0.15"
+    "@types/styled-system__css" "5.0.16"
     "@types/styled-system__theme-get" "5.0.1"
     classnames "2.3.1"
+    color2k "1.2.4"
     deepmerge "4.2.2"
     focus-visible "5.2.0"
     styled-system "5.1.5"
 
-"@primer/octicons-react@^13.0.0":
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-13.0.0.tgz#a7f2288fd9cf9cabc1e75553a0dd9f00d74b68c1"
-  integrity sha512-j5XppNRCvgaMZLPsVvvmp6GSh7P5pq6PUbsfLNBWi2Kz3KYDeoGDWbPr5MjoxFOGUn6Hjnt6qjHPRxahd11vLQ==
-
-"@primer/octicons-react@^16.2.0":
+"@primer/octicons-react@^16.1.0", "@primer/octicons-react@^16.2.0":
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/@primer/octicons-react/-/octicons-react-16.2.0.tgz#702f59169dd763dc03e613b0e881aa715da37a5c"
   integrity sha512-943t5kkVRt+/hxVnKS27xweUp4lXFxwJaTrsit1C1xBB4kqdjzmYGpU84zwKsNyyV2Ch7may3umKjbI/mFBPPQ==
@@ -1624,10 +1622,22 @@
   dependencies:
     object-assign "^4.1.1"
 
-"@primer/primitives@4.6.4":
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-4.6.4.tgz#d31c37ee0e143cfbea47838fc02d33d95903c1f1"
-  integrity sha512-KKlP7m+94pbuFl3BYycQrmtNhX5+0gK3ftAh5L4a73Ov4FHbgMyVto3Cr0C5tlpvg0760Nisu+e/4T+/uvx8tA==
+"@primer/primitives@7.1.1":
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/@primer/primitives/-/primitives-7.1.1.tgz#46edb7f06fbe8809ebe2822bc692fc6c74dba98c"
+  integrity sha512-+Gwo89YK1OFi6oubTlah/zPxxzMNaMLy+inECAYI646KIFdzzhAsKWb3z5tSOu5Ff7no4isRV64rWfMSKLZclw==
+
+"@radix-ui/react-polymorphic@0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@radix-ui/react-polymorphic/-/react-polymorphic-0.0.14.tgz#fc6cefee6686db8c5a7ff14c8c1b9b5abdee325b"
+  integrity sha512-9nsMZEDU3LeIUeHJrpkkhZVxu/9Fc7P2g2I3WR+uA9mTbNC3hGaabi0dV6wg0CfHb+m4nSs1pejbE/5no3MJTA==
+
+"@react-aria/ssr@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@react-aria/ssr/-/ssr-3.1.0.tgz#b7163e6224725c30121932a8d1422ef91d1fab22"
+  integrity sha512-RxqQKmE8sO7TGdrcSlHTcVzMP450hqowtBSd2bBS9oPlcokVkaGq28c3Rwa8ty5ctw4EBCjXqjP7xdcKMGDzug==
+  dependencies:
+    "@babel/runtime" "^7.6.2"
 
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
@@ -2126,10 +2136,10 @@
   dependencies:
     csstype "^3.0.2"
 
-"@types/styled-system__css@5.0.15":
-  version "5.0.15"
-  resolved "https://registry.yarnpkg.com/@types/styled-system__css/-/styled-system__css-5.0.15.tgz#f6f896e33393f8b3763f275afaa84261dae77a54"
-  integrity sha512-bbFlY2ATFEaWEMOllEqMktSzq4yGPAiZSrjGUQ124LSStm9QPhKErOuTxXfJi8VuymaQ+g1uC8AbC2o3BpgQyA==
+"@types/styled-system__css@5.0.16":
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/@types/styled-system__css/-/styled-system__css-5.0.16.tgz#cae75cef03dfa1020703e842a8b1c14d8f9a8f33"
+  integrity sha512-Cji5miCIpR27m8yzH6y3cLU6106N4GVyPgUhBQ4nL7VxgoeAtRdAriKdGTnRgJzSpT3HyB7h5G//cDWOl0M1jQ==
   dependencies:
     csstype "^3.0.2"
 
@@ -3667,6 +3677,11 @@ color-string@^1.5.4:
   dependencies:
     color-name "^1.0.0"
     simple-swizzle "^0.2.2"
+
+color2k@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/color2k/-/color2k-1.2.4.tgz#af34950ac58e23cf224a01cb8dd0c9911a79605e"
+  integrity sha512-DiwdBwc0BryPFFXoCrW8XQGXl2rEtMToODybxZjKnN5IJXt/tV/FsN02pCK/b7KcWvJEioz3c74lQSmayFvS4Q==
 
 color@^3.0.0:
   version "3.1.3"
