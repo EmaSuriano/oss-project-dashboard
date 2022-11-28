@@ -1,6 +1,6 @@
 # Open Source Github Dashboard
 
-This project has been archived, please check https://github.com/EmaSuriano/oss-github-dashboard for an updated and mantained project.
+This project has been archived, please check [oss-github-dashboard](https://github.com/EmaSuriano/oss-github-dashboard) for an updated and mantained project.
 
 [![Master](https://github.com/EmaSuriano/oss-project-dashboard/actions/workflows/master.yml/badge.svg)](https://github.com/EmaSuriano/oss-project-dashboard/actions/workflows/master.yml)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b096e537-bb92-4582-9c48-c55a59860024/deploy-status)](https://app.netlify.com/sites/oss-dashboard/deploys)
